@@ -29,14 +29,14 @@ public class TransitionManager : MonoBehaviour
         return this;
     }
 
-    public TransitionManager SetOutAnimation(OutAnimationDelegate func)
-    {
-        OutAnimation = func;
-        return this;
-    }
     public TransitionManager SetOutStart(OutStartDelegate func)
     {
         OutStart = func;
+        return this;
+    }
+    public TransitionManager SetOutAnimation(OutAnimationDelegate func)
+    {
+        OutAnimation = func;
         return this;
     }
     public TransitionManager SetOutEnd(OutEndDelegate func)
@@ -60,14 +60,15 @@ public class TransitionManager : MonoBehaviour
         return this;
     }
 
-    public TransitionManager SetInAnimation(InAnimationDelegate func)
-    {
-        InAnimation = func;
-        return this;
-    }
+    
     public TransitionManager SetInStart(InStartDelegate func)
     {
         InStart = func;
+        return this;
+    }
+    public TransitionManager SetInAnimation(InAnimationDelegate func)
+    {
+        InAnimation = func;
         return this;
     }
     public TransitionManager SetInEnd(InEndDelegate func)
