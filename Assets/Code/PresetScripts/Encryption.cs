@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 public class Encryption : MonoBehaviour
 {
-    string path = "data/data/";
+    string path;
     const string glyphs= "abcdefghijklmnopqrstuvwxyz0123456789";
 
 
