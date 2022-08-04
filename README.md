@@ -4,7 +4,7 @@
 <!-- <hr> -->
 <h1 align="center">Unity 2D Configured Template V1.0.0</h1>
 
-2D Configured V1.0.0 is a unity template with some probably usefull features that can
+Unity 2D Configured Template V1.0.0 is a unity template with some probably usefull features that can
 always be used for any unity game project. With a few modification within Unity Engine, it can also be used for 3D game. This is mainly a template for game UI.
 
 
