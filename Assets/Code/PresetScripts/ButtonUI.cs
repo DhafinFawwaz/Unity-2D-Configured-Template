@@ -84,67 +84,29 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         clickEvent.Invoke();
     }
 
+    public void EnterAnimation(){StartCoroutine(TweenScale(imageToResize, enterScale));}
+    public void ExitAnimation(){StartCoroutine(TweenScale(imageToResize, exitScale));}
+    public void DownAnimation(){StartCoroutine(TweenScale(imageToResize, downScale));}
+    public void UpAnimation(){StartCoroutine(TweenScale(imageToResize, upScale));}
+
     int key;
-    public void EnterAnimation(){StartCoroutine(Enter());}
-    public void ExitAnimation(){StartCoroutine(Exit());}
-    public void DownAnimation(){StartCoroutine(Down());}
-    public void UpAnimation(){StartCoroutine(Up());}
-    IEnumerator Enter()
+    //Value will keep changing so that everytime a new TweenScale() coroutine is called,
+    //the previous coroutine will be stopped and the new Scaling animation will be executed
+    //without interuption.
+    
+    IEnumerator TweenScale(Transform trans, float endScale)
     {
         key++;
         int requirement = key;
-        float currentScale = imageToResize.localScale.x;
+        float startScale = trans.localScale.x;
         float t = 0;
         while (t <= 1 && requirement == key)
         {
-            imageToResize.localScale = Vector3.one * Mathf.Lerp(currentScale, enterScale, Global.EaseOutQuartCurve(t));
+            trans.localScale = Vector3.one * Mathf.Lerp(startScale, endScale, Global.EaseOutQuartCurve(t));
             t += Time.unscaledDeltaTime / duration;
             yield return null;
         }
-        if(requirement == key)imageToResize.localScale = Vector3.one * enterScale;
-    }
-    IEnumerator Exit()
-    {
-        key++;
-        int requirement = key;
-        float currentScale = imageToResize.localScale.x;
-        float t = 0;
-        while (t <= 1 && requirement == key)
-        {
-            imageToResize.localScale = Vector3.one * Mathf.Lerp(currentScale, exitScale, Global.EaseOutQuartCurve(t));
-            t += Time.unscaledDeltaTime / duration;
-            yield return null;
-        }
-        if(requirement == key)imageToResize.localScale = Vector3.one * exitScale;
-    }
-     
-    IEnumerator Down()
-    {
-        key++;
-        int requirement = key;
-        float currentScale = imageToResize.localScale.x;
-        float t = 0;
-        while (t <= 1 && requirement == key)
-        {
-            imageToResize.localScale = Vector3.one * Mathf.Lerp(currentScale, downScale, Global.EaseOutQuartCurve(t));
-            t += Time.unscaledDeltaTime / duration;
-            yield return null;
-        }
-        if(requirement == key)imageToResize.localScale = Vector3.one * downScale;
-    }
-    IEnumerator Up()
-    {
-        key++;
-        int requirement = key;
-        float currentScale = imageToResize.localScale.x;
-        float t = 0;
-        while (t <= 1 && requirement == key)
-        {
-            imageToResize.localScale = Vector3.one * Mathf.Lerp(currentScale, upScale, Global.EaseOutQuartCurve(t));
-            t += Time.unscaledDeltaTime / duration;
-            yield return null;
-        }
-        if(requirement == key)imageToResize.localScale = Vector3.one * upScale;
+        if(requirement == key)trans.localScale = Vector3.one * endScale;//if the key didn't change then get into endScale
     }
 
 }
