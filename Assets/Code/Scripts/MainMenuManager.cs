@@ -15,7 +15,6 @@ public class MainMenuManager : MonoBehaviour
     {
         Singleton.Instance.transition.Out()
             .AddOutEnd(Singleton.Instance.transition.InDefault)
-            // .SetMusicFade(false)
             .SetDelayAfterOut(delay)
             .AddOutEnd(ActivateHome);
     }
@@ -28,7 +27,6 @@ public class MainMenuManager : MonoBehaviour
     {
         Singleton.Instance.transition.Out()
             .AddOutEnd(Singleton.Instance.transition.InDefault)
-            // .SetMusicFade(false)
             .SetDelayAfterOut(delay)
             .AddOutEnd(ActivateSettings);
         
@@ -41,6 +39,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        Singleton.Instance.loader.LoadSceneWithTransition(sceneName);
+        Singleton.Instance.scene.LoadSceneWithTransition(sceneName);
     }
 }
