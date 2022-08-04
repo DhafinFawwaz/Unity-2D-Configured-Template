@@ -5,7 +5,7 @@ public class Singleton : MonoBehaviour
 {
     public TransitionManager transition;
     new public AudioManager audio;//'new': Hide inherited member
-    public SceneLoader loader;
+    public SceneLoader scene;
     public ResolutionManager resolution;
     public SaveManager save;
     public static Singleton Instance;
