@@ -7,7 +7,6 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField] Loading loadingBar;
 
-    public bool isTransitionIn = false;
     public void LoadScene(string sceneName)
     {
         loadingBar.gameObject.SetActive(true);
@@ -45,9 +44,9 @@ public class SceneLoader : MonoBehaviour
     }
 
     string sceneToLoad;
-    public void LoadSceneWithTransition(string s)
+    public void LoadSceneWithTransition(string sceneName)
     {
-        sceneToLoad = s;
+        sceneToLoad = sceneName;
         Singleton.Instance.transition.Out()
             .AddOutEnd(LoadSceneName)
         ;
