@@ -8,7 +8,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI highscoreText;
     public void LoadScene(string sceneName)
     {
-        Singleton.Instance.loader.LoadSceneWithTransition(sceneName);
+        Singleton.Instance.scene.LoadSceneWithTransition(sceneName);
         Singleton.Instance.transition.SetMusicFade(false);
     }
 
