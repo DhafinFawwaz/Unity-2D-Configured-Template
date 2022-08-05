@@ -81,9 +81,9 @@ Singleton.Instance.scene.MyMethodName();
 
 | Method                                    | Description                       |
 |:--------                                  |:------------------------------    |
-|`LoadScene(string sceneName)`              |Start the transition out animation |
-|`AddOnLoadingEnd(delegate func)`           |Start the transition in animation  |
-|`LoadSceneWithTransition(string sceneName)`|Start the transition in animation  |
+|`LoadScene(string sceneName)`              |Load scene by string               |
+|`AddOnLoadingEnd(delegate func)`           |Add a function to call when the loading ended, usefull for transition in|
+|`LoadSceneWithTransition(string sceneName)`|Transition out, then loading screen, transition in|
 
 In the Unity Hierarchy, navigate to `Singleton/Loading`. You can change the loading animation by editing `Loading.cs` and its child's child.
 
@@ -173,5 +173,5 @@ Singleton.Instance.resolution.SetFullScreen(true);
 ### ⚙️ Settings
 The settings for music volume, sound volume, resolution, and fullscreen has been made as a template. In the Unity Hierarchy, navigate into `Settings` and edit the prefab to however you like. The slider has been customized so that it will get animated when changing the slider value. There's also a customly made button that will be scaled when an event like hover occurs. If you want to add soundeffect to the button, just add the ButtonUI.PlaySound(AudioClip audioClip) one of the unity event. In `SettingsManager.cs` modify `OnMusicValueChanged(float newVal)`, `OnSoundValueChanged(float newVal)`, `SetFullScreen(bool isFullScreen)`, or `OnResolutionValueChanged(int resolutionIndex)` if you want to add something for example a soundeffect.
 
-# 📝 License
+## 📝 License
 [MIT](https://choosealicense.com/licenses/mit/)
