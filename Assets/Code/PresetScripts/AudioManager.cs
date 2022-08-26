@@ -14,12 +14,12 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         musicMixer.SetFloat("Volume", 
-            Mathf.Lerp(minVolume, maxVolume, Global.EaseOutCubicCurve(
+            Mathf.Lerp(minVolume, maxVolume, Ease.OutCubic(
                 GetMusicVolume()
             ))
         );
         soundMixer.SetFloat("Volume", 
-            Mathf.Lerp(minVolume, maxVolume, Global.EaseOutCubicCurve(
+            Mathf.Lerp(minVolume, maxVolume, Ease.OutCubic(
                 GetSoundVolume()
             ))
         );
@@ -88,14 +88,14 @@ public class AudioManager : MonoBehaviour
     public void OnMusicValueChanged(float newVal)
     {
         musicMixer.SetFloat("Volume", 
-            Mathf.Lerp(minVolume, maxVolume, Global.EaseOutCubicCurve(newVal))
+            Mathf.Lerp(minVolume, maxVolume, Ease.OutCubic(newVal))
         );
         PlayerPrefs.SetFloat("musicVolume", newVal);
     }
     public void OnSoundValueChanged(float newVal)
     {
         soundMixer.SetFloat("Volume", 
-            Mathf.Lerp(minVolume, maxVolume, Global.EaseOutCubicCurve(newVal))
+            Mathf.Lerp(minVolume, maxVolume, Ease.OutCubic(newVal))
         );
         PlayerPrefs.SetFloat("soundVolume", newVal);
     }

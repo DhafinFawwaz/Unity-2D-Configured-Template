@@ -45,8 +45,8 @@ public class SliderUI : MonoBehaviour
         int requirement = key;
         while(t <= 1 && requirement == key)
         {
-            handle.position = Vector2.Lerp(currentPos, newPos, Global.EaseOutQuartCurve(t));
-            fillImg.fillAmount = Mathf.Lerp(currentFill, newFill, Global.EaseOutQuartCurve(t));
+            handle.position = Vector2.Lerp(currentPos, newPos, Ease.OutQuart(t));
+            fillImg.fillAmount = Mathf.Lerp(currentFill, newFill, Ease.OutQuart(t));
             t += Time.unscaledDeltaTime/duration;
             yield return null;
         }

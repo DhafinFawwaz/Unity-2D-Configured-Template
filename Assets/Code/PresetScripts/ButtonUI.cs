@@ -101,8 +101,8 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         float startScale = trans.localScale.x;
         float t = 0;
         while (t <= 1 && requirement == key)
-        {
-            trans.localScale = Vector3.one * Mathf.Lerp(startScale, endScale, Global.EaseOutQuartCurve(t));
+        {Debug.Log(Ease.OutBack(t));
+            trans.localScale = Vector3.one * Mathf.LerpUnclamped(startScale, endScale, Ease.OutPowBack(t, 4));
             t += Time.unscaledDeltaTime / duration;
             yield return null;
         }

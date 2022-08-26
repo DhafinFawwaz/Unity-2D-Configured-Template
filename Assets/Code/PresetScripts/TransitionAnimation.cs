@@ -15,7 +15,7 @@ public class TransitionAnimation : MonoBehaviour
     }
     public void OutAnimation(float t)
     {
-        float newY = Mathf.Lerp(startYScale, endYScale, Global.EaseOutQuartCurve(t));
+        float newY = Mathf.Lerp(startYScale, endYScale, Ease.OutQuart(t));
         orangeSquareRT.localScale = new Vector3(1, newY, 1);
     }
     public void OutEnd()
@@ -32,7 +32,7 @@ public class TransitionAnimation : MonoBehaviour
     }
     public void InAnimation(float t)
     {
-        float newY = Mathf.Lerp(endYScale, startYScale, Global.EaseOutQuartCurve(t));
+        float newY = Mathf.Lerp(endYScale, startYScale, Ease.OutQuart(t));
         orangeSquareRT.localScale = new Vector3(1, newY, 1);
     }
     public void InEnd()
