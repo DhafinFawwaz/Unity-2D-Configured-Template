@@ -9,104 +9,112 @@ using UnityEditor.Events;
 #endif
 public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField] float duration = 0.1f;
-    [SerializeField] float enterScale = 1.2f;
-    [SerializeField] float exitScale = 1f;
-    [SerializeField] float downScale  = 0.8f;
+    [SerializeField] float _duration = 0.1f;
+    [SerializeField] float _enterScale = 1.2f;
+    [SerializeField] float _exitScale = 1f;
+    [SerializeField] float _downScale  = 1.3f;
     [SerializeField] float upScale  = 1f;
-    [SerializeField] Transform imageToResize;
+    [SerializeField] Transform _imageToResize;
 
 
-    public UnityEvent clickEvent;
-    public UnityEvent pointerEnterEvent;
-    public UnityEvent pointerExitEvent;
-    public UnityEvent pointerDownEvent;
-    public UnityEvent pointerUpEvent;
+    [SerializeField] UnityEvent _clickEvent;
+    [SerializeField] UnityEvent _pointerEnterEvent;
+    [SerializeField] UnityEvent _pointerExitEvent;
+    [SerializeField] UnityEvent _pointerDownEvent;
+    [SerializeField] UnityEvent _pointerUpEvent;
+
+    enum CursorState
+    {
+        inside, outside
+    }
+    CursorState _currentCursorState;
 
 #if UNITY_EDITOR 
     void Awake()
     {
         //So that it only creates the listener once, when the component is dragged on, not when the scene is loaded.
-        if(pointerEnterEvent == null)
+        if(_pointerEnterEvent == null)
         {
-            pointerEnterEvent = new UnityEvent ();
-            UnityEventTools.AddVoidPersistentListener(pointerEnterEvent, EnterAnimation);
+            _pointerEnterEvent = new UnityEvent ();
+            UnityEventTools.AddVoidPersistentListener(_pointerEnterEvent, EnterAnimation);
         }
-        if(pointerExitEvent == null)
+        if(_pointerExitEvent == null)
         {
-            pointerExitEvent = new UnityEvent ();
-            UnityEventTools.AddVoidPersistentListener(pointerExitEvent, ExitAnimation);
+            _pointerExitEvent = new UnityEvent ();
+            UnityEventTools.AddVoidPersistentListener(_pointerExitEvent, ExitAnimation);
         }
-        if(pointerDownEvent == null)
+        if(_pointerDownEvent == null)
         {
-            pointerDownEvent = new UnityEvent ();
-            UnityEventTools.AddVoidPersistentListener(pointerDownEvent, DownAnimation);
+            _pointerDownEvent = new UnityEvent ();
+            UnityEventTools.AddVoidPersistentListener(_pointerDownEvent, DownAnimation);
         }
-        if(pointerUpEvent == null)
+        if(_pointerUpEvent == null)
         {
-            pointerUpEvent = new UnityEvent ();
-            UnityEventTools.AddVoidPersistentListener(pointerUpEvent, UpAnimation);
+            _pointerUpEvent = new UnityEvent ();
+            UnityEventTools.AddVoidPersistentListener(_pointerUpEvent, UpAnimation);
         }
-        if(imageToResize == null)imageToResize = transform;
+        if(_imageToResize == null)_imageToResize = transform;
     }
 #endif
 
 
     public void PlaySound(AudioClip audioClip)
     {
-        Singleton.Instance.audio.PlaySound(audioClip);
+        Singleton.Instance.Audio.PlaySound(audioClip);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        pointerEnterEvent.Invoke();
+        _pointerEnterEvent.Invoke();
+        _currentCursorState = CursorState.inside;
         // StartCoroutine(Enter());
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        pointerExitEvent.Invoke();
+        _pointerExitEvent.Invoke();
+        _currentCursorState = CursorState.outside;
         // StartCoroutine(Exit());
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        pointerDownEvent.Invoke();
+        _pointerDownEvent.Invoke();
         // StartCoroutine(Down());
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        pointerUpEvent.Invoke();
+        if(_currentCursorState == CursorState.inside)_pointerEnterEvent.Invoke();
         // StartCoroutine(Up());
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        clickEvent.Invoke();
+        _clickEvent.Invoke();
     }
 
-    public void EnterAnimation(){StartCoroutine(TweenScale(imageToResize, enterScale));}
-    public void ExitAnimation(){StartCoroutine(TweenScale(imageToResize, exitScale));}
-    public void DownAnimation(){StartCoroutine(TweenScale(imageToResize, downScale));}
-    public void UpAnimation(){StartCoroutine(TweenScale(imageToResize, upScale));}
+    public void EnterAnimation(){StartCoroutine(TweenScale(_imageToResize, _enterScale));}
+    public void ExitAnimation(){StartCoroutine(TweenScale(_imageToResize, _exitScale));}
+    public void DownAnimation(){StartCoroutine(TweenScale(_imageToResize, _downScale));}
+    public void UpAnimation(){StartCoroutine(TweenScale(_imageToResize, upScale));}
 
-    int key;
+    int _key;
     //Value will keep changing so that everytime a new TweenScale() coroutine is called,
     //the previous coroutine will be stopped and the new Scaling animation will be executed
     //without interuption.
     
     IEnumerator TweenScale(Transform trans, float endScale)
     {
-        key++;
-        int requirement = key;
+        _key++;
+        int requirement = _key;
         float startScale = trans.localScale.x;
         float t = 0;
-        while (t <= 1 && requirement == key)
-        {Debug.Log(Ease.OutBack(t));
+        while (t <= 1 && requirement == _key)
+        {
             trans.localScale = Vector3.one * Mathf.LerpUnclamped(startScale, endScale, Ease.OutPowBack(t, 4));
-            t += Time.unscaledDeltaTime / duration;
+            t += Time.unscaledDeltaTime / _duration;
             yield return null;
         }
-        if(requirement == key)trans.localScale = Vector3.one * endScale;//if the key didn't change then get into endScale
+        if(requirement == _key)trans.localScale = Vector3.one * endScale;//if the key didn't change then get into endScale
     }
 
 }
