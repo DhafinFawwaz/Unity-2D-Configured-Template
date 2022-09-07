@@ -5,16 +5,16 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 public class Encryption : MonoBehaviour
 {
-    string path;
-    const string glyphs= "abcdefghijklmnopqrstuvwxyz0123456789";
+    string _path;
+    const string Glyphs= "abcdefghijklmnopqrstuvwxyz0123456789";
+                        //01234567890123456789012345678901
 
-
-    static readonly string JSON_ENCRYPTED_KEY = "#kJ83DAlowjkf39(#($%0_+[]:#dDA'a";
+    static readonly string JSONEncryptedKey = "#kJ83DAlowjkf39(#($%0_+[]:#dDA'a";
                                                //01234567890123456789012345678901
     void Start()
     {
-        path = "data/data/" + Application.identifier.ToString() + "/files/filesysteminformation.dat";//Path for android
-        path = Application.persistentDataPath + "/filesysteminformation.dat";//Path for pc
+        _path = "data/data/" + Application.identifier.ToString() + "/files/game.dat";//Path for android
+        _path = Application.persistentDataPath + "/game.dat";//Path for pc
         LoadData();
     }
 
@@ -24,22 +24,22 @@ public class Encryption : MonoBehaviour
     {
         string json = JsonUtility.ToJson(data);
         Rijndael crypto = new Rijndael();
-        byte[] soup = crypto.Encrypt(json, JSON_ENCRYPTED_KEY);
+        byte[] soup = crypto.Encrypt(json, JSONEncryptedKey);
 
-        if (File.Exists(path))
+        if (File.Exists(_path))
         {
-            File.Delete(path);
+            File.Delete(_path);
         }
 
-        File.WriteAllBytes(path, soup);
+        File.WriteAllBytes(_path, soup);
     }
     public SaveData LoadData()
     {
-		if(File.Exists(path))
+		if(File.Exists(_path))
 		{ 
             Rijndael crypto = new Rijndael();
-            byte[] soupBackIn = File.ReadAllBytes(path);
-            string jsonFromFile = crypto.Decrypt(soupBackIn, JSON_ENCRYPTED_KEY);
+            byte[] soupBackIn = File.ReadAllBytes(_path);
+            string jsonFromFile = crypto.Decrypt(soupBackIn, JSONEncryptedKey);
             SaveData data = JsonUtility.FromJson<SaveData>(jsonFromFile);
             return data;
 		}

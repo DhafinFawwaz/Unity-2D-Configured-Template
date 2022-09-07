@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MusicLoader : MonoBehaviour
 {
-    [SerializeField] AudioClip musicClip;
+    [SerializeField] AudioClip _musicClip;
     void OnEnable()
     {
         if(Singleton.Instance == null)
@@ -12,19 +12,19 @@ public class MusicLoader : MonoBehaviour
             return;
         }
 
-        if(musicClip == Singleton.Instance.audio.GetCurrentMusicClip())
+        if(_musicClip == Singleton.Instance.Audio.GetCurrentMusicClip())
         {}
-        else if(musicClip != null)
-            Singleton.Instance.audio.PlayMusic(musicClip);
+        else if(_musicClip != null)
+            Singleton.Instance.Audio.PlayMusic(_musicClip);
         else 
-            Singleton.Instance.audio.StopMusic();
+            Singleton.Instance.Audio.StopMusic();
     }
 
     IEnumerator DelayOnEnable()
     {
         yield return new WaitForEndOfFrame();
-        if(musicClip != null)
-            Singleton.Instance.audio.PlayMusic(musicClip);
-        else Singleton.Instance.audio.StopMusic();
+        if(_musicClip != null)
+            Singleton.Instance.Audio.PlayMusic(_musicClip);
+        else Singleton.Instance.Audio.StopMusic();
     }
 }

@@ -5,27 +5,27 @@ using UnityEngine;
 public class TransitionManager : MonoBehaviour
 {
 
-    float duration = 0.5f;
-    float delayAfterOut = 0.2f;
-    bool isMusicFade = true;
-    bool isMusicFadeInstant = true;
-    public TransitionAnimation anim;
+    float _duration = 0.5f;
+    float _delayAfterOut = 0.2f;
+    bool _isMusicFade = true;
+    bool _isMusicFadeInstant = true;
+    public TransitionAnimation Anim;
     void Start(){SetOutDefault();SetInDefault();}
 #region Set
     public TransitionManager SetDelayAfterOut(float t)
     {
-        delayAfterOut = t;
+        _delayAfterOut = t;
         return this;
     }
     public TransitionManager SetDuration(float t)
     {
-        duration = t;
+        _duration = t;
         return this;
     }
 
     public TransitionManager SetMusicFade(bool b)
     {
-        isMusicFade = b;
+        _isMusicFade = b;
         return this;
     }
 
@@ -97,23 +97,23 @@ public class TransitionManager : MonoBehaviour
 
     public void SetOutDefault()
     {
-        duration = 0.5f;
-        delayAfterOut = 1f;
-        isMusicFade = true;
-        isMusicFadeInstant = true;
-        OutStart     = Singleton.Instance.transition.anim.OutStart;
-        OutAnimation = Singleton.Instance.transition.anim.OutAnimation;
-        OutEnd       = Singleton.Instance.transition.anim.OutEnd;
+        _duration = 0.5f;
+        _delayAfterOut = 1f;
+        _isMusicFade = true;
+        _isMusicFadeInstant = true;
+        OutStart     = Singleton.Instance.Transition.Anim.OutStart;
+        OutAnimation = Singleton.Instance.Transition.Anim.OutAnimation;
+        OutEnd       = Singleton.Instance.Transition.Anim.OutEnd;
     }
     public void SetInDefault()
     {
-        duration = 0.5f;
-        delayAfterOut = 1f;
-        isMusicFade = true;
-        isMusicFadeInstant = true;
-        InStart     = Singleton.Instance.transition.anim.InStart;
-        InAnimation = Singleton.Instance.transition.anim.InAnimation;
-        InEnd       = Singleton.Instance.transition.anim.InEnd;
+        _duration = 0.5f;
+        _delayAfterOut = 1f;
+        _isMusicFade = true;
+        _isMusicFadeInstant = true;
+        InStart     = Singleton.Instance.Transition.Anim.InStart;
+        InAnimation = Singleton.Instance.Transition.Anim.InAnimation;
+        InEnd       = Singleton.Instance.Transition.Anim.InEnd;
     }
 
     public delegate void OutStartDelegate();
@@ -145,14 +145,14 @@ public class TransitionManager : MonoBehaviour
         while(t <= 1)
         {
             OutAnimation(t);
-            if(isMusicFade)
-                Singleton.Instance.audio.SetMusicSourceVolume(1 - t);
-            t += Time.unscaledDeltaTime/duration;
+            if(_isMusicFade)
+                Singleton.Instance.Audio.SetMusicSourceVolume(1 - t);
+            t += Time.unscaledDeltaTime/_duration;
             yield return null;
         }
-        if(isMusicFade)
-            Singleton.Instance.audio.SetMusicSourceVolume(0);
-        yield return new WaitForSecondsRealtime(delayAfterOut);
+        if(_isMusicFade)
+            Singleton.Instance.Audio.SetMusicSourceVolume(0);
+        yield return new WaitForSecondsRealtime(_delayAfterOut);
         OutEnd();
         SetOutDefault();
     }
@@ -172,14 +172,14 @@ public class TransitionManager : MonoBehaviour
     IEnumerator TransitionIn()
     {
         float t = 0;
-        if(isMusicFadeInstant)
-            Singleton.Instance.audio.SetMusicSourceVolume(1);
+        if(_isMusicFadeInstant)
+            Singleton.Instance.Audio.SetMusicSourceVolume(1);
         InStart();
         while(t <= 1)
         {
             InAnimation(t);
             
-            t += Time.unscaledDeltaTime/duration;
+            t += Time.unscaledDeltaTime/_duration;
             yield return null;
         }
         InEnd();

@@ -169,11 +169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfe9708eea9b3b4fb199b41537229f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition: {fileID: 7545250281161960662}
-  audio: {fileID: 1470472937528635889}
-  scene: {fileID: 938084913680422791}
-  resolution: {fileID: 6074113487917477811}
-  save: {fileID: 2728080115511647639}
+  Transition: {fileID: 7545250281161960662}
+  Audio: {fileID: 1470472937528635889}
+  Scene: {fileID: 938084913680422791}
+  Resolution: {fileID: 6074113487917477811}
+  Save: {fileID: 2728080115511647639}
 --- !u!1 &938084912861449471
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.18
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf0f8d78c90eb845a5e0137a9bd0bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 938084913642702368}
+  Anim: {fileID: 938084913642702368}
 --- !u!114 &938084913642702368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,10 +466,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e64cb6fc5de704592122e9ddaf0b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orangeSquareRT: {fileID: 938084912636351271}
-  buttonBlocker: {fileID: 938084913845379423}
-  startYScale: 0
-  endYScale: 1
+  _orangeSquareRT: {fileID: 938084912636351271}
+  _buttonBlocker: {fileID: 938084913845379423}
+  _startYScale: 0
+  _endYScale: 1
 --- !u!114 &2669544094707639786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,8 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d61e58f3913b147a382a8dbea10dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.18
-  loadingFillImg: {fileID: 938084913494518755}
+  _progress: 0
+  _loadingFillImg: {fileID: 938084913494518755}
 --- !u!114 &938084913680422791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8bee197edd61f42988686b72a17ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingBar: {fileID: 938084913680422790}
+  _loadingBar: {fileID: 938084913680422790}
 --- !u!1 &938084913845379423
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,8 +901,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b670a08a5e0180b4698ddf2f8191ccc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    highscore: 0
+  Data:
+    Highscore: 0
   encryption: {fileID: 8866284356350909586}
 --- !u!114 &8866284356350909586
 MonoBehaviour:
@@ -962,10 +962,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efcf998882debf749bf99463fb9a3d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minVolume: -50
-  maxVolume: 10
-  musicSource: {fileID: 938084914086080044}
-  soundSource: {fileID: 938084912861449469}
-  musicMixer: {fileID: 24100000, guid: de4362cd4b39fad49839ea4e231c1c4f, type: 2}
-  soundMixer: {fileID: 24100000, guid: bda3efd27bbbd4943ab93f9cb8f71c08, type: 2}
-  defaultSound: {fileID: 8300000, guid: 6607904f0373b3a4287b596327a93093, type: 3}
+  _minVolume: -50
+  _maxVolume: 10
+  _musicSource: {fileID: 938084914086080044}
+  _soundSource: {fileID: 938084912861449469}
+  _musicMixer: {fileID: 24100000, guid: de4362cd4b39fad49839ea4e231c1c4f, type: 2}
+  _soundMixer: {fileID: 24100000, guid: bda3efd27bbbd4943ab93f9cb8f71c08, type: 2}
+  _defaultSound: {fileID: 8300000, guid: 4052e2285f03ec74fa4c83e19dc82f0a, type: 3}

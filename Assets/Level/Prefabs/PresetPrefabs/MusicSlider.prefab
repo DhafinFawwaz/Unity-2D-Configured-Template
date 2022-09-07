@@ -544,12 +544,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297d41dc9b68bd64298ede315f65ac45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSliderValue: 7
-  duration: 0.1
-  slider: {fileID: 7089129987378011755}
-  handleImg: {fileID: 7089129986230131142}
-  handlePos: {fileID: 7089129986835724792}
-  fillImg: {fileID: 7089129987703145746}
+  _maxSliderValue: 7
+  _duration: 0.1
+  _slider: {fileID: 7089129987378011755}
+  _handleImg: {fileID: 7089129986230131142}
+  _handlePos: {fileID: 7089129986835724792}
+  _fillImg: {fileID: 7089129987703145746}
 --- !u!1 &7089129987621206774
 GameObject:
   m_ObjectHideFlags: 0

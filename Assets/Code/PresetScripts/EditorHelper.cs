@@ -10,7 +10,7 @@ public class EditorHelper : MonoBehaviour
     public void TransitionOut()
     {
         Debug.Log("Transition Out");
-        Singleton.Instance.transition.Out()
+        Singleton.Instance.Transition.Out()
             // .SetOnAnimation(Singleton.Instance.transition.anim.OutAnimation)
         ;
     }
@@ -18,42 +18,42 @@ public class EditorHelper : MonoBehaviour
     public void TransitionIn()
     {
         Debug.Log("Transition In");
-        Singleton.Instance.transition.In()
+        Singleton.Instance.Transition.In()
         ;
     }
 
-    [SerializeField] GameObject mainMenuCanvas;
-    [SerializeField] GameObject settingsCanvas;
+    [SerializeField] GameObject _mainMenuCanvas;
+    [SerializeField] GameObject _settingsCanvas;
     void OnEnableMainMenu()
     {
         DisableAllCanvas();
-        mainMenuCanvas.SetActive(true);
+        _mainMenuCanvas.SetActive(true);
     }
 
     void OnEnableSettings()
     {
         DisableAllCanvas();
-        settingsCanvas.SetActive(true);
+        _settingsCanvas.SetActive(true);
     }
     void DisableAllCanvas()
     {
-        mainMenuCanvas.SetActive(false);
-        settingsCanvas.SetActive(false);
+        _mainMenuCanvas.SetActive(false);
+        _settingsCanvas.SetActive(false);
     }
 
     public void LoadSettings()
     {
         Debug.Log("Loading Settings");
-        Singleton.Instance.transition.Out()
-            .AddOutEnd(Singleton.Instance.transition.InDefault)
+        Singleton.Instance.Transition.Out()
+            .AddOutEnd(Singleton.Instance.Transition.InDefault)
             .AddOutEnd(OnEnableSettings)
         ;
     }
     public void LoadMainMenu()
     {
         Debug.Log("Loading MainMenu");
-        Singleton.Instance.transition.Out()
-            .AddOutEnd(Singleton.Instance.transition.InDefault)
+        Singleton.Instance.Transition.Out()
+            .AddOutEnd(Singleton.Instance.Transition.InDefault)
             .AddOutEnd(OnEnableMainMenu)
         ;
     }

@@ -5,22 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] Loading loadingBar;
-
-    public void LoadScene(string sceneName)
-    {
-        loadingBar.gameObject.SetActive(true);
-        StartCoroutine(LoadAsynchronously(sceneName));
-    }
-
+    [SerializeField] Loading _loadingBar;
+    string _sceneToLoad;
 
     public delegate void OnLoadingEndDelegate();
     OnLoadingEndDelegate OnLoadingEnd;
-    public void AddOnLoadingEnd(OnLoadingEndDelegate func)
-    {
-        OnLoadingEnd += func;
-    }
+    public void AddOnLoadingEnd(OnLoadingEndDelegate func) => OnLoadingEnd += func;
 
+    public void LoadScene(string sceneName)
+    {
+        _loadingBar.gameObject.SetActive(true);
+        StartCoroutine(LoadAsynchronously(sceneName));
+    }
 
     IEnumerator LoadAsynchronously(string sceneName)
     {
@@ -32,7 +28,7 @@ public class SceneLoader : MonoBehaviour
         while(!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress/0.9f);
-            loadingBar.Fill(progress);
+            _loadingBar.Fill(progress);
             yield return null;
         }
         if(OnLoadingEnd != null)
@@ -40,22 +36,20 @@ public class SceneLoader : MonoBehaviour
             OnLoadingEnd();
             OnLoadingEnd = null;
         }
-        loadingBar.gameObject.SetActive(false);
+        _loadingBar.gameObject.SetActive(false);
     }
 
-    string sceneToLoad;
     public void LoadSceneWithTransition(string sceneName)
     {
-        sceneToLoad = sceneName;
-        Singleton.Instance.transition.Out()
-            .AddOutEnd(LoadSceneName)
-        ;
-        AddOnLoadingEnd(Singleton.Instance.transition.InDefault);
+        _sceneToLoad = sceneName;
+        Singleton.Instance.Transition.Out()
+            .AddOutEnd(LoadSceneName);
+        AddOnLoadingEnd(Singleton.Instance.Transition.InDefault);
     }
     void LoadSceneName()
     {
-        loadingBar.gameObject.SetActive(true);
-        StartCoroutine(LoadAsynchronouslyWithTransition(sceneToLoad));
+        _loadingBar.gameObject.SetActive(true);
+        StartCoroutine(LoadAsynchronouslyWithTransition(_sceneToLoad));
     }
     IEnumerator LoadAsynchronouslyWithTransition(string sceneName)
     {
@@ -67,7 +61,7 @@ public class SceneLoader : MonoBehaviour
         while(!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress/0.9f);
-            loadingBar.Fill(progress);
+            _loadingBar.Fill(progress);
             yield return null;
         }
         if(OnLoadingEnd != null)
@@ -75,6 +69,6 @@ public class SceneLoader : MonoBehaviour
             OnLoadingEnd();
             OnLoadingEnd = null;
         }
-        loadingBar.gameObject.SetActive(false);
+        _loadingBar.gameObject.SetActive(false);
     }
 }

@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 236885329}
   - component: {fileID: 236885332}
   - component: {fileID: 236885331}
-  - component: {fileID: 236885330}
+  - component: {fileID: 236885333}
   m_Layer: 0
   m_Name: Button (1)
   m_TagString: Untagged
@@ -247,99 +247,6 @@ RectTransform:
   m_AnchoredPosition: {x: 317, y: 313}
   m_SizeDelta: {x: 436.975, y: 55.5477}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &236885330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236885328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 037b6eab7cf3af94994901bf87e513ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 0.1
-  enterScale: 1.2
-  exitScale: 1
-  downScale: 0.8
-  upScale: 1
-  imageToResize: {fileID: 236885329}
-  clickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 626487235}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Game1
-          m_BoolArgument: 0
-        m_CallState: 2
-  pointerEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 236885330}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: EnterAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  pointerExitEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 236885330}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: ExitAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  pointerDownEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 236885330}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: DownAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  pointerUpEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 236885330}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: UpAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &236885331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +285,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236885328}
   m_CullTransparentMesh: 1
+--- !u!114 &236885333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236885328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037b6eab7cf3af94994901bf87e513ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.1
+  _enterScale: 1.2
+  _exitScale: 1
+  _downScale: 1.3
+  upScale: 1
+  _imageToResize: {fileID: 236885329}
+  _clickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 626487235}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Game1
+          m_BoolArgument: 0
+        m_CallState: 2
+  _pointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 236885333}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: EnterAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _pointerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 236885333}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: ExitAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _pointerDownEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 236885333}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: DownAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _pointerUpEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 236885333}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: UpAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &317340544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -389,6 +389,10 @@ PrefabInstance:
       propertyPath: musicClip
       value: 
       objectReference: {fileID: 8300000, guid: 09542647b3a20b449a34f744c683b6f2, type: 3}
+    - target: {fileID: 4978948923478222102, guid: 96de4155da2ebf9478907e6e2e061c6d, type: 3}
+      propertyPath: _musicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ad919422c9be1bf4b8083675bc2cc892, type: 3}
     - target: {fileID: 4978948923478222103, guid: 96de4155da2ebf9478907e6e2e061c6d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -704,9 +708,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1723f89e82bed7e499d7c4d594a1a32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  home: {fileID: 1897661475}
-  settings: {fileID: 852776579}
-  delay: 0
+  _home: {fileID: 1897661475}
+  _settings: {fileID: 852776579}
+  _delay: 0
 --- !u!4 &626487236
 Transform:
   m_ObjectHideFlags: 0
@@ -823,10 +827,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d100b16077ee8247a6a6c49e347d8a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSlider: {fileID: 1435930187}
-  soundSlider: {fileID: 1531600037}
-  resolutionDropdown: {fileID: 1001791511}
-  fullscreenToggle: {fileID: 224898175}
+  _musicSlider: {fileID: 1435930187}
+  _soundSlider: {fileID: 1531600037}
+  _resolutionDropdown: {fileID: 1001791511}
+  _fullscreenToggle: {fileID: 224898175}
 --- !u!114 &852776584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -882,7 +886,7 @@ GameObject:
   - component: {fileID: 1309534170}
   - component: {fileID: 1309534173}
   - component: {fileID: 1309534172}
-  - component: {fileID: 1309534171}
+  - component: {fileID: 1309534174}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
@@ -910,99 +914,6 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1309534171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309534169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 037b6eab7cf3af94994901bf87e513ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 0.1
-  enterScale: 1.2
-  exitScale: 1
-  downScale: 0.8
-  upScale: 1
-  imageToResize: {fileID: 1309534170}
-  clickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 626487235}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: LoadHome
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  pointerEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1309534171}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: EnterAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  pointerExitEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1309534171}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: ExitAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  pointerDownEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1309534171}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: DownAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  pointerUpEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1309534171}
-        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: UpAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1309534172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +952,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309534169}
   m_CullTransparentMesh: 1
+--- !u!114 &1309534174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309534169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037b6eab7cf3af94994901bf87e513ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.1
+  _enterScale: 1.2
+  _exitScale: 1
+  _downScale: 0.8
+  upScale: 1
+  _imageToResize: {fileID: 1309534170}
+  _clickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 626487235}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: LoadHome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _pointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1309534174}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: EnterAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _pointerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1309534174}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: ExitAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _pointerDownEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1309534174}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: DownAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _pointerUpEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1309534174}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: UpAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1435930185 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7089129987378011752, guid: e005af6aae155a645b98380bd7a7adf9, type: 3}
@@ -1414,16 +1418,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037b6eab7cf3af94994901bf87e513ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.1
-  enterScale: 1.2
-  exitScale: 1
-  downScale: 0.8
+  _duration: 0.1
+  _enterScale: 1.2
+  _exitScale: 1
+  _downScale: 1.3
   upScale: 1
-  imageToResize: {fileID: 1544821622}
-  clickEvent:
+  _imageToResize: {fileID: 1544821622}
+  _clickEvent:
     m_PersistentCalls:
       m_Calls: []
-  pointerEnterEvent:
+  _pointerEnterEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1544821625}
@@ -1438,7 +1442,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  pointerExitEvent:
+  _pointerExitEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1544821625}
@@ -1453,7 +1457,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  pointerDownEvent:
+  _pointerDownEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1544821625}
@@ -1468,7 +1472,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  pointerUpEvent:
+  _pointerUpEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1544821625}
@@ -1573,13 +1577,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037b6eab7cf3af94994901bf87e513ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.1
-  enterScale: 1.2
-  exitScale: 1
-  downScale: 0.8
+  _duration: 0.1
+  _enterScale: 1.2
+  _exitScale: 1
+  _downScale: 1.3
   upScale: 1
-  imageToResize: {fileID: 1865643028}
-  clickEvent:
+  _imageToResize: {fileID: 1865643028}
+  _clickEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 626487235}
@@ -1594,7 +1598,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  pointerEnterEvent:
+  _pointerEnterEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1865643031}
@@ -1609,7 +1613,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  pointerExitEvent:
+  _pointerExitEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1865643031}
@@ -1624,7 +1628,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  pointerDownEvent:
+  _pointerDownEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1865643031}
@@ -1639,7 +1643,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  pointerUpEvent:
+  _pointerUpEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1865643031}
@@ -2113,6 +2117,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1897661477}
     m_Modifications:
+    - target: {fileID: 4978948923478222102, guid: 96de4155da2ebf9478907e6e2e061c6d, type: 3}
+      propertyPath: _musicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: abb6383d08036574faaf20b46665c148, type: 3}
     - target: {fileID: 4978948923478222103, guid: 96de4155da2ebf9478907e6e2e061c6d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2184,6 +2192,14 @@ PrefabInstance:
       objectReference: {fileID: 1897661475}
     - target: {fileID: 5840741759717950001, guid: 0218131ca98637943a98fa2d282e2c9f, type: 3}
       propertyPath: settingsCanvas
+      value: 
+      objectReference: {fileID: 852776579}
+    - target: {fileID: 5840741759717950001, guid: 0218131ca98637943a98fa2d282e2c9f, type: 3}
+      propertyPath: _mainMenuCanvas
+      value: 
+      objectReference: {fileID: 1897661475}
+    - target: {fileID: 5840741759717950001, guid: 0218131ca98637943a98fa2d282e2c9f, type: 3}
+      propertyPath: _settingsCanvas
       value: 
       objectReference: {fileID: 852776579}
     - target: {fileID: 5840741759717950006, guid: 0218131ca98637943a98fa2d282e2c9f, type: 3}

@@ -3,11 +3,11 @@ using UnityEngine.Audio;
 
 public class Singleton : MonoBehaviour
 {
-    public TransitionManager transition;
-    new public AudioManager audio;//'new': Hide inherited member
-    public SceneLoader scene;
-    public ResolutionManager resolution;
-    public SaveManager save;
+    public TransitionManager Transition;
+    public AudioManager Audio;
+    public SceneLoader Scene;
+    public ResolutionManager Resolution;
+    public SaveManager Save;
     public static Singleton Instance;
     
     void Awake()

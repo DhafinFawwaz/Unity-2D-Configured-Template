@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
-    public SaveData data;
+    public SaveData Data;
     public void OnDataLoaded()
     {
 
@@ -28,11 +28,11 @@ public class SaveManager : MonoBehaviour
     [SerializeField] Encryption encryption;
     public void SaveData()
     {
-        encryption.SaveData(data);
+        encryption.SaveData(Data);
     }
     public void LoadData()
     {
-        data = encryption.LoadData();
+        Data = encryption.LoadData();
         OnDataLoaded();
     }
 }

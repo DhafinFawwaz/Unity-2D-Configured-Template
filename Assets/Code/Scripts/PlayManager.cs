@@ -5,25 +5,25 @@ using TMPro;
 
 public class PlayManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI highscoreText;
+    [SerializeField] TextMeshProUGUI _highscoreText;
     public void LoadScene(string sceneName)
     {
-        Singleton.Instance.scene.LoadSceneWithTransition(sceneName);
-        Singleton.Instance.transition.SetMusicFade(false);
+        Singleton.Instance.Scene.LoadSceneWithTransition(sceneName);
+        Singleton.Instance.Transition.SetMusicFade(sceneName == "MainMenu" ? true : false);
     }
 
     void Start()
     {
-        Singleton.Instance.save.LoadData();
-        highscoreText.text = "Highscore: " + Singleton.Instance.save.data.highscore.ToString();
+        Singleton.Instance.Save.LoadData();
+        _highscoreText.text = "Highscore: " + Singleton.Instance.Save.Data.Highscore.ToString();
     }
 
     public void SetRandomHighscore()
     {
         int randomNumber = Random.Range(10, 200);
-        highscoreText.text = "Highscore: " + randomNumber.ToString();
-        Singleton.Instance.save.data.highscore = randomNumber;
-        Singleton.Instance.save.SaveData(); 
+        _highscoreText.text = "Highscore: " + randomNumber.ToString();
+        Singleton.Instance.Save.Data.Highscore = randomNumber;
+        Singleton.Instance.Save.SaveData(); 
     }
     
 }
