@@ -97,7 +97,7 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void DownAnimation(){StartCoroutine(TweenScale(_imageToResize, _downScale));}
     public void UpAnimation(){StartCoroutine(TweenScale(_imageToResize, upScale));}
 
-    int _key;
+    ushort _key;
     //Value will keep changing so that everytime a new TweenScale() coroutine is called,
     //the previous coroutine will be stopped and the new Scaling animation will be executed
     //without interuption.
@@ -105,7 +105,7 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     IEnumerator TweenScale(Transform trans, float endScale)
     {
         _key++;
-        int requirement = _key;
+        ushort requirement = _key;
         float startScale = trans.localScale.x;
         float t = 0;
         while (t <= 1 && requirement == _key)
