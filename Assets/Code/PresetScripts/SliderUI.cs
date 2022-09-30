@@ -35,14 +35,14 @@ public class SliderUI : MonoBehaviour
         _previousValue = _slider.value;
     }
 
-    int _key;
+    ushort _key;
     IEnumerator HandleAnimation(Transform handle, Vector2 newPos, Image fillImg, float newFill)
     {
         float t = 0;
         Vector2 currentPos = handle.position;
         float currentFill = fillImg.fillAmount;
         _key++;
-        int requirement = _key;
+        ushort requirement = _key;
         while(t <= 1 && requirement == _key)
         {
             handle.position = Vector2.Lerp(currentPos, newPos, Ease.OutQuart(t));
