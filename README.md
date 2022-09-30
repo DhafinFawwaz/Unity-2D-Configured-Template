@@ -40,7 +40,8 @@ Singleton.Instance.transition.MyMethodName();
 |`SetInDefault()`                   |Set the transition in parameters to the default values|
 |`OutDefault()`                     |call `SetOutDefault()` then `Out()`|
 |`InDefault()`                      |call `SetInDefault()` then `In()`|
-|`SetDelayAfterOut(float t)`        |Set the delay after the transition animation ends, before the added/set function by t|
+|`SetDelayAfterOut(float t)`        |Set the delay after the transition out animation ends, before the added/set function by t|
+|`SetDelayBeforeIn(float t)`        |Set the delay before the transition in animation start, before the added/set function by t|
 |`SetDuration(float t)`             |Set the duration of the transition animation by t|
 |`SetMusicFade(bool b)`             |Set whether the music will fade during the transition out|
 |`SetOutStart(delegate func)`       |Set the method that will get called when transition out started    |
