@@ -6,7 +6,8 @@ public class TransitionManager : MonoBehaviour
 {
 
     float _duration = 0.5f;
-    float _delayAfterOut = 0.2f;
+    float _delayAfterOut = 0.3f;
+    float _delayBeforeIn = 0.7f;
     bool _isMusicFade = true;
     bool _isMusicFadeInstant = true;
     public TransitionAnimation Anim;
@@ -15,6 +16,11 @@ public class TransitionManager : MonoBehaviour
     public TransitionManager SetDelayAfterOut(float t)
     {
         _delayAfterOut = t;
+        return this;
+    }
+    public TransitionManager SetDelayBeforeIn(float t)
+    {
+        _delayBeforeIn = t;
         return this;
     }
     public TransitionManager SetDuration(float t)
@@ -98,7 +104,8 @@ public class TransitionManager : MonoBehaviour
     public void SetOutDefault()
     {
         _duration = 0.5f;
-        _delayAfterOut = 1f;
+        _delayAfterOut = 0.3f;
+        _delayBeforeIn = 0.7f;
         _isMusicFade = true;
         _isMusicFadeInstant = true;
         OutStart     = Singleton.Instance.Transition.Anim.OutStart;
@@ -108,7 +115,8 @@ public class TransitionManager : MonoBehaviour
     public void SetInDefault()
     {
         _duration = 0.5f;
-        _delayAfterOut = 1f;
+        _delayAfterOut = 0.3f;
+        _delayBeforeIn = 0.7f;
         _isMusicFade = true;
         _isMusicFadeInstant = true;
         InStart     = Singleton.Instance.Transition.Anim.InStart;
@@ -171,6 +179,7 @@ public class TransitionManager : MonoBehaviour
     }
     IEnumerator TransitionIn()
     {
+        yield return new WaitForSecondsRealtime(_delayBeforeIn);
         float t = 0;
         if(_isMusicFadeInstant)
             Singleton.Instance.Audio.SetMusicSourceVolume(1);
