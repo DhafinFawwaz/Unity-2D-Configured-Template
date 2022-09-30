@@ -5,7 +5,7 @@
 <h1 align="center">Unity 2D Configured Template V1.0.0</h1>
 
 Unity 2D Configured Template V1.0.0 is a unity template with some probably usefull features that can
-always be used for any unity game project. With a few modification within Unity Engine, it can also be used for 3D game. This is mainly a template for game UI.
+always be used for any unity game project. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI.
 
 
 ## ✨ Features
@@ -27,7 +27,7 @@ always be used for any unity game project. With a few modification within Unity 
 Get the reference by
 
 ```csharp
-Singleton.Instance.transition.MyMethodName();
+Singleton.Instance.Transition.MyMethodName();
 ```
 
 #### 🔗 Syntax
@@ -64,8 +64,8 @@ In the Unity Hierarchy, navigate to `Singleton/Transition`. Inside `TransitionAn
 
 Transition out without fading the music, call `ActivateMainMenuCanvas()`, wait 1 seconds then transition in.
 ```csharp
-Singleton.Instance.transition.Out()
-    .AddOutEnd(Singleton.Instance.transition.InDefault)
+Singleton.Instance.Transition.Out()
+    .AddOutEnd(Singleton.Instance.Transition.InDefault)
     .SetMusicFade(false)
     .SetDelayAfterOut(1)
     .AddOutEnd(ActivateMainMenuCanvas);
@@ -75,7 +75,7 @@ Singleton.Instance.transition.Out()
 Get the reference by
 
 ```csharp
-Singleton.Instance.scene.MyMethodName();
+Singleton.Instance.Scene.MyMethodName();
 ```
 
 #### 🔗 Syntax
@@ -92,8 +92,8 @@ In the Unity Hierarchy, navigate to `Singleton/Loading`. You can change the load
 
 Transition out in 0.7 seconds without fading the music, start loading screen, load scene, then transition in.
 ```csharp
-Singleton.Instance.scene.LoadSceneWithTransition(sceneName);
-Singleton.Instance.transition.SetMusicFade(true)
+Singleton.Instance.Scene.LoadSceneWithTransition(sceneName);
+Singleton.Instance.Transition.SetMusicFade(true)
     .SetDuration(0.7f);
 ```
 
@@ -101,7 +101,7 @@ Singleton.Instance.transition.SetMusicFade(true)
 Get the reference by
 
 ```csharp
-Singleton.Instance.save.MyMethodName();
+Singleton.Instance.Save.MyMethodName();
 ```
 
 #### 🔗 Syntax
@@ -117,23 +117,23 @@ Modify `SaveData.cs` in `Assets\Code\PresetScripts` however you like to fit the 
 
 Set the value of the highscore to 120 then save it.
 ```csharp
-Singleton.Instance.save.data.highscore = 120;
-Singleton.Instance.save.SaveData();
+Singleton.Instance.Save.Data.Highscore = 120;
+Singleton.Instance.Save.SaveData();
 ```
 Set the value of the save data into newPlayerData then save it. Make sure to modify the `SaveData.cs`.
 ```csharp
 Save newPlayerData = new Save();
 newPlayerData.username = "chicken";
 newPlayerData.exp = 50;
-Singleton.Instance.save.data = newPlayerData;
-Singleton.Instance.save.SaveData();
+Singleton.Instance.Save.Data = newPlayerData;
+Singleton.Instance.Save.SaveData();
 ```
 
 ### 🔊 Audio
 Get the reference by
 
 ```csharp
-Singleton.Instance.audio.MyMethodName();
+Singleton.Instance.Audio.MyMethodName();
 ```
 
 | Method     | Description                                        |
@@ -151,14 +151,14 @@ Drop the `MusicLoader` prefab in `Assets\Level\Prefabs\PresetPrefabs` to the sce
 
 Play the epicImpactSFX.
 ```csharp
-Singleton.Instance.audio.PlaySound(epicImpactSFX);
+Singleton.Instance.Audio.PlaySound(epicImpactSFX);
 ```
 
 ### 💻 Resolution
 Get the reference by
 
 ```csharp
-Singleton.Instance.resolution.MyMethodName();
+Singleton.Instance.Resolution.MyMethodName();
 ```
 
 | Method     | Description                                        |
@@ -168,7 +168,7 @@ Singleton.Instance.resolution.MyMethodName();
 
 Set the screen into fullscreen.
 ```csharp
-Singleton.Instance.resolution.SetFullScreen(true);
+Singleton.Instance.Resolution.SetFullScreen(true);
 ```
 
 ### ⚙️ Settings
