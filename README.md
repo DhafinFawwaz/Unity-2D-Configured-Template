@@ -2,9 +2,9 @@
 <!-- ![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png) -->
 <!-- 444x91 px -->
 <!-- <hr> -->
-<h1 align="center">Unity 2D Configured Template V1.0.0</h1>
+<h1 align="center">Unity 2D Configured Template V2.0.0</h1>
 
-Unity 2D Configured Template V1.0.0 is a unity template with some probably usefull features that can
+Unity 2D Configured Template V2.0.0 is a unity template with some probably usefull features that can
 always be used for any unity game project. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI.
 
 
