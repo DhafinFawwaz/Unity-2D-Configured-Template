@@ -154,6 +154,7 @@ Transform:
   - {fileID: 938084913642702381}
   - {fileID: 3445606169141521686}
   - {fileID: 938084913680422784}
+  - {fileID: 7276578851651941900}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -174,6 +175,7 @@ MonoBehaviour:
   Scene: {fileID: 938084913680422791}
   Resolution: {fileID: 6074113487917477811}
   Save: {fileID: 2728080115511647639}
+  Game: {fileID: 3148094947486676671}
 --- !u!1 &938084912861449471
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,3 +995,47 @@ MonoBehaviour:
   _musicMixer: {fileID: 24100000, guid: de4362cd4b39fad49839ea4e231c1c4f, type: 2}
   _soundMixer: {fileID: 24100000, guid: bda3efd27bbbd4943ab93f9cb8f71c08, type: 2}
   _defaultSound: {fileID: 8300000, guid: 4052e2285f03ec74fa4c83e19dc82f0a, type: 3}
+--- !u!1 &8308287894574395575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7276578851651941900}
+  - component: {fileID: 3148094947486676671}
+  m_Layer: 0
+  m_Name: Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7276578851651941900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8308287894574395575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 938084912695069933}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3148094947486676671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8308287894574395575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6bad8ffd9a5f94c9bbefb5ad44e802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
