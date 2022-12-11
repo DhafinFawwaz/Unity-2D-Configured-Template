@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -99,4 +100,24 @@ public class AudioManager : MonoBehaviour
         );
         PlayerPrefs.SetFloat("soundVolume", newVal);
     }
+
+
+    // SFX
+    [System.Serializable] public class Sound
+    {
+        [Tooltip("Clip to play")]public AudioClip Clip;
+        [Tooltip("Volume of the clip")]
+        public float Volume = 1;
+        #if UNITY_EDITOR 
+        [Tooltip("Just for naming, this isn't actually used anywhere")]public string ClipName;
+        #endif
+    }
+    // [NonReorderable] 
+    public Sound[] SFX;
+    // public List<Sound> SFX;
+    public void PlaySound(int index)
+    {
+        PlaySound(SFX[index].Clip, SFX[index].Volume);
+    }
+    // [SerializeField] Sounds buttonSFX;
 }

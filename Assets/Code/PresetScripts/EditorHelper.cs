@@ -45,7 +45,7 @@ public class EditorHelper : MonoBehaviour
     {
         Debug.Log("Loading Settings");
         Singleton.Instance.Transition.Out()
-            .AddOutEnd(Singleton.Instance.Transition.InDefault)
+            .AddOutEnd(Singleton.Instance.Transition.In)
             .AddOutEnd(OnEnableSettings)
         ;
     }
@@ -53,7 +53,7 @@ public class EditorHelper : MonoBehaviour
     {
         Debug.Log("Loading MainMenu");
         Singleton.Instance.Transition.Out()
-            .AddOutEnd(Singleton.Instance.Transition.InDefault)
+            .AddOutEnd(Singleton.Instance.Transition.In)
             .AddOutEnd(OnEnableMainMenu)
         ;
     }

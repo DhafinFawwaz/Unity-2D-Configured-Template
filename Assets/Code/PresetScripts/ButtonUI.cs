@@ -62,6 +62,10 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         Singleton.Instance.Audio.PlaySound(audioClip);
     }
+    public void PlaySound(int index)
+    {
+        Singleton.Instance.Audio.PlaySound(index);
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {

@@ -14,7 +14,7 @@ public class MainMenuManager : MonoBehaviour
     public void LoadHome()
     {
         Singleton.Instance.Transition.Out()
-            .AddOutEnd(Singleton.Instance.Transition.InDefault)
+            .AddOutEnd(Singleton.Instance.Transition.In)
             .SetDelayAfterOut(_delay)
             .AddOutEnd(ActivateHome);
     }
@@ -26,7 +26,7 @@ public class MainMenuManager : MonoBehaviour
     public void LoadSettings()
     {
         Singleton.Instance.Transition.Out()
-            .AddOutEnd(Singleton.Instance.Transition.InDefault)
+            .AddOutEnd(Singleton.Instance.Transition.In)
             .SetDelayAfterOut(_delay)
             .AddOutEnd(ActivateSettings);
         

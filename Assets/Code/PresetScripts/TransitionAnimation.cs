@@ -1,38 +1,42 @@
 using UnityEngine;
+using System.Collections;
 
 public class TransitionAnimation : MonoBehaviour
 {
     [SerializeField] RectTransform _orangeSquareRT;
-    [SerializeField] GameObject _buttonBlocker;
     [SerializeField] float _startYScale = 0;
     [SerializeField] float _endYScale = 1;
-    void Start() => InEnd();
-    public void OutStart()
-    {
-        _buttonBlocker.SetActive(true);
-        _orangeSquareRT.pivot = new Vector2(0.5f, 1f);
-        OutAnimation(0);
-    }
-    public void OutAnimation(float t)
-    {
-        float newY = Mathf.Lerp(_startYScale, _endYScale, Ease.OutQuart(t));
-        _orangeSquareRT.localScale = new Vector3(1, newY, 1);
-    }
-    public void OutEnd() => OutAnimation(1);
 
-    public void InStart()
+    
+    float _outDuration = 0.5f;
+    public IEnumerator OutAnimation()
+    {
+        Singleton.Instance.Game.SetActiveAllInput(false);
+        _orangeSquareRT.pivot = new Vector2(0.5f, 1f);
+        float t = 0;
+        while(t <= 1)
+        {
+            t += Time.unscaledDeltaTime/_outDuration;
+            float newY = Mathf.Lerp(_startYScale, _endYScale, Ease.OutQuart(t));
+            _orangeSquareRT.localScale = new Vector3(1, newY, 1);
+            yield return null;
+        }
+        _orangeSquareRT.localScale = new Vector3(1, Mathf.Lerp(_startYScale, _endYScale, Ease.OutQuart(1)), 1);
+    }
+
+    float _inDuration = 0.5f;
+    public IEnumerator InAnimation()
     {
         _orangeSquareRT.pivot = new Vector2(0.5f, 0f);
-        InAnimation(0);
-    }
-    public void InAnimation(float t)
-    {
-        float newY = Mathf.Lerp(_endYScale, _startYScale, Ease.OutQuart(t));
-        _orangeSquareRT.localScale = new Vector3(1, newY, 1);
-    }
-    public void InEnd()
-    {
-        _buttonBlocker.SetActive(false);
-        InAnimation(1);
+        float t = 0;
+        while(t <= 1)
+        {
+            t += Time.unscaledDeltaTime/_outDuration;
+            float newY = Mathf.Lerp(_endYScale, _startYScale, Ease.OutQuart(t));
+            _orangeSquareRT.localScale = new Vector3(1, newY, 1);
+            yield return null;
+        }
+        _orangeSquareRT.localScale = new Vector3(1, Mathf.Lerp(_endYScale, _startYScale, Ease.OutQuart(1)), 1);
+        Singleton.Instance.Game.SetActiveAllInput(true);
     }
 }

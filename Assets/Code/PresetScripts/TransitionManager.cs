@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class TransitionManager : MonoBehaviour
 {
+    float _delayBeforeOut = 0.0f;
+    float _delayAfterOut = 0.1f;
 
-    float _duration = 0.5f;
-    float _delayAfterOut = 0.3f;
-    float _delayBeforeIn = 0.7f;
+    float _delayBeforeIn = 0.5f;
+    float _delayAfterIn = 0.0f;
+    
     bool _isMusicFade = true;
     bool _isMusicFadeInstant = true;
+
+    float _musicFadeOutDuration = 0.4f;
+    float _musicFadeInDuration = 0.4f;
+    
     public TransitionAnimation Anim;
     void Start(){SetOutDefault();SetInDefault();}
 #region Set
@@ -23,11 +29,6 @@ public class TransitionManager : MonoBehaviour
         _delayBeforeIn = t;
         return this;
     }
-    public TransitionManager SetDuration(float t)
-    {
-        _duration = t;
-        return this;
-    }
 
     public TransitionManager SetMusicFade(bool b)
     {
@@ -35,14 +36,11 @@ public class TransitionManager : MonoBehaviour
         return this;
     }
 
+
+
     public TransitionManager SetOutStart(OutStartDelegate func)
     {
         OutStart = func;
-        return this;
-    }
-    public TransitionManager SetOutAnimation(OutAnimationDelegate func)
-    {
-        OutAnimation = func;
         return this;
     }
     public TransitionManager SetOutEnd(OutEndDelegate func)
@@ -50,19 +48,36 @@ public class TransitionManager : MonoBehaviour
         OutEnd = func;
         return this;
     }
+    public TransitionManager SetOutStart(OutStartTransitionDelegate func)
+    {
+        OutStartTransition = func;
+        return this;
+    }
+    public TransitionManager SetOutEnd(OutEndTransitionDelegate func)
+    {
+        OutEndTransition = func;
+        return this;
+    }
+
+
     public TransitionManager AddOutStart(OutStartDelegate func)
     {
         OutStart += func;
         return this;
     }
-    public TransitionManager AddOutAnimation(OutAnimationDelegate func)
-    {
-        OutAnimation += func;
-        return this;
-    }
     public TransitionManager AddOutEnd(OutEndDelegate func)
     {
         OutEnd += func;
+        return this;
+    }
+    public TransitionManager AddOutStart(OutStartTransitionDelegate func)
+    {
+        OutStartTransition += func;
+        return this;
+    }
+    public TransitionManager AddOutEnd(OutEndTransitionDelegate func)
+    {
+        OutEndTransition += func;
         return this;
     }
 
@@ -72,29 +87,41 @@ public class TransitionManager : MonoBehaviour
         InStart = func;
         return this;
     }
-    public TransitionManager SetInAnimation(InAnimationDelegate func)
-    {
-        InAnimation = func;
-        return this;
-    }
     public TransitionManager SetInEnd(InEndDelegate func)
     {
         InEnd = func;
         return this;
     }
+    public TransitionManager SetInStart(InStartTransitionDelegate func)
+    {
+        InStartTransition = func;
+        return this;
+    }
+    public TransitionManager SetInEnd(InEndTransitionDelegate func)
+    {
+        InEndTransition = func;
+        return this;
+    }
+
+
     public TransitionManager AddInStart(InStartDelegate func)
     {
         InStart += func;
         return this;
     }
-    public TransitionManager AddInAnimation(InAnimationDelegate func)
-    {
-        InAnimation += func;
-        return this;
-    }
     public TransitionManager AddInEnd(InEndDelegate func)
     {
         InEnd += func;
+        return this;
+    }
+    public TransitionManager AddInStart(InStartTransitionDelegate func)
+    {
+        InStartTransition += func;
+        return this;
+    }
+    public TransitionManager AddInEnd(InEndTransitionDelegate func)
+    {
+        InEndTransition += func;
         return this;
     }
 
@@ -103,40 +130,44 @@ public class TransitionManager : MonoBehaviour
 
     public void SetOutDefault()
     {
-        _duration = 0.5f;
-        _delayAfterOut = 0.3f;
-        _delayBeforeIn = 0.7f;
+        _delayBeforeOut = 0.0f;
+        _delayAfterOut = 0.1f;
         _isMusicFade = true;
         _isMusicFadeInstant = true;
-        OutStart     = Singleton.Instance.Transition.Anim.OutStart;
-        OutAnimation = Singleton.Instance.Transition.Anim.OutAnimation;
-        OutEnd       = Singleton.Instance.Transition.Anim.OutEnd;
+        _musicFadeOutDuration = 0.4f;
+        OutStart = null;
+        OutStartTransition = null;
     }
     public void SetInDefault()
     {
-        _duration = 0.5f;
-        _delayAfterOut = 0.3f;
-        _delayBeforeIn = 0.7f;
+        _delayBeforeIn = 0.5f;
+        _delayAfterIn = 0.0f;
         _isMusicFade = true;
         _isMusicFadeInstant = true;
-        InStart     = Singleton.Instance.Transition.Anim.InStart;
-        InAnimation = Singleton.Instance.Transition.Anim.InAnimation;
-        InEnd       = Singleton.Instance.Transition.Anim.InEnd;
+        _musicFadeInDuration = 0.4f;
+        InStart = null;
+        InStartTransition = null;
     }
 
     public delegate void OutStartDelegate();
     OutStartDelegate OutStart;
-    public delegate void OutAnimationDelegate(float t);
-    OutAnimationDelegate OutAnimation;
     public delegate void OutEndDelegate();
     OutEndDelegate OutEnd;
 
     public delegate void InStartDelegate();
     InStartDelegate InStart;
-    public delegate void InAnimationDelegate(float t);
-    InAnimationDelegate InAnimation;
     public delegate void InEndDelegate();
     InEndDelegate InEnd;
+
+    public delegate TransitionManager OutStartTransitionDelegate(); //Overload for Out() because the return type isn;t void. Could have used generic or with UnityAction, but since it's only for 1 function which is Out() and In() it'll be fine.
+    OutStartTransitionDelegate OutStartTransition;
+    public delegate TransitionManager OutEndTransitionDelegate();
+    OutEndTransitionDelegate OutEndTransition;
+
+    public delegate TransitionManager InStartTransitionDelegate();
+    InStartTransitionDelegate InStartTransition;
+    public delegate TransitionManager InEndTransitionDelegate();
+    InEndTransitionDelegate InEndTransition;
 
     
 
@@ -148,26 +179,28 @@ public class TransitionManager : MonoBehaviour
 
     IEnumerator TransitionOut()
     {
+        OutStart?.Invoke();
+        OutStartTransition?.Invoke();
+        yield return new WaitForSecondsRealtime(_delayBeforeOut);
+        StartCoroutine(MusicFadeOut());
+        yield return StartCoroutine(Anim.OutAnimation());
+        yield return new WaitForSecondsRealtime(_delayAfterOut);
+        OutEnd?.Invoke();
+        OutEndTransition?.Invoke();
+        SetOutDefault(); // Because the delegates might still reference a function from another scene
+    }
+
+    IEnumerator MusicFadeOut()
+    {
         float t = 0;
-        OutStart();
+        AudioManager audio = Singleton.Instance.Audio;
         while(t <= 1)
         {
-            OutAnimation(t);
-            if(_isMusicFade)
-                Singleton.Instance.Audio.SetMusicSourceVolume(1 - t);
-            t += Time.unscaledDeltaTime/_duration;
+            audio.SetMusicSourceVolume(1 - t);
+            t += Time.unscaledDeltaTime/_musicFadeOutDuration;
             yield return null;
         }
-        if(_isMusicFade)
-            Singleton.Instance.Audio.SetMusicSourceVolume(0);
-        yield return new WaitForSecondsRealtime(_delayAfterOut);
-        OutEnd();
-        SetOutDefault();
-    }
-    public void OutDefault()
-    {
-        SetOutDefault();
-        StartCoroutine(TransitionOut());
+        audio.SetMusicSourceVolume(0);
     }
 
 
@@ -179,28 +212,27 @@ public class TransitionManager : MonoBehaviour
     }
     IEnumerator TransitionIn()
     {
+        InStart?.Invoke();
+        InStartTransition?.Invoke();
         yield return new WaitForSecondsRealtime(_delayBeforeIn);
+        StartCoroutine(MusicFadeIn());
+        yield return StartCoroutine(Anim.InAnimation());
+        yield return new WaitForSecondsRealtime(_delayAfterIn);
+        InEnd?.Invoke();
+        InEndTransition?.Invoke();
+        SetInDefault();
+    }
+
+    IEnumerator MusicFadeIn()
+    {
         float t = 0;
-        if(_isMusicFadeInstant)
-            Singleton.Instance.Audio.SetMusicSourceVolume(1);
-        InStart();
+        AudioManager audio = Singleton.Instance.Audio;
         while(t <= 1)
         {
-            InAnimation(t);
-            
-            t += Time.unscaledDeltaTime/_duration;
+            audio.SetMusicSourceVolume(1 - t);
+            t += Time.unscaledDeltaTime/_musicFadeInDuration;
             yield return null;
         }
-        InEnd();
-        SetInDefault();
+        audio.SetMusicSourceVolume(0);
     }
-    public void InDefault()
-    {
-        SetInDefault();
-        StartCoroutine(TransitionIn());
-    }
-
-
-
-    
 }

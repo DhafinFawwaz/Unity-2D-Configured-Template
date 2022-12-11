@@ -3,3 +3,61 @@
 /// </summary>
 /// <param name="myBool">Parameter value to pass.</param>
 /// <returns>Returns an integer based on the passed value.</returns>
+
+
+
+
+using UnityEngine;
+using UnityEditor;
+
+[CustomPropertyDrawer(typeof(AudioManager.Sounds))]
+public class SequenceDrawer : PropertyDrawer
+{
+    int _height = 18;
+    int _spacing = 2;
+    int _amount = 2;
+    int _rightPadding = 5;
+    int _column = 3;
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        return (((_height+_spacing)*_amount + _spacing)/_column);
+    }
+    
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        EditorGUI.BeginProperty(position, label, property);
+        // position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+
+        // Don't make child fields be indented
+        var indent = EditorGUI.indentLevel;
+        EditorGUI.indentLevel = 0;
+
+        int i = System.Convert.ToInt32(label.ToString().Remove(0, 8));
+        _column = 0;
+        while(100 * (_column+1) < EditorGUIUtility.currentViewWidth)
+        {
+            _column++;
+        }
+        
+        // Calculate rects
+        var labelRect   = new Rect((i % _column)*(100+_rightPadding)+(position.x     )  , (position.y+((17)*(i/_column)))                      - (((i) % _column) + 2*((i) / _column)) * (position.height+_spacing), 20, (position.height*_column)/2-_spacing);
+        var nameRect    = new Rect((i % _column)*(100+_rightPadding)+(position.x + 25)  , (position.y+((17)*(i/_column)))                      - (((i) % _column) + 2*((i) / _column)) * (position.height+_spacing), 75, (position.height*_column)/2-_spacing);
+        var clipRect    = new Rect((i % _column)*(100+_rightPadding)+(position.x     )  , (position.y+((17)*(i/_column)))+(_height+_spacing+1) - (((i) % _column) + 2*((i) / _column)) * (position.height+_spacing), 75, (position.height*_column)/2-_spacing);
+        var volumeRect  = new Rect((i % _column)*(100+_rightPadding)+(position.x + 80)  , (position.y+((17)*(i/_column)))+(_height+_spacing+1) - (((i) % _column) + 2*((i) / _column)) * (position.height+_spacing), 20, (position.height*_column)/2-_spacing);
+
+        EditorGUI.LabelField(labelRect, label.ToString().Remove(0, 8));
+        EditorGUI.PropertyField(nameRect, property.FindPropertyRelative("_clipName"), GUIContent.none);
+        EditorGUI.PropertyField(clipRect, property.FindPropertyRelative("Clip"), GUIContent.none);
+        EditorGUI.PropertyField(volumeRect, property.FindPropertyRelative("Volume"), GUIContent.none);
+
+
+        // Set indent back to what it was
+        EditorGUI.indentLevel = indent;
+
+        EditorGUI.EndProperty();
+    }
+
+
+    
+}
+

@@ -9,8 +9,11 @@ public class SceneLoader : MonoBehaviour
     string _sceneToLoad;
 
     public delegate void OnLoadingEndDelegate();
+    public delegate TransitionManager OnLoadingEndTransitionDelegate();
     OnLoadingEndDelegate OnLoadingEnd;
+    OnLoadingEndTransitionDelegate OnLoadingEndTransition;
     public void AddOnLoadingEnd(OnLoadingEndDelegate func) => OnLoadingEnd += func;
+    public void AddOnLoadingEnd(OnLoadingEndTransitionDelegate func) => OnLoadingEndTransition += func;
 
     public void LoadScene(string sceneName)
     {
@@ -34,7 +37,9 @@ public class SceneLoader : MonoBehaviour
         if(OnLoadingEnd != null)
         {
             OnLoadingEnd();
+            OnLoadingEndTransition();
             OnLoadingEnd = null;
+            OnLoadingEndTransition = null;
         }
         _loadingBar.gameObject.SetActive(false);
     }
@@ -44,7 +49,7 @@ public class SceneLoader : MonoBehaviour
         _sceneToLoad = sceneName;
         Singleton.Instance.Transition.Out()
             .AddOutEnd(LoadSceneName);
-        AddOnLoadingEnd(Singleton.Instance.Transition.InDefault);
+        AddOnLoadingEnd(Singleton.Instance.Transition.In);
     }
     void LoadSceneName()
     {

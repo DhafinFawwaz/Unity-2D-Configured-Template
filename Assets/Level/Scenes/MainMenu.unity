@@ -333,6 +333,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 236885333}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _pointerExitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -342,7 +354,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -967,7 +979,7 @@ MonoBehaviour:
   _duration: 0.1
   _enterScale: 1.2
   _exitScale: 1
-  _downScale: 0.8
+  _downScale: 1.3
   upScale: 1
   _imageToResize: {fileID: 1309534170}
   _clickEvent:
@@ -1442,6 +1454,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1544821625}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _pointerExitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1451,7 +1475,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1613,6 +1637,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1865643031}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _pointerExitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1622,7 +1658,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2006,6 +2042,162 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: buttonSFX.Clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6607904f0373b3a4287b596327a93093, type: 3}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: buttonSFX._clipName
+      value: ButtonSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[0].Clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4052e2285f03ec74fa4c83e19dc82f0a, type: 3}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[0].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[1].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[2].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[3].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[4].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[5].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[0].ClipName
+      value: ButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[1].ClipName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[2].ClipName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[3].ClipName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[4].ClipName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: SFX.Array.data[5].ClipName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[0].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[1].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[2].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[3].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[4].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[5].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[6].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[7].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[8].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[9].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[10].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[11].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[12].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[13].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[14].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[15].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[16].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[17].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[18].Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[0]._clipName
+      value: dsgf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470472937528635889, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: _sounds.Array.data[1]._clipName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7276578851651941900, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 938084913642702371, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f855f6a253bcc8e47ba65d623655fd91, type: 3}
@@ -2182,18 +2374,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EditorHelper
       objectReference: {fileID: 0}
-    - target: {fileID: 5840741759717950000, guid: 0218131ca98637943a98fa2d282e2c9f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5840741759717950001, guid: 0218131ca98637943a98fa2d282e2c9f, type: 3}
-      propertyPath: mainMenuCanvas
-      value: 
-      objectReference: {fileID: 1897661475}
-    - target: {fileID: 5840741759717950001, guid: 0218131ca98637943a98fa2d282e2c9f, type: 3}
-      propertyPath: settingsCanvas
-      value: 
-      objectReference: {fileID: 852776579}
     - target: {fileID: 5840741759717950001, guid: 0218131ca98637943a98fa2d282e2c9f, type: 3}
       propertyPath: _mainMenuCanvas
       value: 
