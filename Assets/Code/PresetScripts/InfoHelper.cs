@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [ExecuteInEditMode]
-public class DebugInfo : MonoBehaviour
+public class InfoHelper : MonoBehaviour
 {
     [SerializeField] bool _showDebug = true;
     [SerializeField] Color _color = Color.red;

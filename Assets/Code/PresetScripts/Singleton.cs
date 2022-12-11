@@ -7,7 +7,6 @@ public class Singleton : MonoBehaviour
     public AudioManager Audio;
     public SceneLoader Scene;
     public ResolutionManager Resolution;
-    public SaveManager Save;
     public GameManager Game;
     public static Singleton Instance;
     

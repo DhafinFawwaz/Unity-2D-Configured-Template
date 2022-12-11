@@ -39,4 +39,9 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
         => Singleton.Instance.Scene.LoadSceneWithTransition(sceneName);
+
+    void Start()
+    {
+        Debug.Log(Save.Data.Coin);
+    }
 }

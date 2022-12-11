@@ -1,0 +1,5 @@
+/// <summary>
+/// Lorem Ipsum.
+/// </summary>
+/// <param name="myBool">Parameter value to pass.</param>
+/// <returns>Returns an integer based on the passed value.</returns>
