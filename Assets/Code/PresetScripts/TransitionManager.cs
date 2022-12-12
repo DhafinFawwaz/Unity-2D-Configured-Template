@@ -11,7 +11,6 @@ public class TransitionManager : MonoBehaviour
     float _delayAfterIn = 0.0f;
     
     bool _isMusicFade = true;
-    bool _isMusicFadeInstant = true;
 
     float _musicFadeOutDuration = 0.4f;
     float _musicFadeInDuration = 0.4f;
@@ -133,7 +132,6 @@ public class TransitionManager : MonoBehaviour
         _delayBeforeOut = 0.0f;
         _delayAfterOut = 0.1f;
         _isMusicFade = true;
-        _isMusicFadeInstant = true;
         _musicFadeOutDuration = 0.4f;
         OutStart = null;
         OutStartTransition = null;
@@ -143,7 +141,6 @@ public class TransitionManager : MonoBehaviour
         _delayBeforeIn = 0.5f;
         _delayAfterIn = 0.0f;
         _isMusicFade = true;
-        _isMusicFadeInstant = true;
         _musicFadeInDuration = 0.4f;
         InStart = null;
         InStartTransition = null;
@@ -179,15 +176,17 @@ public class TransitionManager : MonoBehaviour
 
     IEnumerator TransitionOut()
     {
+        Singleton.Instance.Game.SetActiveAllInput(false);
         OutStart?.Invoke();
         OutStartTransition?.Invoke();
         yield return new WaitForSecondsRealtime(_delayBeforeOut);
-        StartCoroutine(MusicFadeOut());
+        if(_isMusicFade)StartCoroutine(MusicFadeOut());
         yield return StartCoroutine(Anim.OutAnimation());
         yield return new WaitForSecondsRealtime(_delayAfterOut);
         OutEnd?.Invoke();
         OutEndTransition?.Invoke();
         SetOutDefault(); // Because the delegates might still reference a function from another scene
+        Singleton.Instance.Game.SetActiveAllInput(true);
     }
 
     IEnumerator MusicFadeOut()
@@ -212,27 +211,16 @@ public class TransitionManager : MonoBehaviour
     }
     IEnumerator TransitionIn()
     {
+        Singleton.Instance.Game.SetActiveAllInput(false);
         InStart?.Invoke();
         InStartTransition?.Invoke();
         yield return new WaitForSecondsRealtime(_delayBeforeIn);
-        StartCoroutine(MusicFadeIn());
+        Singleton.Instance.Audio.SetMusicSourceVolume(1); // Transition in doesn't need fading music, just do it instantly
         yield return StartCoroutine(Anim.InAnimation());
         yield return new WaitForSecondsRealtime(_delayAfterIn);
         InEnd?.Invoke();
         InEndTransition?.Invoke();
         SetInDefault();
-    }
-
-    IEnumerator MusicFadeIn()
-    {
-        float t = 0;
-        AudioManager audio = Singleton.Instance.Audio;
-        while(t <= 1)
-        {
-            audio.SetMusicSourceVolume(1 - t);
-            t += Time.unscaledDeltaTime/_musicFadeInDuration;
-            yield return null;
-        }
-        audio.SetMusicSourceVolume(0);
+        Singleton.Instance.Game.SetActiveAllInput(true);
     }
 }
