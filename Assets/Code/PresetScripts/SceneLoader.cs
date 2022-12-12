@@ -34,13 +34,8 @@ public class SceneLoader : MonoBehaviour
             _loadingBar.Fill(progress);
             yield return null;
         }
-        if(OnLoadingEnd != null)
-        {
-            OnLoadingEnd();
-            OnLoadingEndTransition();
-            OnLoadingEnd = null;
-            OnLoadingEndTransition = null;
-        }
+        Time.timeScale = 1;
+
         _loadingBar.gameObject.SetActive(false);
     }
 
@@ -69,11 +64,12 @@ public class SceneLoader : MonoBehaviour
             _loadingBar.Fill(progress);
             yield return null;
         }
-        if(OnLoadingEnd != null)
-        {
-            OnLoadingEnd();
-            OnLoadingEnd = null;
-        }
+        Time.timeScale = 1;
+
+        OnLoadingEnd?.Invoke();
+        OnLoadingEndTransition?.Invoke();
+        OnLoadingEnd = null;
+        OnLoadingEndTransition = null;
         _loadingBar.gameObject.SetActive(false);
     }
 }

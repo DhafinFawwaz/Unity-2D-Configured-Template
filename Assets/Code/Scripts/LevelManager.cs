@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
+    GameManager _game;
     [SerializeField] TextMeshProUGUI _highscoreText;
     public void LoadScene(string sceneName)
     {
@@ -12,6 +13,11 @@ public class PlayManager : MonoBehaviour
         Singleton.Instance.Transition.SetMusicFade(sceneName == "MainMenu" ? true : false);
     }
 
+    void Awake()
+    {
+        _game = Singleton.Instance.Game;
+        Debug.Log(_game);
+    }
     void Start()
     {
         Save.LoadData();
@@ -22,7 +28,7 @@ public class PlayManager : MonoBehaviour
     {
         int randomNumber = Random.Range(10, 200);
         _highscoreText.text = "Highscore: " + randomNumber.ToString();
-        // Singleton.Instance.Save.Data.Highscore = randomNumber;
+        Save.Data.Highscore = randomNumber;
         Save.SaveData(); 
     }
     
