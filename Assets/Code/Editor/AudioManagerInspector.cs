@@ -6,17 +6,13 @@ using System.Collections.Generic;
 public class AudioManagerInspector : Editor
 {
     AudioManager _script;
-    int _height = 18;
-    int _spacing = 2;
-    int _amount = 2;
-    int _padding = 10;
 
     void OnEnable()
     {
+        _script = (AudioManager)target;
     }
     public override void OnInspectorGUI()
     {
-        _script = (AudioManager)target;
         DrawDefaultInspector();
 
         int i = 0;
