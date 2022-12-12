@@ -13,7 +13,6 @@ public class TransitionManager : MonoBehaviour
     bool _isMusicFade = true;
 
     float _musicFadeOutDuration = 0.4f;
-    float _musicFadeInDuration = 0.4f;
     
     public TransitionAnimation Anim;
     void Start(){SetOutDefault();SetInDefault();}
@@ -141,7 +140,6 @@ public class TransitionManager : MonoBehaviour
         _delayBeforeIn = 0.5f;
         _delayAfterIn = 0.0f;
         _isMusicFade = true;
-        _musicFadeInDuration = 0.4f;
         InStart = null;
         InStartTransition = null;
     }
