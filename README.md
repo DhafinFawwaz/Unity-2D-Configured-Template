@@ -1,11 +1,7 @@
-
-<!-- ![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png) -->
-<!-- 444x91 px -->
-<!-- <hr> -->
 <h1 align="center">Unity 2D Configured Template V2.0.0</h1>
 
 Unity 2D Configured Template V2.0.0 is a unity template with some probably usefull features that can
-always be used for any unity game project. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI.
+always be used for any unity game project. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI. Also note that the API Reference below hasn't covered everything.
 
 
 ## ✨ Features
@@ -35,37 +31,33 @@ Singleton.Instance.Transition.MyMethodName();
 | Method                            | Description                        |
 |:--------                          | :------------------------------    |
 |`Out()`                            |Start the transition out animation  |
-|`In()`                             |Start the transition in animation   |
 |`SetOutDefault()`                  |Set the transition out parameters to the default values|
-|`SetInDefault()`                   |Set the transition in parameters to the default values|
-|`OutDefault()`                     |call `SetOutDefault()` then `Out()`|
-|`InDefault()`                      |call `SetInDefault()` then `In()`|
+|`SetDelayBeforeOut(float t)`       |Set the delay before the transition out animation starts, before the added/set function by t|
 |`SetDelayAfterOut(float t)`        |Set the delay after the transition out animation ends, before the added/set function by t|
-|`SetDelayBeforeIn(float t)`        |Set the delay before the transition in animation start, before the added/set function by t|
-|`SetDuration(float t)`             |Set the duration of the transition animation by t|
-|`SetMusicFade(bool b)`             |Set whether the music will fade during the transition out|
 |`SetOutStart(delegate func)`       |Set the method that will get called when transition out started    |
-|`SetOutAnimation(delegate func)`   |Set the method that will get called during the transition out      |
 |`SetOutEnd(delegate func)`         |Set the method that will get called when transition out ended      |
 |`AddOutStart(delegate func)`       |Add another method that will get called when transition out started|
-|`AddOutAnimation(delegate func)`   |Add another method that will get called during the transition out  |
 |`AddOutEnd(delegate func)`         |Add another method that will get called when transition out ended  |
+
+|`In()`                             |Start the transition in animation   |
+|`SetInDefault()`                   |Set the transition in parameters to the default values|
+|`SetDelayBeforeIn(float t)`        |Set the delay before the transition in animation start, before the added/set function by t|
 |`SetInStart(delegate func)`        |Set the method that will get called when transition in started     |
-|`SetInAnimation(delegate func)`    |Set the method that will get called during the transition in       |
 |`SetInEnd(delegate func)`          |Set the method that will get called when transition in ended       |
 |`AddInStart(delegate func)`        |Add another method that will get called when transition in started |
-|`AddInAnimation(delegate func)`    |Add another method that will get called during the transition in   |
 |`AddInEnd(delegate func)`          |Add another method that will get called when transition in ended   |
 
+|`SetMusicFade(bool b)`             |Set whether the music will fade during the transition out|
 
-In the Unity Hierarchy, navigate to `Singleton/Transition`. Inside `TransitionAnimation.cs`, change the animation the way you want there with `OutAnimation(float t) and by editing its child`. Make sure the animation can be Played by inputing the parameter `float t` from 0 to 1. You can also modify `OutStart()`, `OutEnd()`, `InStart()`, and `InEnd()`.
+
+In the Unity Hierarchy, navigate to `Singleton/Transition`. Inside `TransitionAnimation.cs`, change the animation the way you want there with `OutAnimation() and by editing its child`.
 
 #### 📖 Examples
 
 Transition out without fading the music, call `ActivateMainMenuCanvas()`, wait 1 seconds then transition in.
 ```csharp
 Singleton.Instance.Transition.Out()
-    .AddOutEnd(Singleton.Instance.Transition.InDefault)
+    .AddOutEnd(Singleton.Instance.Transition.In)
     .SetMusicFade(false)
     .SetDelayAfterOut(1)
     .AddOutEnd(ActivateMainMenuCanvas);
@@ -84,49 +76,49 @@ Singleton.Instance.Scene.MyMethodName();
 |:--------                                  |:------------------------------    |
 |`LoadScene(string sceneName)`              |Load scene by string               |
 |`AddOnLoadingEnd(delegate func)`           |Add a function to call when the loading ended, usefull for transition in|
-|`LoadSceneWithTransition(string sceneName)`|Transition out, then loading screen, transition in|
+|`LoadSceneWithTransition(string sceneName)`|Transition out, loading screen, then transition in|
 
 In the Unity Hierarchy, navigate to `Singleton/Loading`. You can change the loading animation by editing `Loading.cs` and its child's child.
 
 #### 📖 Examples
 
-Transition out in 0.7 seconds without fading the music, start loading screen, load scene, then transition in.
+Transition out in 0.7 seconds with fading music, start loading screen, load scene, then transition in.
 ```csharp
 Singleton.Instance.Scene.LoadSceneWithTransition(sceneName);
 Singleton.Instance.Transition.SetMusicFade(true)
     .SetDuration(0.7f);
 ```
 
-### 📑 SaveData
+### 💾 SaveData
 Get the reference by
 
 ```csharp
-Singleton.Instance.Save.MyMethodName();
+Save.MyMethodName();
 ```
 
 #### 🔗 Syntax
 
 | Method     | Description                                        |
 |:--------   |:------------------------------                     |
-|`SaveData()`|Save the data of Singleton.Instance.save.data       |
-|`LoadData()`|Load the save data into Singleton.Instance.save.data|
+|`SaveData()`|Save the data of Save.data       |
+|`LoadData()`|Load the save data into Save.data|
 
-Modify `SaveData.cs` in `Assets\Code\PresetScripts` however you like to fit the game. Remove the path depending on which platform you want to build in `Encryption.cs` line 16 and 17. Change the value of `JSON_ENCRYPTED_KEY` into any other random value with the same amount of digit.
+Modify `SaveData.cs` in `Assets\Code\PresetScripts` however you like to fit the game. Remove the path depending on which platform you want to build in `Encryption.cs` line 16 and 17. Change the value of `JSON_ENCRYPTED_KEY` into any other random value with the same amount of digit. Note that this save system didn't use BinaryFormatter because of security risk according to Microsoft (Microsoft, 2022). The encryption uses Rijndael algorithm instead, see https://en.wikipedia.org/wiki/Advanced_Encryption_Standard.
 
 #### 📖 Examples
 
 Set the value of the highscore to 120 then save it.
 ```csharp
-Singleton.Instance.Save.Data.Highscore = 120;
-Singleton.Instance.Save.SaveData();
+Save.Data.Highscore = 120;
+Save.SaveData();
 ```
 Set the value of the save data into newPlayerData then save it. Make sure to modify the `SaveData.cs`.
 ```csharp
 Save newPlayerData = new Save();
 newPlayerData.username = "chicken";
 newPlayerData.exp = 50;
-Singleton.Instance.Save.Data = newPlayerData;
-Singleton.Instance.Save.SaveData();
+Save.Data = newPlayerData;
+Save.SaveData();
 ```
 
 ### 🔊 Audio
@@ -141,8 +133,9 @@ Singleton.Instance.Audio.MyMethodName();
 |`PlayMusic(AudioClip audioClip)`|Play the audioClip music|
 |`StopMusic()`|Stop the music and null it|
 |`StopPlayMusic()`|Stop the music then play it again|
-|`PlaySound(AudioClip audioClip)`|Play the audioClip soundeffect|
-|`PlaySound(AudioClip audioClip, float volume)`|Play the audioClip soundeffect by volume|
+|`PlaySound(AudioClip audioClip)`|Play the audioClip sound|
+|`PlaySound(AudioClip audioClip, float volume)`|Play the audioClip sound by volume|
+|`PlaySound(int index)`|Play the audioClip sound by index|
 
 
 Drop the `MusicLoader` prefab in `Assets\Level\Prefabs\PresetPrefabs` to the scene and replace the Music Clip in the inspector to any music you want. This will automatically replace the currently played music when entering this scene.
@@ -176,3 +169,7 @@ The settings for music volume, sound volume, resolution, and fullscreen has been
 
 ## 📝 License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## 📑 Reference
+Microsoft, M. (2022, October 28). Deserialization risks in use of BinaryFormatter and related types. Microsoft Learn. Retrieved December 12, 2022, from https://learn.microsoft.com/en-us/dotnet/standard/serialization/binaryformatter-security-guide
+
