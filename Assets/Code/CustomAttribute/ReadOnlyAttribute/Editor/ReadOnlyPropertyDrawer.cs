@@ -1,11 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-
-public class ReadOnlyAttribute : PropertyAttribute
-{
-   
-}
-
 /// <summary>
 /// Allows you to add '[ReadOnly]' before a variable so that it is shown but not editable in the inspector.
 /// Small but useful script, to make your inspectors look pretty and useful :D
