@@ -45,7 +45,6 @@ Singleton.Instance.Transition.MyMethodName();
 |`SetInEnd(delegate func)`          |Set the method that will get called when transition in ended       |
 |`AddInStart(delegate func)`        |Add another method that will get called when transition in started |
 |`AddInEnd(delegate func)`          |Add another method that will get called when transition in ended   |
-
 |`SetMusicFade(bool b)`             |Set whether the music will fade during the transition out|
 
 
