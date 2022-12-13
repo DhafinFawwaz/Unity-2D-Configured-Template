@@ -38,7 +38,6 @@ Singleton.Instance.Transition.MyMethodName();
 |`SetOutEnd(delegate func)`         |Set the method that will get called when transition out ended      |
 |`AddOutStart(delegate func)`       |Add another method that will get called when transition out started|
 |`AddOutEnd(delegate func)`         |Add another method that will get called when transition out ended  |
-
 |`In()`                             |Start the transition in animation   |
 |`SetInDefault()`                   |Set the transition in parameters to the default values|
 |`SetDelayBeforeIn(float t)`        |Set the delay before the transition in animation start, before the added/set function by t|
