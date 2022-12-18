@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7745591736656671129}
   - component: {fileID: 7745591736656671134}
   - component: {fileID: 7745591736656671135}
-  - component: {fileID: 7745591736656671133}
+  - component: {fileID: 2596045588495340777}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7745591736656671133
+--- !u!114 &2596045588495340777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,22 +90,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0.1
+  _imageToResize: {fileID: 7745591736656671135}
+  _textToTint: {fileID: 0}
+  _easeType: 3
+  _easePower: 3
   _enterScale: 1.2
   _exitScale: 1
   _downScale: 1.3
   _upScale: 1
-  _upColor: {r: 1, g: 1, b: 1, a: 1}
-  _downColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  _imageToResize: {fileID: 7745591736656671135}
-  _easeType: 3
-  _easePower: 3
+  _enterTint: {r: 1, g: 1, b: 1, a: 1}
+  _exitTint: {r: 1, g: 1, b: 1, a: 1}
+  _downTint: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  _upTint: {r: 1, g: 1, b: 1, a: 1}
+  _textEnterTint: {r: 1, g: 1, b: 1, a: 1}
+  _textExitTint: {r: 1, g: 1, b: 1, a: 1}
+  _textDownTint: {r: 1, g: 1, b: 1, a: 1}
+  _textUpTint: {r: 1, g: 1, b: 1, a: 1}
   _pointerClickEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: PlaySound
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2596045588495340777}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: EnterScaleAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2596045588495340777}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: EnterTextTintAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2596045588495340777}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: EnterTintAnimation
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -129,7 +172,7 @@ MonoBehaviour:
   _pointerEnterEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: EnterScaleAnimation
         m_Mode: 1
@@ -141,9 +184,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
-        m_MethodName: UpTintAnimation
+        m_MethodName: EnterTintAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -153,7 +196,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: PlaySound
         m_Mode: 3
@@ -168,9 +211,21 @@ MonoBehaviour:
   _pointerExitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: ExitScaleAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2596045588495340777}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: ExitTintAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -183,7 +238,7 @@ MonoBehaviour:
   _pointerDownEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: DownScaleAnimation
         m_Mode: 1
@@ -195,7 +250,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: DownTintAnimation
         m_Mode: 1
@@ -207,10 +262,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2596045588495340777}
+        m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _pointerUpEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: UpScaleAnimation
         m_Mode: 1
@@ -222,7 +289,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7745591736656671133}
+      - m_Target: {fileID: 2596045588495340777}
         m_TargetAssemblyTypeName: ButtonUI, Assembly-CSharp
         m_MethodName: UpTintAnimation
         m_Mode: 1
@@ -459,15 +526,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0.1
+  _imageToResize: {fileID: 7745591737489351217}
+  _textToTint: {fileID: 0}
+  _easeType: 3
+  _easePower: 3
   _enterScale: 1.2
   _exitScale: 1
   _downScale: 1.3
   _upScale: 1
-  _upColor: {r: 0.28234005, g: 1, b: 0.27843142, a: 1}
-  _downColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  _imageToResize: {fileID: 7745591737489351217}
-  _easeType: 3
-  _easePower: 3
+  _enterTint: {r: 1, g: 1, b: 1, a: 1}
+  _exitTint: {r: 1, g: 1, b: 1, a: 1}
+  _downTint: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  _upTint: {r: 1, g: 1, b: 1, a: 1}
+  _textEnterTint: {r: 1, g: 1, b: 1, a: 1}
+  _textExitTint: {r: 1, g: 1, b: 1, a: 1}
+  _textDownTint: {r: 1, g: 1, b: 1, a: 1}
+  _textUpTint: {r: 1, g: 1, b: 1, a: 1}
   _pointerClickEvent:
     m_PersistentCalls:
       m_Calls:
@@ -825,15 +899,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0.1
+  _imageToResize: {fileID: 7745591738560910171}
+  _textToTint: {fileID: 0}
+  _easeType: 3
+  _easePower: 3
   _enterScale: 1.2
   _exitScale: 1
   _downScale: 1.3
   _upScale: 1
-  _upColor: {r: 1, g: 0.27735847, b: 0.27735847, a: 1}
-  _downColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  _imageToResize: {fileID: 7745591738560910171}
-  _easeType: 3
-  _easePower: 3
+  _enterTint: {r: 1, g: 1, b: 1, a: 1}
+  _exitTint: {r: 1, g: 1, b: 1, a: 1}
+  _downTint: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  _upTint: {r: 1, g: 1, b: 1, a: 1}
+  _textEnterTint: {r: 1, g: 1, b: 1, a: 1}
+  _textExitTint: {r: 1, g: 1, b: 1, a: 1}
+  _textDownTint: {r: 1, g: 1, b: 1, a: 1}
+  _textUpTint: {r: 1, g: 1, b: 1, a: 1}
   _pointerClickEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1059,15 +1140,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0.1
+  _imageToResize: {fileID: 7745591738646958538}
+  _textToTint: {fileID: 0}
+  _easeType: 3
+  _easePower: 3
   _enterScale: 1.2
   _exitScale: 1
   _downScale: 1.3
   _upScale: 1
-  _upColor: {r: 0.27843142, g: 0.70878506, b: 1, a: 1}
-  _downColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  _imageToResize: {fileID: 7745591738646958538}
-  _easeType: 3
-  _easePower: 3
+  _enterTint: {r: 1, g: 1, b: 1, a: 1}
+  _exitTint: {r: 1, g: 1, b: 1, a: 1}
+  _downTint: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  _upTint: {r: 1, g: 1, b: 1, a: 1}
+  _textEnterTint: {r: 1, g: 1, b: 1, a: 1}
+  _textExitTint: {r: 1, g: 1, b: 1, a: 1}
+  _textDownTint: {r: 1, g: 1, b: 1, a: 1}
+  _textUpTint: {r: 1, g: 1, b: 1, a: 1}
   _pointerClickEvent:
     m_PersistentCalls:
       m_Calls:
