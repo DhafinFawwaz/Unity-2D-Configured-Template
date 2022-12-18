@@ -18,8 +18,6 @@ public class AudioManagerInspector : Editor
         int i = 0;
         int j = 0;
         int width = 100;
-        // for(int j = 0; j < _script.SFX.Length/3; j++)
-        // {
         while(i < _script.SFX.Length)
         {
             j = 0;
@@ -55,7 +53,6 @@ public class AudioManagerInspector : Editor
             EditorGUILayout.Space();
 
         }
-        // }
 
 
             GUILayout.FlexibleSpace();
@@ -64,14 +61,3 @@ public class AudioManagerInspector : Editor
 
     }
 }
-
-// var labelRect   = new Rect(_padding     , _padding+(i*(_height+_spacing)*_amount)                     , 20, (_height+_spacing));
-// var nameRect    = new Rect(_padding + 25, _padding+(i*(_height+_spacing)*_amount)                     , 75, (_height+_spacing));
-// var clipRect    = new Rect(_padding     , _padding+(i*(_height+_spacing)*_amount)+(_height+_spacing)  , 75, (_height+_spacing));
-// var volumeRect  = new Rect(_padding + 80, _padding+(i*(_height+_spacing)*_amount)+(_height+_spacing)  , 20, (_height+_spacing));
-
-// EditorGUI.LabelField(labelRect, i.ToString());
-// EditorGUI.PropertyField(nameRect, nameProperty, GUIContent.none);
-// EditorGUI.PropertyField(clipRect, clipProperty, GUIContent.none);
-// EditorGUI.PropertyField(volumeRect, volumeProperty, GUIContent.none);
-// EditorGUILayout.LabelField(labelRect, i.ToString());
