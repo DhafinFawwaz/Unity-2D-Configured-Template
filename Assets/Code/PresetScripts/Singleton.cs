@@ -7,7 +7,10 @@ using UnityEditor;
 #endif
 public class Singleton : MonoBehaviour
 {
+    public TransitionManager Transition;
     public AudioManager Audio;
+    public SceneLoader Scene;
+    public ResolutionManager Resolution;
     public GameManager Game;
     public static Singleton Instance;
     
