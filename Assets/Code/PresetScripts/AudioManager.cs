@@ -77,6 +77,7 @@ public class AudioManager : MonoBehaviour
     }
     void PlayDefaultSound()
     {
+        if(_defaultSound != null)
         _soundSource.PlayOneShot(_defaultSound);
     }
 
@@ -112,12 +113,13 @@ public class AudioManager : MonoBehaviour
         [Tooltip("Just for naming, this isn't actually used anywhere")]public string ClipName;
         #endif
     }
-    // [NonReorderable] 
     public Sound[] SFX;
-    // public List<Sound> SFX;
     public void PlaySound(int index)
     {
+        if(index > SFX.Length-1)
+        {
+            Debug.LogWarning("Please assign the clip at index " + index.ToString());
+        }
         PlaySound(SFX[index].Clip, SFX[index].Volume);
     }
-    // [SerializeField] Sounds buttonSFX;
 }
