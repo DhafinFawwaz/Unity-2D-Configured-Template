@@ -23,8 +23,7 @@ public static class Encryption
     /// Save file path for Windows.
     /// </summary>
     public static readonly string Path = Application.persistentDataPath + "/" +_fileName + _fileFormat;
-#endif
-#if UNITY_ANDROID
+#elif UNITY_ANDROID
     /// <summary>
     /// Save file path for Android.
     /// </summary>
@@ -81,8 +80,7 @@ public static class Encryption
     /// Path for unencrypted save data.
     /// </summary>
     public static readonly string UnencryptedPath = Application.persistentDataPath + "/Unencrypted_" +_fileName + ".txt";
-#endif    
-#if UNITY_ANDROID
+#elif UNITY_ANDROID
     /// <summary>
     /// Path for unencrypted save data.
     /// </summary>

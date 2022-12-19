@@ -1,7 +1,7 @@
-<h1 align="center">Unity 2D Configured Template V2.0.0</h1>
+<h1 align="center">Unity 2D Configured Template V3.0.0</h1>
 
-Unity 2D Configured Template V2.0.0 is a unity template with some probably usefull features that can
-always be used for any unity game project. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI. Also note that the API Reference below hasn't covered everything.
+Unity 2D Configured Template V3.0.0 is a unity template with some probably usefull features that can
+always be used for any unity game project. It consist of a template scene that has implemented all the features below. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI. Also note that the API Reference below hasn't covered everything. In this version, [AnimationUI](https://github.com/DhafinFawwaz/Unity-AnimationUI "AnimationUI") is also integrated. Now the LoadScene sequence have option to loadscene with the loading bar.
 
 
 ## ✨ Features
@@ -41,6 +41,7 @@ Singleton.Instance.Transition.MyMethodName();
 |`In()`                             |Start the transition in animation   |
 |`SetInDefault()`                   |Set the transition in parameters to the default values|
 |`SetDelayBeforeIn(float t)`        |Set the delay before the transition in animation start, before the added/set function by t|
+|`SetDelayAfterIn(float t)`        |Set the delay after the transition In animation ends, before the added/set function by t|
 |`SetInStart(delegate func)`        |Set the method that will get called when transition in started     |
 |`SetInEnd(delegate func)`          |Set the method that will get called when transition in ended       |
 |`AddInStart(delegate func)`        |Add another method that will get called when transition in started |
@@ -136,7 +137,7 @@ Singleton.Instance.Audio.MyMethodName();
 |`PlaySound(int index)`|Play the audioClip sound by index|
 
 
-Drop the `MusicLoader` prefab in `Assets\Level\Prefabs\PresetPrefabs` to the scene and replace the Music Clip in the inspector to any music you want. This will automatically replace the currently played music when entering this scene.
+Drop the `MusicLoader` prefab in `Assets\Level\Prefabs\PresetPrefabs` to the scene and replace the Music Clip in the inspector to any music you want. This will automatically replace the currently played music when entering this scene. If there's no music asigned to the MusicLoader, it will automatically stop the current playing music.
 
 #### 📖 Examples
 

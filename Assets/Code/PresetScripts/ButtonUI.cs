@@ -84,7 +84,7 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(_pointerEnterEvent == null)
         {
             _pointerEnterEvent = new UnityEvent ();
-            UnityEventTools.AddVoidPersistentListener(_pointerEnterEvent, EnterScaleAnimation);
+            if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerEnterEvent, EnterScaleAnimation);
             if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerEnterEvent, EnterTintAnimation);
             if(_textToTint != null)UnityEventTools.AddVoidPersistentListener(_pointerEnterEvent, EnterTextTintAnimation);
             UnityEventTools.AddIntPersistentListener(_pointerEnterEvent, PlaySound, 0);
@@ -92,14 +92,14 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(_pointerExitEvent == null)
         {
             _pointerExitEvent = new UnityEvent ();
-            UnityEventTools.AddVoidPersistentListener(_pointerExitEvent, ExitScaleAnimation);
+            if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerExitEvent, ExitScaleAnimation);
             if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerExitEvent, ExitTintAnimation);
             if(_textToTint != null)UnityEventTools.AddVoidPersistentListener(_pointerExitEvent, ExitTextTintAnimation);
         }
         if(_pointerDownEvent == null)
         {
             _pointerDownEvent = new UnityEvent ();
-            UnityEventTools.AddVoidPersistentListener(_pointerDownEvent, DownScaleAnimation);
+            if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerDownEvent, DownScaleAnimation);
             if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerDownEvent, DownTintAnimation);
             if(_textToTint != null)UnityEventTools.AddVoidPersistentListener(_pointerDownEvent, DownTextTintAnimation);
             UnityEventTools.AddIntPersistentListener(_pointerDownEvent, PlaySound, 0);
@@ -107,7 +107,7 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(_pointerUpEvent == null)
         {
             _pointerUpEvent = new UnityEvent ();
-            UnityEventTools.AddVoidPersistentListener(_pointerUpEvent, UpScaleAnimation);
+            if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerUpEvent, UpScaleAnimation);
             if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerUpEvent, UpTintAnimation);
             if(_textToTint != null)UnityEventTools.AddVoidPersistentListener(_pointerUpEvent, UpTextTintAnimation);
         }
@@ -116,9 +116,9 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             _pointerClickEvent = new UnityEvent ();
             UnityEventTools.AddIntPersistentListener(_pointerClickEvent, PlaySound, 0);
 
-            UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterScaleAnimation);
-            UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterTextTintAnimation);
-            UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterTintAnimation);
+            if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterScaleAnimation);
+            if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterTintAnimation);
+            if(_textToTint != null)UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterTextTintAnimation);
         }
         
     }

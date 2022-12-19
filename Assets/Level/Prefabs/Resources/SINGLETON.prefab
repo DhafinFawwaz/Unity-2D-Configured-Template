@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.514073, b: 0.14528298, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1052,16 +1052,16 @@ MonoBehaviour:
   SFX:
   - Clip: {fileID: 8300000, guid: 4052e2285f03ec74fa4c83e19dc82f0a, type: 3}
     Volume: 1
+    ClipName: ButtonEnter
+  - Clip: {fileID: 8300000, guid: ab8e83fe1df36224f92444e31e711853, type: 3}
+    Volume: 6
+    ClipName: ButtonMove
+  - Clip: {fileID: 8300000, guid: 7aea22bf5a9e6e94b8c978832e9079f3, type: 3}
+    Volume: 1
     ClipName: ButtonClick
-  - Clip: {fileID: 0}
+  - Clip: {fileID: 8300000, guid: d0827a5929e77b445b80e1601cc828f6, type: 3}
     Volume: 1
-    ClipName: 
-  - Clip: {fileID: 0}
-    Volume: 1
-    ClipName: 
-  - Clip: {fileID: 0}
-    Volume: 1
-    ClipName: 
+    ClipName: ButtonDown
   - Clip: {fileID: 0}
     Volume: 1
     ClipName: 
