@@ -5,11 +5,28 @@ using TMPro;
 using System.Linq;
 public class ResolutionManager : MonoBehaviour
 {
+    int _defaultWidth = Screen.currentResolution.width;
+    int _defaultHeight = Screen.currentResolution.height;
+
+#if UNITY_STANDALONE_WIN
     Resolution[] _resolutions;
+#elif UNITY_ANDROID
+    Resolution[] _resolutions = new Resolution[6]; // For some reason, Screen.resolitions won't return the available resolutions for some android devices. So this has to be done.
+#endif   
     void Start()
     {
+#if UNITY_STANDALONE_WIN
         _resolutions = Screen.resolutions.Select(resolution => 
         new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
+#elif UNITY_ANDROID
+        for(int i = 0; i < 6; i++)
+        {
+            _resolutions[i].height = Display.main.systemHeight*(i+1)/6;
+            _resolutions[i].width = Display.main.systemWidth*(i+1)/6;
+        }
+#endif   
+        
+
         List<string> options = new List<string>();
         
         int currentResolutionIndex = 0;
@@ -18,7 +35,7 @@ public class ResolutionManager : MonoBehaviour
             string option = _resolutions[i].width + " × " + _resolutions[i].height;
             options.Add(option);
 
-            if(_resolutions[i].width == Screen.currentResolution.width && _resolutions[i].height == Screen.currentResolution.height)
+            if(_resolutions[i].width == _defaultWidth && _resolutions[i].height == _defaultHeight)
             {currentResolutionIndex = i;}
         }
 
