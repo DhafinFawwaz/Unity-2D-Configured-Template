@@ -16,7 +16,7 @@ public static class Encryption
     /// Key for encryption. Change it to any string with 32 characters.
     /// </summary>
     const string JSONEncryptedKey = "#kJ83DAlowjkf39(#($%0_+[]:#dDA'a";
-                                          //01234567890123456789012345678901
+                                   //01234567890123456789012345678901
 
 #if UNITY_STANDALONE_WIN
     /// <summary>
@@ -27,7 +27,7 @@ public static class Encryption
     /// <summary>
     /// Save file path for Android.
     /// </summary>
-    public static readonly string Path = "data/data/" + Application.identifier.ToString() + "/files//"+_fileName + _fileFormat;
+    public static readonly string Path = "data/data/" + Application.identifier.ToString() + "/files/"+_fileName + _fileFormat;
 #endif
 
     /// <summary>
@@ -84,7 +84,7 @@ public static class Encryption
     /// <summary>
     /// Path for unencrypted save data.
     /// </summary>
-    public static readonly string UnencryptedPath = "data/data/" + Application.identifier.ToString() + "/files//Unencrypted_"+_fileName + _fileFormat;
+    public static readonly string UnencryptedPath = "data/data/" + Application.identifier.ToString() + "/files/Unencrypted_"+_fileName + ".txt";
 #endif    
     
     /// <summary>
