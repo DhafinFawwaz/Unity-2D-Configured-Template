@@ -156,6 +156,9 @@ Singleton.Instance.Resolution.MyMethodName();
 | Method     | Description                                        |
 |:--------   |:------------------------------                     |
 |`SetFullScreen(bool isFullScreen)`|Set whether the screen should be in fullscreen or not|
+
+If you want to set the default resolution, Look at ResolutionManager.cs and modify the _defaultWidth and _defaultHeight. for example `int _defaultWidth = Screen.currentResolution.width * 4/6;`
+
 #### 📖 Examples
 
 Set the screen into fullscreen.
