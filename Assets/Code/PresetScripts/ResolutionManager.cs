@@ -5,8 +5,6 @@ using TMPro;
 using System.Linq;
 public class ResolutionManager : MonoBehaviour
 {
-    int _defaultWidth = Screen.currentResolution.width;
-    int _defaultHeight = Screen.currentResolution.height;
 
 #if UNITY_STANDALONE_WIN
     Resolution[] _resolutions;
@@ -25,7 +23,8 @@ public class ResolutionManager : MonoBehaviour
             _resolutions[i].width = Display.main.systemWidth*(i+1)/6;
         }
 #endif   
-        
+        int defaultWidth = Screen.currentResolution.width;
+        int defaultHeight = Screen.currentResolution.height;
 
         List<string> options = new List<string>();
         
@@ -35,7 +34,7 @@ public class ResolutionManager : MonoBehaviour
             string option = _resolutions[i].width + " × " + _resolutions[i].height;
             options.Add(option);
 
-            if(_resolutions[i].width == _defaultWidth && _resolutions[i].height == _defaultHeight)
+            if(_resolutions[i].width == defaultWidth && _resolutions[i].height == defaultHeight)
             {currentResolutionIndex = i;}
         }
 
