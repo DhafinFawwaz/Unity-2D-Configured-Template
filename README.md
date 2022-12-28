@@ -102,7 +102,7 @@ Save.MyMethodName();
 |`SaveData()`|Save the data of Save.data       |
 |`LoadData()`|Load the save data into Save.data|
 
-Modify `SaveData.cs` in `Assets\Code\PresetScripts` however you like to fit the game. Remove the path depending on which platform you want to build in `Encryption.cs` line 16 and 17. Change the value of `JSON_ENCRYPTED_KEY` into any other random value with the same amount of digit. Note that this save system didn't use BinaryFormatter because of security risk according to Microsoft (Microsoft, 2022). The encryption uses Rijndael algorithm instead, see https://en.wikipedia.org/wiki/Advanced_Encryption_Standard.
+Modify `SaveData.cs` in `Assets\Code\PresetScripts\SaveData.cs` however you like to fit the game. Change the value of `JSONEncryptedKey` into any other random value with the same amount of digit. Note that this save system didn't use BinaryFormatter because of security risk according to Microsoft (Microsoft, 2022). The encryption uses Rijndael algorithm instead, see https://en.wikipedia.org/wiki/Advanced_Encryption_Standard.
 
 #### 📖 Examples
 
