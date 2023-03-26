@@ -22,9 +22,19 @@ public class TransitionManager : MonoBehaviour
         _delayAfterOut = t;
         return this;
     }
+    public TransitionManager SetDelayAfterIn(float t)
+    {
+        _delayAfterIn = t;
+        return this;
+    }
     public TransitionManager SetDelayBeforeIn(float t)
     {
         _delayBeforeIn = t;
+        return this;
+    }
+    public TransitionManager SetDelayBeforeOut(float t)
+    {
+        _delayBeforeOut = t;
         return this;
     }
 
@@ -182,7 +192,7 @@ public class TransitionManager : MonoBehaviour
         OutStart?.Invoke();
         OutStartTransition?.Invoke();
         yield return new WaitForSecondsRealtime(_delayBeforeOut);
-        if(_isMusicFade)StartCoroutine(MusicFadeOut());
+        if(_isMusicFade)Singleton.Instance.Audio.MusicFadeOut(_musicFadeOutDuration);
         yield return StartCoroutine(Anim.OutAnimation());
         yield return new WaitForSecondsRealtime(_delayAfterOut);
         Singleton.Instance.Game.SetActiveAllInput(true);
@@ -190,21 +200,6 @@ public class TransitionManager : MonoBehaviour
         OutEndTransition?.Invoke();
         SetOutDefault(); // Because the delegates might still reference a function from another scene
     }
-
-    IEnumerator MusicFadeOut()
-    {
-        float t = 0;
-        AudioManager audio = Singleton.Instance.Audio;
-        while(t <= 1)
-        {
-            audio.SetMusicSourceVolume(1 - t);
-            t += Time.unscaledDeltaTime/_musicFadeOutDuration;
-            yield return null;
-        }
-        audio.SetMusicSourceVolume(0);
-    }
-
-
 
     public TransitionManager In()
     {

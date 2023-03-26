@@ -41,16 +41,14 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadSceneWithTransition(string sceneName)
     {
-        _sceneToLoad = sceneName;
         Singleton.Instance.Transition.Out()
-            .AddOutEnd(LoadSceneName);
+            .AddOutEnd(() => {
+                _loadingBar.gameObject.SetActive(true);
+                StartCoroutine(LoadAsynchronouslyWithTransition(sceneName));
+            });
         AddOnLoadingEnd(Singleton.Instance.Transition.In);
     }
-    void LoadSceneName()
-    {
-        _loadingBar.gameObject.SetActive(true);
-        StartCoroutine(LoadAsynchronouslyWithTransition(_sceneToLoad));
-    }
+
     IEnumerator LoadAsynchronouslyWithTransition(string sceneName)
     {
         yield return null;
@@ -71,5 +69,19 @@ public class SceneLoader : MonoBehaviour
         OnLoadingEnd = null;
         OnLoadingEndTransition = null;
         _loadingBar.gameObject.SetActive(false);
+    }
+
+    
+    public void LoadSceneWithTransitionWithoutLoading(string sceneName)
+    {
+        Singleton.Instance.Transition.Out()
+            .SetDelayBeforeOut(0)
+            .SetDelayAfterOut(0)
+            .AddOutEnd(() => {
+                SceneManager.LoadScene(sceneName);
+                Singleton.Instance.Transition.In()
+                    .SetDelayBeforeIn(0.05f)
+                    .SetDelayAfterIn(0);
+        });
     }
 }

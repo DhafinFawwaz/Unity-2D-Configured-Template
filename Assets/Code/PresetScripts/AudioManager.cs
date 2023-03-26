@@ -107,10 +107,22 @@ public class AudioManager : MonoBehaviour
         _musicSource.loop = isLooping;
     }
 
-
+    public void MusicFadeOut(float duration)
+        => StartCoroutine(MusicFadeOutIEnumerator(duration));
+    System.Collections.IEnumerator MusicFadeOutIEnumerator(float duration)
+    {
+        float t = 0;
+        while(t <= 1)
+        {
+            _musicSource.volume = 1 - t;
+            t += Time.unscaledDeltaTime/duration;
+            yield return null;
+        }
+        _musicSource.volume = 0;
+    }
     public void MusicFadeOutAndChangeTo(AudioClip _musicClip, bool isLooping, float duration, float delayBeforeChangeDuration)
-        => StartCoroutine(MusicFadeOut(_musicClip, isLooping, duration, delayBeforeChangeDuration));
-    System.Collections.IEnumerator MusicFadeOut(AudioClip _musicClip, bool isLooping, float duration, float delayBeforeChangeDuration)
+        => StartCoroutine(MusicFadeOutAndChangeToIEnumerator(_musicClip, isLooping, duration, delayBeforeChangeDuration));
+    System.Collections.IEnumerator MusicFadeOutAndChangeToIEnumerator(AudioClip _musicClip, bool isLooping, float duration, float delayBeforeChangeDuration)
     {
         float t = 0;
         while(t <= 1)

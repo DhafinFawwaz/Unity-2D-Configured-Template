@@ -16,6 +16,8 @@ public class MainMenuManager : MonoBehaviour
     }
     public void LoadScene(string sceneName)
         => Singleton.Instance.Scene.LoadSceneWithTransition(sceneName);
+    public void LoadSceneWithoutLoading(string sceneName)
+        => Singleton.Instance.Scene.LoadSceneWithTransitionWithoutLoading(sceneName);
 
     public void DisableAll()
     {
