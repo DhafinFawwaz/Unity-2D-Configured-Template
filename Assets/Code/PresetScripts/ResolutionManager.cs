@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
-public class ResolutionManager : MonoBehaviour
+public static class ResolutionManager
 {
 
 #if UNITY_STANDALONE_WIN
-    Resolution[] _resolutions;
+    static Resolution[] _resolutions;
 #elif UNITY_ANDROID
-    Resolution[] _resolutions = new Resolution[6]; // For some reason, Screen.resolitions won't return the available resolutions for some android devices. So this has to be done.
+    static Resolution[] _resolutions = new Resolution[6]; // For some reason, Screen.resolitions won't return the available resolutions for some android devices. So this has to be done.
 #endif   
-    void Start()
+    static ResolutionManager()
     {
 #if UNITY_STANDALONE_WIN
         _resolutions = Screen.resolutions.Select(resolution => 
@@ -43,30 +43,25 @@ public class ResolutionManager : MonoBehaviour
             IntToBool(PlayerPrefs.GetInt("IsFullScreen", 1))
         );
     }
-    bool IntToBool(int n) => n == 0 ? false : true;
-    int BoolToInt(bool b) => b == false ? 0 : 1;
-    public void SetFullScreen(bool isFullScreen)
+    static bool IntToBool(int n) => n == 0 ? false : true;
+    static int BoolToInt(bool b) => b == false ? 0 : 1;
+    public static void SetFullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
         PlayerPrefs.SetInt("IsFullScreen", BoolToInt(isFullScreen));
     }
-    public bool GetIsFullscreen()
+    public static bool GetIsFullscreen()
     {
         return IntToBool(PlayerPrefs.GetInt("IsFullScreen", 0));
     }
-    public void SetResolution(int resolutionIndex)
+    public static void SetResolution(int resolutionIndex)
     {
+        if(_resolutions == null) return;
         Resolution resolution = _resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         PlayerPrefs.SetInt("Resolution", resolutionIndex);
     }
-    public void SetResolutionPercentage(int numerator, int denominator)
-    {
-        int width = Display.main.systemWidth * numerator / denominator;
-        int height = Display.main.systemHeight * numerator / denominator;
-        Screen.SetResolution(width, height, true);
-    }
 
-    public Resolution[] GetResolutions() => _resolutions;
+    public static Resolution[] GetResolutions() => _resolutions;
 
 }

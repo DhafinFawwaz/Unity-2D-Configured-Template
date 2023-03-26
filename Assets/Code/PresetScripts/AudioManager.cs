@@ -102,6 +102,31 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetFloat("soundVolume", newVal);
     }
 
+    public void ToggleLoop(bool isLooping)
+    {
+        _musicSource.loop = isLooping;
+    }
+
+
+    public void MusicFadeOutAndChangeTo(AudioClip _musicClip, bool isLooping, float duration, float delayBeforeChangeDuration)
+        => StartCoroutine(MusicFadeOut(_musicClip, isLooping, duration, delayBeforeChangeDuration));
+    System.Collections.IEnumerator MusicFadeOut(AudioClip _musicClip, bool isLooping, float duration, float delayBeforeChangeDuration)
+    {
+        float t = 0;
+        while(t <= 1)
+        {
+            _musicSource.volume = 1 - t;
+            t += Time.unscaledDeltaTime/duration;
+            yield return null;
+        }
+        _musicSource.volume = 0;
+
+        yield return new WaitForSecondsRealtime(delayBeforeChangeDuration);
+        _musicSource.volume = 1;
+        PlayMusic(_musicClip);
+        ToggleLoop(isLooping);
+    }
+
 
     // SFX
     [System.Serializable] public class Sound

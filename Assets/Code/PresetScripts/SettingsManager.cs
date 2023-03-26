@@ -21,7 +21,7 @@ public class SettingsManager : MonoBehaviour
         _musicSlider.OnVariableChanged += OnMusicValueChanged;
         _soundSlider.OnVariableChanged += OnSoundValueChanged;
 
-        _resolutions = Singleton.Instance.Resolution.GetResolutions();
+        _resolutions = ResolutionManager.GetResolutions();
         _resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         
@@ -38,7 +38,7 @@ public class SettingsManager : MonoBehaviour
         _resolutionDropdown.value = currentResolutionIndex;
         _resolutionDropdown.RefreshShownValue();
 
-        _fullscreenToggle.isOn = Singleton.Instance.Resolution.GetIsFullscreen();
+        _fullscreenToggle.isOn = ResolutionManager.GetIsFullscreen();
     }
 
     void OnMusicValueChanged(float newVal)
@@ -48,7 +48,7 @@ public class SettingsManager : MonoBehaviour
         => Singleton.Instance.Audio.OnSoundValueChanged(newVal);
 
     public void SetFullScreen(bool isFullScreen)
-        => Singleton.Instance.Resolution.SetFullScreen(isFullScreen);
+        => ResolutionManager.SetFullScreen(isFullScreen);
     public void OnResolutionValueChanged(int resolutionIndex)
-        => Singleton.Instance.Resolution.SetResolution(resolutionIndex);
+        => ResolutionManager.SetResolution(resolutionIndex);
 }

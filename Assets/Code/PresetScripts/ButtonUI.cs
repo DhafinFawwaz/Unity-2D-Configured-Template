@@ -114,11 +114,10 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(_pointerClickEvent == null)
         {
             _pointerClickEvent = new UnityEvent ();
-            UnityEventTools.AddIntPersistentListener(_pointerClickEvent, PlaySound, 0);
-
             if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterScaleAnimation);
             if(_imageToResize != null)UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterTintAnimation);
             if(_textToTint != null)UnityEventTools.AddVoidPersistentListener(_pointerClickEvent, EnterTextTintAnimation);
+            UnityEventTools.AddIntPersistentListener(_pointerClickEvent, PlaySound, 0);
         }
         
     }

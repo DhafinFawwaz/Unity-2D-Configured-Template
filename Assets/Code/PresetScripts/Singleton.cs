@@ -10,7 +10,6 @@ public class Singleton : MonoBehaviour
     public TransitionManager Transition;
     public AudioManager Audio;
     public SceneLoader Scene;
-    public ResolutionManager Resolution;
     public GameManager Game;
     public static Singleton Instance
     {
@@ -48,7 +47,11 @@ public class Singleton : MonoBehaviour
             return;
         }
 
+#if UNITY_EDITOR
         PrefabUtility.InstantiatePrefab(singleton);
+#else
+        Instantiate(singleton);
+#endif  
         if(_instance == null)
         {
             Debug.Log("Something went wrong with loading singleton", Singleton._instance);
