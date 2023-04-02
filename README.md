@@ -151,7 +151,7 @@ Singleton.Instance.Audio.PlaySound(epicImpactSFX);
 Get the reference by
 
 ```csharp
-Singleton.Instance.Resolution.MyMethodName();
+ResolutionManager.MyMethodName();
 ```
 
 | Method     | Description                                        |
@@ -164,7 +164,7 @@ If you want to set the default resolution, Look at ResolutionManager.cs line 26 
 
 Set the screen into fullscreen.
 ```csharp
-Singleton.Instance.Resolution.SetFullScreen(true);
+ResolutionManager.SetFullScreen(true);
 ```
 
 ### ⚙️ Settings
