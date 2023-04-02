@@ -15,9 +15,6 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         _game = Singleton.Instance.Game;
-    }
-    void Start()
-    {
         Save.LoadData();
     }
 

@@ -1,7 +1,7 @@
-<h1 align="center">Unity 2D Configured Template V3.0.0</h1>
+<h1 align="center">Unity 2D Configured Template V4.0.0</h1>
 
-Unity 2D Configured Template V3.0.0 is a unity template with some probably usefull features that can
-always be used for any unity game project. It consist of a template scene that has implemented all the features below. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI. Also note that the API Reference below hasn't covered everything. In this version, [AnimationUI](https://github.com/DhafinFawwaz/Unity-AnimationUI "AnimationUI") is also integrated. Now the LoadScene sequence have option to loadscene with the loading bar.
+Unity 2D Configured Template V4.0.0 is a unity template with some probably usefull features that can
+always be used for any unity game project. It consist of a template scene that has implemented all the features below. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI. Also note that the API Reference below hasn't covered everything. In this version, there's already boiler plate for state machine and you can easily create a new state by right click Create/C# StateMachine/PlayerGeneralState and you can also choose Core or States. Also, [AnimationUI](https://github.com/DhafinFawwaz/Unity-AnimationUI "AnimationUI") is also integrated. Now the LoadScene sequence have option to loadscene with the loading bar.
 
 
 ## ✨ Features
@@ -12,6 +12,7 @@ always be used for any unity game project. It consist of a template scene that h
 - Audio settings including with option like fading when Scene Load
 - Custom button
 - Custom Slider
+- Boilerplate for StateMachine
 - Others
 
 

@@ -1,0 +1,41 @@
+public class #SCRIPTNAME# : Core
+{
+#region StateMachine
+    #SCRIPTNAME#States _states;
+    BaseState<#SCRIPTNAME#, #SCRIPTNAME#States> _currentState;
+    BaseState<#SCRIPTNAME#, #SCRIPTNAME#States> _previousState;
+
+    public #SCRIPTNAME#States States {get {return _states;} set {_states = value;}}
+    public BaseState<#SCRIPTNAME#, #SCRIPTNAME#States> CurrentState {get {return _currentState;} set {_currentState = value;}}
+    public BaseState<#SCRIPTNAME#, #SCRIPTNAME#States> PreviousState {get {return _previousState;} set {_previousState = value;}}
+    public void SwitchState(BaseState<#SCRIPTNAME#, #SCRIPTNAME#States> newState)
+    {
+        _previousState = CurrentState;
+        _currentState.StateExit();
+        _currentState = newState;
+        _currentState.StateEnter();
+    }
+    public override string GetState()
+    {
+        return _currentState.ToString();
+    }
+#endregion StateMachine
+
+    void Awake()
+    {
+        _states = new #SCRIPTNAME#States(this);
+        _currentState = _states.Idle();
+        _currentState.StateEnter();
+    }
+
+    void Update()
+    {
+        CurrentState.StateUpdate();
+    }
+    void FixedUpdate()
+    {
+        CurrentState.StateFixedUpdate();
+    }
+
+    
+}
