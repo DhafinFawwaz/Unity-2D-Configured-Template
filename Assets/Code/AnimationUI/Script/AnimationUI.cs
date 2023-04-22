@@ -121,7 +121,7 @@ public class AnimationUI : MonoBehaviour
             }
             else if(sequence.SequenceType == Sequence.Type.SetActiveAllInput)
             {
-                Singleton.Instance.Game.SetActiveAllInput(sequence.IsActivating);
+                Customizable.SetActiveAllInput(sequence.IsActivating);
             }
             else if(sequence.SequenceType == Sequence.Type.SetActive)
             {
@@ -141,17 +141,14 @@ public class AnimationUI : MonoBehaviour
                         // Debug.LogWarning("Please assign SFX for Sequence at "+sequence.StartTime.ToString()+"s");
                         continue;
                     }
-                    Singleton.Instance.Audio.PlaySound(sequence.SFXFile);
+                    Customizable.PlaySound(sequence.SFXFile);
                 }
                 else
-                    Singleton.Instance.Audio.PlaySound(sequence.SFXIndex);
+                    Customizable.PlaySound(sequence.SFXFile);
             }
             else if(sequence.SequenceType == Sequence.Type.LoadScene)
             {
-                if(sequence.IsLoadWithLoadingScreen)
-                    Singleton.Instance.Scene.LoadScene(sequence.SceneToLoad);
-                else
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(sequence.SceneToLoad);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(sequence.SceneToLoad);
             }
             else if(sequence.SequenceType == Sequence.Type.UnityEvent)
             {
@@ -271,7 +268,7 @@ public class AnimationUI : MonoBehaviour
             }
             else if(sequence.SequenceType == Sequence.Type.SetActiveAllInput)
             {
-                Singleton.Instance.Game.SetActiveAllInput(!sequence.IsActivating);
+                Customizable.SetActiveAllInput(!sequence.IsActivating);
             }
             else if(sequence.SequenceType == Sequence.Type.SetActive)
             {
@@ -291,10 +288,10 @@ public class AnimationUI : MonoBehaviour
                         // Debug.LogWarning("Please assign SFX for Sequence at "+sequence.StartTime.ToString()+"s");
                         continue;
                     }
-                    Singleton.Instance.Audio.PlaySound(sequence.SFXFile);
+                    Customizable.PlaySound(sequence.SFXFile);
                 }
                 else
-                    Singleton.Instance.Audio.PlaySound(sequence.SFXIndex);
+                    Customizable.PlaySound(sequence.SFXFile);
             }
             else if(sequence.SequenceType == Sequence.Type.LoadScene)
             {
@@ -541,6 +538,9 @@ public class AnimationUI : MonoBehaviour
 
 
 #if UNITY_EDITOR
+    void OnEnable() => UnityEditor.EditorApplication.update += EditorUpdate;
+    void OnDisable() => UnityEditor.EditorApplication.update -= EditorUpdate;
+    
     void ForceRepaint()
     {
         if (!Application.isPlaying)
@@ -548,14 +548,13 @@ public class AnimationUI : MonoBehaviour
             UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
             UnityEditor.SceneView.RepaintAll();
             UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
-            // Editor.up
         }
     }
     void OnDrawGizmos()
     {
         ForceRepaint();
     }
-    void Update()
+    void EditorUpdate()
     {
         if(Application.isPlaying)return;
         ForceRepaint();
@@ -1112,13 +1111,13 @@ public class AnimationUI : MonoBehaviour
                         if(t - sequence.StartTime > -0.01f)
                         {
                             sequence.IsDone = true;
-                            Singleton.Instance.Game.SetActiveAllInput(sequence.IsActivating);
+                            Customizable.SetActiveAllInput(sequence.IsActivating);
                         }
                     }
                     else if(t - sequence.StartTime < 0)
                     {
                         sequence.IsDone = false;
-                        Singleton.Instance.Game.SetActiveAllInput(!sequence.IsActivating);
+                        Customizable.SetActiveAllInput(!sequence.IsActivating);
                     }
                 }
                 // sequence.IsDone = false;
@@ -1168,10 +1167,10 @@ public class AnimationUI : MonoBehaviour
                                     // Debug.LogWarning("Please assign SFX for Sequence at "+sequence.StartTime.ToString()+"s");
                                     return;
                                 }
-                                Singleton.Instance.Audio.PlaySound(sequence.SFXFile);
+                                Customizable.PlaySound(sequence.SFXFile);
                             }
                             else
-                                Singleton.Instance.Audio.PlaySound(sequence.SFXIndex);
+                                Customizable.PlaySound(sequence.SFXFile);
                         }
                     }
                     else if(t - sequence.StartTime < 0)
@@ -1183,10 +1182,11 @@ public class AnimationUI : MonoBehaviour
                                 // Debug.LogWarning("Please assign SFX for Sequence at "+sequence.StartTime.ToString()+"s");
                                 return;
                             }
-                            Singleton.Instance.Audio.PlaySound(sequence.SFXFile);
+                            Customizable.PlaySound(sequence.SFXFile);
                         }
                         else
-                            Singleton.Instance.Audio.PlaySound(sequence.SFXIndex);
+                            Customizable.PlaySound(sequence.SFXFile);
+                        
                         sequence.IsDone = false;
                     }
                 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -40,7 +39,14 @@ public class Singleton : MonoBehaviour
     
     public static void LoadSingleton()
     {
-        GameObject singleton = Resources.Load("SINGLETON") as GameObject;
+        Singleton singleton = FindObjectOfType<Singleton>();
+        if(singleton != null)
+        {
+            Debug.Log("Found singleton in scene");
+            _instance = singleton;
+            return;
+        }
+        singleton = (Resources.Load("SINGLETON") as GameObject).GetComponent<Singleton>();
         if(singleton == null)
         {
             Debug.Log("SINGLETON prefab not found in .../Resources/SINGLETON. Please don't remove or move this to other folder.", singleton);
@@ -48,10 +54,11 @@ public class Singleton : MonoBehaviour
         }
 
 #if UNITY_EDITOR
-        PrefabUtility.InstantiatePrefab(singleton);
+        UnityEditor.PrefabUtility.InstantiatePrefab(singleton);
 #else
         Instantiate(singleton);
-#endif  
+#endif
+
         if(_instance == null)
         {
             Debug.Log("Something went wrong with loading singleton", Singleton._instance);
