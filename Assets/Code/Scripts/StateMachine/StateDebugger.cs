@@ -13,8 +13,8 @@ public class StateDebugger : MonoBehaviour
     void Awake()
     {
         cam = Camera.main;
-        if(_core == null)
-            _core = GetComponent<Core>();
+        _core ??= GetComponent<Core>();
+
     }
     void OnGUI()
     {
@@ -32,7 +32,7 @@ public class StateDebugger : MonoBehaviour
                 _dimension.x, 
                 _dimension.y
             ),
-            _core.GetState(),
+            _core.GetCurrentState(),
             style
         );
     }

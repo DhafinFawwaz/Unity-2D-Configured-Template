@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class PlayerJumpState : BaseState<PlayerCore, PlayerStates>
+public class PlayerJumpState : BaseState<PlayerStates>
 {
     public PlayerJumpState(PlayerCore contextCore, PlayerStates States) : base (contextCore, States)
     {
@@ -15,7 +15,7 @@ public class PlayerJumpState : BaseState<PlayerCore, PlayerStates>
     public override void StateUpdate()
     {
         if(Input.GetKeyDown(KeyCode.Space))
-            Core.SwitchState(States.Idle());
+            SwitchState(States.Idle());
     }
     public override void StateFixedUpdate()
     {

@@ -1,10 +1,10 @@
-public abstract class BaseState<TCore, TStates> where TCore : Core where TStates : States
+public abstract class BaseState<TStates> where TStates : States
 {
-    protected TCore _core;
+    protected Core<TStates> _core;
     protected TStates _states;
-    protected TCore Core{get{return _core;}}
+    protected Core<TStates> Core{get{return _core;}}
     protected TStates States{get{return _states;}}
-    public BaseState(TCore contextCore, TStates playerStates)
+    public BaseState(Core<TStates> contextCore, TStates playerStates)
     {
         _core = contextCore;
         _states = playerStates;
@@ -13,4 +13,12 @@ public abstract class BaseState<TCore, TStates> where TCore : Core where TStates
     public abstract void StateUpdate();
     public abstract void StateFixedUpdate();
     public abstract void StateExit();
+    public virtual void OnHurt()
+    {
+        
+    }
+    protected void SwitchState(BaseState<TStates> newState)
+    {
+        _core.SwitchState(newState);
+    }
 }
