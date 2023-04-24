@@ -83,6 +83,9 @@ public class StateMachineEditor : EditorWindow
         {
             GUILayout.BeginHorizontal();
             _coreName = EditorGUILayout.TextField("Core Name: ", _coreName);
+            // Remove all spaces
+            _coreName = _coreName.Replace(" ", "");
+
             // GUI.Label(GUILayoutUtility.GetLastRect(), new GUIContent("", "Please don't include the 'Core' suffix in this field"));
             // GUILayout.Label(GUI.tooltip);
             EditorGUILayout.LabelField("Core");
@@ -92,7 +95,7 @@ public class StateMachineEditor : EditorWindow
             rect.x += INDENTWIDTH*2;
             rect.width -= INDENTWIDTH*2;
 
-            if(GUI.Button(rect, "Generate StateMachine"))
+            if(GUI.Button(rect, "Generate "+_coreName+"Core"))
             {
                 GenerateStateMachine(_coreName);
             }
@@ -149,6 +152,11 @@ public class StateMachineEditor : EditorWindow
                 _newStateName[i].NewStateName = EditorGUILayout.TextField(coreNames[i], _newStateName[i].NewStateName);
                 // GUI.Label(GUILayoutUtility.GetLastRect(), new GUIContent("", "Please don't include the '"+ coreNames[i] +"' prefix and the 'State' suffix in this field"));
                 // GUILayout.Label(GUI.tooltip);
+
+                // Remove all spaces
+                _newStateName[i].NewStateName = _newStateName[i].NewStateName.Replace(" ", "");
+
+
                 EditorGUILayout.LabelField("State");
                 GUILayout.EndHorizontal();
 
