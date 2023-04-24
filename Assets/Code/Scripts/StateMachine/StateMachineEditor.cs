@@ -3,6 +3,7 @@ using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class StateMachineEditor : EditorWindow
 {
@@ -23,6 +24,7 @@ public class StateMachineEditor : EditorWindow
 
     string _coreName = "Enemy";
 
+    
     [System.Serializable] class StateMachineProperties
     {
         public bool Toggle = false;
@@ -31,6 +33,12 @@ public class StateMachineEditor : EditorWindow
     List<StateMachineProperties> _newStateName = new List<StateMachineProperties>();
 
     Vector2 _scrollPos;
+
+    GUIStyle foldoutStyle;
+        
+    int _toolbarInt = 0;
+    string[] _toolbarStrings = {"Add New", "Update Existing", "Initialization"};
+
 
     [MenuItem("Window/State Machine Editor")]
     static void Init()
@@ -41,156 +49,169 @@ public class StateMachineEditor : EditorWindow
 
     void OnGUI()
     {
-        _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
-        var foldoutStyle = EditorStyles.foldout;
+        foldoutStyle = EditorStyles.foldout;
         foldoutStyle.fontStyle = FontStyle.Bold;
+
+        _toolbarInt = GUILayout.Toolbar(_toolbarInt, _toolbarStrings);
+
+        _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
 
         if(_path == "")
         {
             _path = GetCurrentScriptFolderPath();
         }
-        _initializationToggle = EditorGUILayout.BeginFoldoutHeaderGroup(_initializationToggle, "Initialization", foldoutStyle);
-        EditorGUI.indentLevel++;
-        if(_initializationToggle)
-        {
-            Rect rect = EditorGUILayout.GetControlRect();
-            rect.x += INDENTWIDTH*2;
-            rect.width -= INDENTWIDTH*2;
-
-            if(GUI.Button(rect, "Select Folder"))
-            {
-                string defaultPath = GetCurrentScriptFolderPath();
-                _path = EditorUtility.OpenFolderPanel("Select Folder", "", defaultPath);
-            }
-
-            _path = EditorGUILayout.TextField("Path: ", _path);
-        }
-        EditorGUI.indentLevel--;
-        EditorGUILayout.EndFoldoutHeaderGroup();
 
         // Check if directory exist
         if (!Directory.Exists(_path))
         {
-            EditorGUILayout.HelpBox("Please select a valid directory", MessageType.Error);
-            EditorGUILayout.EndScrollView();
-            return;
+            // EditorGUILayout.HelpBox("Please select a valid directory", MessageType.Error);
+            _toolbarInt = 2;
+            // return;
         }
-        
-        EditorGUILayout.Space(10);
-        _newToggle = EditorGUILayout.BeginFoldoutHeaderGroup(_newToggle, "Add New StateMachine", foldoutStyle);
-        EditorGUI.indentLevel++;
-        if(_newToggle)
-        {
-            GUILayout.BeginHorizontal();
-            _coreName = EditorGUILayout.TextField("Core Name: ", _coreName);
-            // Remove all spaces
-            _coreName = _coreName.Replace(" ", "");
 
-            // GUI.Label(GUILayoutUtility.GetLastRect(), new GUIContent("", "Please don't include the 'Core' suffix in this field"));
+        switch(_toolbarInt)
+        {
+            case 0:
+                AddNewStateMachine();
+                break;
+            case 1:
+                UpdateExistingStateMachine();
+                break;
+            case 2:
+                Initialization();
+                break;
+        }
+        EditorGUILayout.EndScrollView();
+    }
+
+    private void Initialization()
+    {
+        GUIStyle bold = EditorStyles.boldLabel;
+        bold.alignment = TextAnchor.MiddleCenter;
+        EditorGUILayout.LabelField("Initialization", bold);
+
+        GUIStyle style = EditorStyles.textArea;
+        style.wordWrap = true;
+        // _path = EditorGUILayout.TextField("Path: ", _path, style);
+        EditorGUILayout.LabelField("Path: ");
+        
+        _path = EditorGUILayout.TextArea(_path, style);
+
+        Rect rect = EditorGUILayout.GetControlRect();
+        if(GUI.Button(rect, "Select Folder"))
+        {
+            string defaultPath = GetCurrentScriptFolderPath();
+            _path = EditorUtility.OpenFolderPanel("Select Folder", "", defaultPath);
+        }
+
+    }
+
+    private void AddNewStateMachine()
+    {
+        GUIStyle bold = EditorStyles.boldLabel;
+        bold.alignment = TextAnchor.MiddleCenter;
+        EditorGUILayout.LabelField("Add New StateMachine", bold);
+
+        GUILayout.BeginHorizontal();
+        _coreName = EditorGUILayout.TextField("Core Name: ", _coreName);
+        // Remove all spaces
+        _coreName = _coreName.Replace(" ", "");
+
+        // GUI.Label(GUILayoutUtility.GetLastRect(), new GUIContent("", "Please don't include the 'Core' suffix in this field"));
+        // GUILayout.Label(GUI.tooltip);
+        EditorGUILayout.LabelField("Core");
+        GUILayout.EndHorizontal();
+
+        if(_coreName == "")
+            GUI.enabled = false;
+        if(GUILayout.Button("Generate "+_coreName+"Core"))
+        {
+            GenerateStateMachine(_coreName);
+        }
+        GUI.enabled = true;
+    }
+
+    private void UpdateExistingStateMachine()
+    {
+        GUIStyle bold = EditorStyles.boldLabel;
+        bold.alignment = TextAnchor.MiddleCenter;
+        EditorGUILayout.LabelField("Update Existing StateMachine", bold);
+
+        var paths = Directory.GetDirectories(_path).ToList();
+        var coreNames = Directory.GetDirectories(_path).Select(d => new DirectoryInfo(d).Name).ToList();
+
+        // Set the size of the list to the number of paths
+        if(_newStateName.Count() != paths.Count())
+        {
+            _newStateName.Clear();
+            for(int i = 0; i < paths.Count(); i++)
+            {
+                _newStateName.Add(new StateMachineProperties());
+            }
+        }
+
+        for(int i = 0; i < paths.Count(); i++)
+        {
+            if(coreNames[i] == "Base")continue;
+            EditorGUILayout.Space(5);
+
+            _newStateName[i].Toggle = EditorGUILayout.Foldout(_newStateName[i].Toggle, coreNames[i]+"Core", foldoutStyle);
+            if(!_newStateName[i].Toggle)continue;
+
+            EditorGUI.indentLevel++;
+
+
+            List<string> states = GetAvailableStates(paths[i], coreNames[i]);
+            string statesText = "";
+            
+            for(int j = 0; j < states.Count(); j++)
+            {
+                if(j == states.Count()-1)
+                    statesText += states[j];
+                else
+                    statesText += states[j] + ", ";
+            }
+            EditorGUILayout.LabelField("States("+states.Count()+"): "+ statesText);
+
+            
+            EditorGUILayout.LabelField("New State Name:");
+
+            GUILayout.BeginHorizontal();
+            _newStateName[i].NewStateName = EditorGUILayout.TextField(coreNames[i], _newStateName[i].NewStateName);
+            // GUI.Label(GUILayoutUtility.GetLastRect(), new GUIContent("", "Please don't include the '"+ coreNames[i] +"' prefix and the 'State' suffix in this field"));
             // GUILayout.Label(GUI.tooltip);
-            EditorGUILayout.LabelField("Core");
+
+            // Remove all spaces
+            _newStateName[i].NewStateName = _newStateName[i].NewStateName.Replace(" ", "");
+
+
+            EditorGUILayout.LabelField("State");
             GUILayout.EndHorizontal();
 
             Rect rect = EditorGUILayout.GetControlRect();
             rect.x += INDENTWIDTH*2;
             rect.width -= INDENTWIDTH*2;
 
-            if(_coreName == "")
+            if(_newStateName[i].NewStateName == "")
                 GUI.enabled = false;
-            if(GUI.Button(rect, "Generate "+_coreName+"Core"))
+            if(GUI.Button(rect, "Generate "+coreNames[i]+_newStateName[i].NewStateName+"State"))
             {
-                GenerateStateMachine(_coreName);
+                GenerateState(paths[i], coreNames[i], _newStateName[i].NewStateName);
             }
             GUI.enabled = true;
+
+            rect = EditorGUILayout.GetControlRect();
+            rect.x += INDENTWIDTH*2;
+            rect.width -= INDENTWIDTH*2;
+
+            if(GUI.Button(rect, "Update "+coreNames[i]+"States Manually"))
+            {
+                UpdateStateMachine(paths[i], coreNames[i]);
+            }
+
+            EditorGUI.indentLevel--;
         }
-        EditorGUI.indentLevel--;
-        EditorGUILayout.EndFoldoutHeaderGroup();
-
-
-        EditorGUILayout.Space(10);
-        _updateToggle = EditorGUILayout.BeginFoldoutHeaderGroup(_updateToggle, "Update Existing StateMachine", foldoutStyle);
-        EditorGUI.indentLevel++;
-        if(_updateToggle)
-        {
-            var paths = Directory.GetDirectories(_path).ToList();
-            var coreNames = Directory.GetDirectories(_path).Select(d => new DirectoryInfo(d).Name).ToList();
-
-            // Set the size of the list to the number of paths
-            if(_newStateName.Count() != paths.Count())
-            {
-                _newStateName.Clear();
-                for(int i = 0; i < paths.Count(); i++)
-                {
-                    _newStateName.Add(new StateMachineProperties());
-                }
-            }
-
-            for(int i = 0; i < paths.Count(); i++)
-            {
-                if(coreNames[i] == "Base")continue;
-                EditorGUILayout.Space(5);
-
-                _newStateName[i].Toggle = EditorGUILayout.Foldout(_newStateName[i].Toggle, coreNames[i]+"Core", foldoutStyle);
-                if(!_newStateName[i].Toggle)continue;
-
-                EditorGUI.indentLevel++;
-
-
-                List<string> states = GetAvailableStates(paths[i], coreNames[i]);
-                string statesText = "";
-                
-                for(int j = 0; j < states.Count(); j++)
-                {
-                    if(j == states.Count()-1)
-                        statesText += states[j];
-                    else
-                        statesText += states[j] + ", ";
-                }
-                EditorGUILayout.LabelField("States("+states.Count()+"): "+ statesText);
-
-                
-                EditorGUILayout.LabelField("New State Name:");
-
-                GUILayout.BeginHorizontal();
-                _newStateName[i].NewStateName = EditorGUILayout.TextField(coreNames[i], _newStateName[i].NewStateName);
-                // GUI.Label(GUILayoutUtility.GetLastRect(), new GUIContent("", "Please don't include the '"+ coreNames[i] +"' prefix and the 'State' suffix in this field"));
-                // GUILayout.Label(GUI.tooltip);
-
-                // Remove all spaces
-                _newStateName[i].NewStateName = _newStateName[i].NewStateName.Replace(" ", "");
-
-
-                EditorGUILayout.LabelField("State");
-                GUILayout.EndHorizontal();
-
-                Rect rect = EditorGUILayout.GetControlRect();
-                rect.x += INDENTWIDTH*4;
-                rect.width -= INDENTWIDTH*4;
-
-                if(_newStateName[i].NewStateName == "")
-                    GUI.enabled = false;
-                if(GUI.Button(rect, "Generate "+coreNames[i]+_newStateName[i].NewStateName+"State"))
-                {
-                    GenerateState(paths[i], coreNames[i], _newStateName[i].NewStateName);
-                }
-                GUI.enabled = true;
-
-                rect = EditorGUILayout.GetControlRect();
-                rect.x += INDENTWIDTH*4;
-                rect.width -= INDENTWIDTH*4;
-
-                if(GUI.Button(rect, "Update "+coreNames[i]+"States Manually"))
-                {
-                    UpdateStateMachine(paths[i], coreNames[i]);
-                }
-
-                EditorGUI.indentLevel--;
-            }
             
-        }
-        EditorGUI.indentLevel--;
-        EditorGUILayout.EndFoldoutHeaderGroup();
-        EditorGUILayout.EndScrollView();
     }
 
     void GenerateStateMachine(string _coreName)
