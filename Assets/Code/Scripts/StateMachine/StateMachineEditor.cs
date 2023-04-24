@@ -95,10 +95,13 @@ public class StateMachineEditor : EditorWindow
             rect.x += INDENTWIDTH*2;
             rect.width -= INDENTWIDTH*2;
 
+            if(_coreName == "")
+                GUI.enabled = false;
             if(GUI.Button(rect, "Generate "+_coreName+"Core"))
             {
                 GenerateStateMachine(_coreName);
             }
+            GUI.enabled = true;
         }
         EditorGUI.indentLevel--;
         EditorGUILayout.EndFoldoutHeaderGroup();
@@ -164,10 +167,13 @@ public class StateMachineEditor : EditorWindow
                 rect.x += INDENTWIDTH*4;
                 rect.width -= INDENTWIDTH*4;
 
+                if(_newStateName[i].NewStateName == "")
+                    GUI.enabled = false;
                 if(GUI.Button(rect, "Generate "+coreNames[i]+_newStateName[i].NewStateName+"State"))
                 {
                     GenerateState(paths[i], coreNames[i], _newStateName[i].NewStateName);
                 }
+                GUI.enabled = true;
 
                 rect = EditorGUILayout.GetControlRect();
                 rect.x += INDENTWIDTH*4;
