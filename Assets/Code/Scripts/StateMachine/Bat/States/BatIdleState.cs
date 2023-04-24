@@ -1,31 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class #SCRIPTNAME# : BaseState<PlayerStates>
+public class BatIdleState : BaseState<BatStates>
 {
-    public #SCRIPTNAME#(PlayerCore contextCore, PlayerStates States) : base (contextCore, States)
-    {}
+    public BatIdleState(BatCore contextCore, BatStates States) : base (contextCore, States)
+    {
+    }
 
     public override void StateEnter()
     {
-        #NOTRIM#
+        
     }
 
     public override void StateUpdate()
     {
-        #NOTRIM#
+        if(Input.GetKeyDown(KeyCode.Space))
+            SwitchState(States.Jump());
     }
-
     public override void StateFixedUpdate()
     {
-        #NOTRIM#
+
     }
 
     public override void StateExit()
     {
-        #NOTRIM#
+        
     }
-
     public override void OnHurt(HitParams hitParams)
     {
         base.OnHurt(hitParams);

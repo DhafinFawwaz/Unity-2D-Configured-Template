@@ -26,8 +26,8 @@ public class PlayerIdleState : BaseState<PlayerStates>
     {
         
     }
-    public override void OnHurt()
+    public override void OnHurt(HitParams hitParams)
     {
-        base.OnHurt();
+        base.OnHurt(hitParams);
     }
 }

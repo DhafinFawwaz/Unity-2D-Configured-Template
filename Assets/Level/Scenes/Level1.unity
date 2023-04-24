@@ -292,10 +292,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2664c73e5e95bf94fa57f4292980eaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _core: {fileID: 0}
+  _core: {fileID: 718232855}
   _offset: {x: 0, y: 50}
   _fontSize: 15
   _textColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &718232855 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2821838718296861000, guid: 0c925d640aac69c4aa1ae043db383ceb, type: 3}
+  m_PrefabInstance: {fileID: 2821838719787138233}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718232846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e93d97508e84c418c0a3923e1bdd54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1056400821
 PrefabInstance:
   m_ObjectHideFlags: 0

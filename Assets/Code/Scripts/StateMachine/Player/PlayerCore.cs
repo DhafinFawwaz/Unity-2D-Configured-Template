@@ -19,7 +19,7 @@ public class PlayerCore : Core<PlayerStates>
         Stats = GetComponent<PlayerStats>();
     }
 
-    public override void OnHurt()
+    public override void OnHurt(HitParams hitParams)
     {
         
     }
@@ -30,7 +30,7 @@ public class PlayerCore : Core<PlayerStates>
         CurrentState.StateUpdate();
         if(Input.GetKeyDown(KeyCode.H))
         {
-            GetComponent<Core>().OnHurt();
+            GetComponent<Core>().OnHurt(new HitParams(10, 100, Vector2.up, Element.Fire, 0.5f));
         }
     }
     void FixedUpdate()

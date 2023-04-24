@@ -1,31 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class #SCRIPTNAME# : BaseState<PlayerStates>
+public class BatFlyState : BaseState<BatStates>
 {
-    public #SCRIPTNAME#(PlayerCore contextCore, PlayerStates States) : base (contextCore, States)
-    {}
+    public BatFlyState(BatCore contextCore, BatStates States) : base (contextCore, States)
+    {
+    }
 
     public override void StateEnter()
     {
-        #NOTRIM#
+        
     }
 
     public override void StateUpdate()
     {
-        #NOTRIM#
+        
     }
-
     public override void StateFixedUpdate()
     {
-        #NOTRIM#
+
     }
 
     public override void StateExit()
     {
-        #NOTRIM#
+        
     }
-
     public override void OnHurt(HitParams hitParams)
     {
         base.OnHurt(hitParams);

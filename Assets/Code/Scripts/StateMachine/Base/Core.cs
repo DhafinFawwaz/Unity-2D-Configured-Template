@@ -4,7 +4,7 @@ public abstract class Core : MonoBehaviour
 {
     public abstract string GetCurrentState();
     public abstract string GetPreviousState();
-    public abstract void OnHurt();
+    public abstract void OnHurt(HitParams hitParams);
 }
 
 public abstract class Core<TStates> : Core where TStates : States
@@ -34,9 +34,9 @@ public abstract class Core<TStates> : Core where TStates : States
         return _previousState.ToString();
     }
 
-    public override void OnHurt()
+    public override void OnHurt(HitParams hitParams)
     {
-        _currentState.OnHurt();
+        _currentState.OnHurt(hitParams);
     }
 #endregion StateMachine
 }
