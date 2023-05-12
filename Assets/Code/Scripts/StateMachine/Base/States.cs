@@ -1,4 +1,4 @@
-public class States
+public interface IStates
 {
     
 }

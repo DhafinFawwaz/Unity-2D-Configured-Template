@@ -7,7 +7,7 @@ public abstract class Core : MonoBehaviour
     public abstract void OnHurt(HitParams hitParams);
 }
 
-public abstract class Core<TStates> : Core where TStates : States
+public abstract class Core<TStates> : Core where TStates : IStates
 {
     #region StateMachine
     TStates _states;

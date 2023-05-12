@@ -1,4 +1,4 @@
-public abstract class BaseState<TStates> where TStates : States
+public abstract class BaseState<TStates> where TStates : IStates
 {
     protected Core<TStates> _core;
     protected TStates _states;

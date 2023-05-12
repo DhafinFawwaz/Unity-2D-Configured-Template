@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-public class PlayerStates : States
+public class PlayerStates : IStates
 {
     PlayerCore _core;
     Dictionary<State, BaseState<PlayerStates>> _states = new Dictionary<State, BaseState<PlayerStates>>();

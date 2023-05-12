@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-public class BatStates : States
+public class BatStates : IStates
 {
     BatCore _core;
     Dictionary<State, BaseState<BatStates>> _states = new Dictionary<State, BaseState<BatStates>>();

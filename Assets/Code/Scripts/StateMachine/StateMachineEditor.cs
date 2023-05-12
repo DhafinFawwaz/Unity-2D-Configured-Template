@@ -137,8 +137,10 @@ public class StateMachineEditor : EditorWindow
         bold.alignment = TextAnchor.MiddleCenter;
         EditorGUILayout.LabelField("Update Existing StateMachine", bold);
 
-        var paths = Directory.GetDirectories(_path).ToList();
-        var coreNames = Directory.GetDirectories(_path).Select(d => new DirectoryInfo(d).Name).ToList();
+        // path to current folder including the name of the core, ...StateMachine\Player
+        List<string> paths = Directory.GetDirectories(_path).ToList();
+        // name of current core
+        List<string> coreNames = Directory.GetDirectories(_path).Select(d => new DirectoryInfo(d).Name).ToList();
 
         // Set the size of the list to the number of paths
         if(_newStateName.Count() != paths.Count())
@@ -160,26 +162,42 @@ public class StateMachineEditor : EditorWindow
 
             EditorGUI.indentLevel++;
 
-
+            // Available States
             List<string> states = GetAvailableStates(paths[i], coreNames[i]);
-            string statesText = "";
+            // string statesText = "";
             
-            for(int j = 0; j < states.Count(); j++)
-            {
-                if(j == states.Count()-1)
-                    statesText += states[j];
-                else
-                    statesText += states[j] + ", ";
-            }
-            EditorGUILayout.LabelField("States("+states.Count()+"): "+ statesText);
-
+            // for(int j = 0; j < states.Count(); j++)
+            // {
+            //     if(j == states.Count()-1)
+            //         statesText += states[j];
+            //     else
+            //         statesText += states[j] + ", ";
+            // }
+            // EditorGUILayout.LabelField("States("+states.Count()+"): "+ statesText);
             
-            EditorGUILayout.LabelField("New State Name:");
+            EditorGUI.LabelField(EditorGUILayout.GetControlRect() ,"States("+states.Count()+"): ");
 
             GUILayout.BeginHorizontal();
+            GUILayout.Space(INDENTWIDTH*3);
+            
+            foreach(string state in states)
+            {   
+                if(EditorGUILayout.LinkButton(state))
+                {
+                    Application.OpenURL(paths[i] + "/States/" + (coreNames[i]+state+"State.cs"));
+                }
+            }
+            GUILayout.EndHorizontal();
+            
+
+            // New State Name
+            EditorGUILayout.LabelField("New State Name:");
+
+            // Field
+            GUILayout.BeginHorizontal();
+            GUILayout.Space(INDENTWIDTH);
             _newStateName[i].NewStateName = EditorGUILayout.TextField(coreNames[i], _newStateName[i].NewStateName);
-            // GUI.Label(GUILayoutUtility.GetLastRect(), new GUIContent("", "Please don't include the '"+ coreNames[i] +"' prefix and the 'State' suffix in this field"));
-            // GUILayout.Label(GUI.tooltip);
+
 
             // Remove all spaces
             _newStateName[i].NewStateName = _newStateName[i].NewStateName.Replace(" ", "");
@@ -189,11 +207,12 @@ public class StateMachineEditor : EditorWindow
             GUILayout.EndHorizontal();
 
             Rect rect = EditorGUILayout.GetControlRect();
-            rect.x += INDENTWIDTH*2;
-            rect.width -= INDENTWIDTH*2;
+            rect.x += INDENTWIDTH*2.5f;
+            rect.width -= INDENTWIDTH*2.5f;
 
             if(_newStateName[i].NewStateName == "")
                 GUI.enabled = false;
+            // Generate State
             if(GUI.Button(rect, "Generate "+coreNames[i]+_newStateName[i].NewStateName+"State"))
             {
                 GenerateState(paths[i], coreNames[i], _newStateName[i].NewStateName);
@@ -201,9 +220,10 @@ public class StateMachineEditor : EditorWindow
             GUI.enabled = true;
 
             rect = EditorGUILayout.GetControlRect();
-            rect.x += INDENTWIDTH*2;
-            rect.width -= INDENTWIDTH*2;
+            rect.x += INDENTWIDTH*2.5f;
+            rect.width -= INDENTWIDTH*2.5f;
 
+            // Update States
             if(GUI.Button(rect, "Update "+coreNames[i]+"States Manually"))
             {
                 UpdateStateMachine(paths[i], coreNames[i]);
