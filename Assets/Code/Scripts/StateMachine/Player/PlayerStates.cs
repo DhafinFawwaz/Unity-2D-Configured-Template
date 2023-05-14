@@ -1,23 +1,20 @@
 using System.Collections.Generic;
-public class PlayerStates : IStates
+public class PlayerStates : States<PlayerCore, PlayerStates>
 {
-    PlayerCore _core;
-    Dictionary<State, BaseState<PlayerStates>> _states = new Dictionary<State, BaseState<PlayerStates>>();
+    Dictionary<State, BaseState<PlayerCore, PlayerStates>> _states = new Dictionary<State, BaseState<PlayerCore, PlayerStates>>();
     
     enum State
     {
         Idle,
         Jump,
     }
-    public PlayerStates(PlayerCore contextCore)
+    public PlayerStates(PlayerCore contextCore) : base (contextCore)
     {
-        _core = contextCore;
-
-        _states[State.Idle] = new PlayerIdleState(_core, this);
-        _states[State.Jump] = new PlayerJumpState(_core, this);
+        _states[State.Idle] = new PlayerIdleState(Core, this);
+        _states[State.Jump] = new PlayerJumpState(Core, this);
     }
 
-    public BaseState<PlayerStates> Idle() => _states[State.Idle];
-    public BaseState<PlayerStates> Jump() => _states[State.Jump];
+    public BaseState<PlayerCore, PlayerStates> Idle() => _states[State.Idle];
+    public BaseState<PlayerCore, PlayerStates> Jump() => _states[State.Jump];
     
 }

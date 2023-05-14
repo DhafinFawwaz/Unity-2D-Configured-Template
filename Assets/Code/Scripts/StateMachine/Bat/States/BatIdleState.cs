@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class BatIdleState : BaseState<BatStates>
+public class BatIdleState : BaseState<BatCore, BatStates>
 {
     public BatIdleState(BatCore contextCore, BatStates States) : base (contextCore, States)
     {
@@ -9,7 +9,7 @@ public class BatIdleState : BaseState<BatStates>
 
     public override void StateEnter()
     {
-        
+        Core.OnEnterIdle();
     }
 
     public override void StateUpdate()

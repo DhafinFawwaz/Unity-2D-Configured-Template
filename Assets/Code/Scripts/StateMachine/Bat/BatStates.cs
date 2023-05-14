@@ -1,26 +1,21 @@
 using System.Collections.Generic;
-public class BatStates : IStates
+public class BatStates : States<BatCore, BatStates>
 {
-    BatCore _core;
-    Dictionary<State, BaseState<BatStates>> _states = new Dictionary<State, BaseState<BatStates>>();
+    Dictionary<State, BaseState<BatCore, BatStates>> _states = new Dictionary<State, BaseState<BatCore, BatStates>>();
     
     enum State
     {
-        Fly, Idle, Jump, 
+        Idle, Jump, 
     }
-    public BatStates(BatCore contextCore)
+    public BatStates(BatCore contextCore) : base (contextCore)
     {
-        _core = contextCore;
-
-        _states[State.Fly] = new BatFlyState(_core, this);
-        _states[State.Idle] = new BatIdleState(_core, this);
-        _states[State.Jump] = new BatJumpState(_core, this);
+        _states[State.Idle] = new BatIdleState(Core, this);
+        _states[State.Jump] = new BatJumpState(Core, this);
 
     }
 
-    public BaseState<BatStates> Fly() => _states[State.Fly];
-    public BaseState<BatStates> Idle() => _states[State.Idle];
-    public BaseState<BatStates> Jump() => _states[State.Jump];
+    public BaseState<BatCore, BatStates> Idle() => _states[State.Idle];
+    public BaseState<BatCore, BatStates> Jump() => _states[State.Jump];
 
     
 }

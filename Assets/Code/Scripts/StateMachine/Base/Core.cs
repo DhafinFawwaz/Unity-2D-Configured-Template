@@ -7,18 +7,18 @@ public abstract class Core : MonoBehaviour
     public abstract void OnHurt(HitParams hitParams);
 }
 
-public abstract class Core<TStates> : Core where TStates : IStates
+public abstract class Core<T, U> : Core where T : Core<T, U> where U : States<T, U>
 {
     #region StateMachine
-    TStates _states;
-    BaseState<TStates> _currentState;
-    BaseState<TStates> _previousState;
+    U _states;
+    BaseState<T, U> _currentState;
+    BaseState<T,U> _previousState;
 
 
-    public TStates States {get {return _states;} set {_states = value;}}
-    public BaseState<TStates> CurrentState {get {return _currentState;} set {_currentState = value;}}
-    public BaseState<TStates> PreviousState {get {return _previousState;} set {_previousState = value;}}
-    public void SwitchState(BaseState<TStates> newState)
+    public U States {get {return _states;} set {_states = value;}}
+    public BaseState<T,U> CurrentState {get {return _currentState;} set {_currentState = value;}}
+    public BaseState<T,U> PreviousState {get {return _previousState;} set {_previousState = value;}}
+    public void SwitchState(BaseState<T,U> newState)
     {
         _previousState = CurrentState;
         _currentState.StateExit();

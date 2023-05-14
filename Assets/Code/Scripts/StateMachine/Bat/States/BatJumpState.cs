@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class BatJumpState : BaseState<BatStates>
+public class BatJumpState : BaseState<BatCore, BatStates>
 {
     public BatJumpState(BatCore contextCore, BatStates States) : base (contextCore, States)
     {

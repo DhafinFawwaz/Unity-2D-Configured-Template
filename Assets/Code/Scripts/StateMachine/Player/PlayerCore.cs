@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class PlayerCore : Core<PlayerStates>
+public class PlayerCore : Core<PlayerCore, PlayerStates>
 {
     GameManager _game;
     [ReadOnly] public PlayerLocomotion Locomotion;
     [ReadOnly] public PlayerStats Stats;
 
-    void Awake()
+    void Start()
     {
         States = new PlayerStates(this);
         CurrentState = States.Idle();

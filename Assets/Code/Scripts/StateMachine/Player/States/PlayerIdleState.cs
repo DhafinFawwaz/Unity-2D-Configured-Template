@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class PlayerIdleState : BaseState<PlayerStates>
+public class PlayerIdleState : BaseState<PlayerCore, PlayerStates>
 {
     public PlayerIdleState(PlayerCore contextCore, PlayerStates States) : base (contextCore, States)
     {

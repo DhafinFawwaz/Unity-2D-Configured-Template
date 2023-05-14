@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BatCore : Core<BatStates>
+public class BatCore : Core<BatCore, BatStates>
 {
     void Awake()
     {
@@ -26,6 +26,11 @@ public class BatCore : Core<BatStates>
     void FixedUpdate()
     {
         CurrentState.StateFixedUpdate();
+    }
+
+    public void OnEnterIdle()
+    {
+        Debug.Log("Enter Idle");
     }
 
     

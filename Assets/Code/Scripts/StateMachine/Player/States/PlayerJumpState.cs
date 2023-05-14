@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class PlayerJumpState : BaseState<PlayerStates>
+public class PlayerJumpState : BaseState<PlayerCore, PlayerStates>
 {
     public PlayerJumpState(PlayerCore contextCore, PlayerStates States) : base (contextCore, States)
     {
@@ -9,7 +9,7 @@ public class PlayerJumpState : BaseState<PlayerStates>
 
     public override void StateEnter()
     {
-
+        
     }
 
     public override void StateUpdate()

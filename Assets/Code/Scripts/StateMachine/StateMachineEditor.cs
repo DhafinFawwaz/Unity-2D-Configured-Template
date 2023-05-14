@@ -16,9 +16,6 @@ public class StateMachineEditor : EditorWindow
     const int INDENTWIDTH = 8;
 
 
-    bool _initializationToggle = true;
-    bool _newToggle = true;
-    bool _updateToggle = true;
     string _path = "";
 
 
@@ -270,8 +267,8 @@ public class StateMachineEditor : EditorWindow
         for(int i = 0; i < states.Count(); i++)
         {
             statesEnumText += states[i] + ", ";
-            statesConstructorText += $"        _states[State.{states[i]}] = new {_coreName}{states[i]}State(_core, this);\n";
-            statesSwitchMethods += $"    public BaseState<{_coreName}States> {states[i]}() => _states[State.{states[i]}];\n";
+            statesConstructorText += $"        _states[State.{states[i]}] = new {_coreName}{states[i]}State(Core, this);\n";
+            statesSwitchMethods += $"    public BaseState<{_coreName}Core, {_coreName}States> {states[i]}() => _states[State.{states[i]}];\n";
         }
 
         statesTemplate = statesTemplate.Replace("#STATESENUM#", statesEnumText);

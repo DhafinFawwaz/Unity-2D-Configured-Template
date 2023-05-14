@@ -1,10 +1,10 @@
-public abstract class BaseState<TStates> where TStates : IStates
+public abstract class BaseState<T, U> where T : Core<T, U> where U : States<T, U>
 {
-    protected Core<TStates> _core;
-    protected TStates _states;
-    protected Core<TStates> Core{get{return _core;}}
-    protected TStates States{get{return _states;}}
-    public BaseState(Core<TStates> contextCore, TStates playerStates)
+    T _core;
+    U _states;
+    protected T Core{get{return _core;}}
+    protected U States{get{return _states;}}
+    public BaseState(T contextCore, U playerStates)
     {
         _core = contextCore;
         _states = playerStates;
@@ -17,7 +17,7 @@ public abstract class BaseState<TStates> where TStates : IStates
     {
         
     }
-    protected void SwitchState(BaseState<TStates> newState)
+    protected void SwitchState(BaseState<T, U> newState)
     {
         _core.SwitchState(newState);
     }

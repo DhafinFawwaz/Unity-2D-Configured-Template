@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class #SCRIPTNAME#Core : Core<#SCRIPTNAME#States>
+public class #SCRIPTNAME#Core : Core<#SCRIPTNAME#Core, #SCRIPTNAME#States>
 {
     void Awake()
     {
@@ -26,6 +26,11 @@ public class #SCRIPTNAME#Core : Core<#SCRIPTNAME#States>
     void FixedUpdate()
     {
         CurrentState.StateFixedUpdate();
+    }
+
+    public void OnEnterIdle()
+    {
+        Debug.Log("Enter Idle");
     }
 
     
