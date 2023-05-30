@@ -23,6 +23,11 @@ public static class Encryption
     /// Save file path for Windows.
     /// </summary>
     public static readonly string Path = Application.persistentDataPath + "/" +_fileName + _fileFormat;
+#elif UNITY_WEBGL
+    /// <summary>
+    /// Save file path for Windows.
+    /// </summary>
+    public static readonly string Path = Application.persistentDataPath + "/" +_fileName + _fileFormat;
 #elif UNITY_ANDROID
     /// <summary>
     /// Save file path for Android.
@@ -76,6 +81,11 @@ public static class Encryption
 #region Unencrypted
 
 #if UNITY_STANDALONE_WIN
+    /// <summary>
+    /// Path for unencrypted save data.
+    /// </summary>
+    public static readonly string UnencryptedPath = Application.persistentDataPath + "/Unencrypted_" +_fileName + ".txt";
+#elif UNITY_WEBGL
     /// <summary>
     /// Path for unencrypted save data.
     /// </summary>

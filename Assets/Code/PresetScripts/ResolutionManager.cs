@@ -8,6 +8,8 @@ public static class ResolutionManager
 
 #if UNITY_STANDALONE_WIN
     static Resolution[] _resolutions;
+#elif UNITY_WEBGL
+    static Resolution[] _resolutions = new Resolution[1];  
 #elif UNITY_ANDROID
     static Resolution[] _resolutions = new Resolution[6]; // For some reason, Screen.resolitions won't return the available resolutions for some android devices. So this has to be done.
 #endif   
@@ -16,6 +18,12 @@ public static class ResolutionManager
 #if UNITY_STANDALONE_WIN
         _resolutions = Screen.resolutions.Select(resolution => 
         new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
+#elif UNITY_WEBGL
+        for(int i = 0; i < 1; i++)
+        {
+            _resolutions[i].height = Display.main.systemHeight*(i+1)/1;
+            _resolutions[i].width = Display.main.systemWidth*(i+1)/1;
+        }
 #elif UNITY_ANDROID
         for(int i = 0; i < 6; i++)
         {
