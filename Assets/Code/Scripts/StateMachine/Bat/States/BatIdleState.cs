@@ -26,8 +26,8 @@ public class BatIdleState : BaseState<BatCore, BatStates>
     {
         
     }
-    public override void OnHurt(HitParams hitParams)
+    public override void OnHurt(HitRequest hitRequest, ref HitResult hitResult)
     {
-        base.OnHurt(hitParams);
+        base.OnHurt(hitRequest, ref hitResult);
     }
 }

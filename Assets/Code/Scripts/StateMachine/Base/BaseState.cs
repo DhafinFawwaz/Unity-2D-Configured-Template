@@ -13,7 +13,7 @@ public abstract class BaseState<T, U> where T : Core<T, U> where U : States<T, U
     public abstract void StateUpdate();
     public abstract void StateFixedUpdate();
     public abstract void StateExit();
-    public virtual void OnHurt(HitParams hitParams)
+    public virtual void OnHurt(HitRequest hitParams, ref HitResult hitResult)
     {
         
     }

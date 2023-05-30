@@ -9,9 +9,9 @@ public class BatCore : Core<BatCore, BatStates>
         CurrentState.StateEnter();
     }
 
-    public override void OnHurt(HitParams hitParams)
+    public override void OnHurt(HitRequest hitRequest, ref HitResult hitResult)
     {
-        base.OnHurt(hitParams);
+        hitResult.Type = HitType.Entity;
     }
 
 
@@ -20,7 +20,14 @@ public class BatCore : Core<BatCore, BatStates>
         CurrentState.StateUpdate();
         if(Input.GetKeyDown(KeyCode.H))
         {
-            GetComponent<Core>().OnHurt(new HitParams(10, 100, Vector2.up, Element.Fire, 0.5f));
+            HitResult hitResult = new HitResult();
+            GetComponent<Core>().OnHurt(new HitRequest(
+                damage: 10, 
+                knockback: 100, 
+                direction: Vector2.up, 
+                element: Element.Fire, 
+                stunDuration: 0.5f
+            ), ref hitResult);
         }
     }
     void FixedUpdate()
