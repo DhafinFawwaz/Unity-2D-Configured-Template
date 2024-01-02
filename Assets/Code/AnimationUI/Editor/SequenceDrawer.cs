@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [CustomPropertyDrawer(typeof(Sequence))]
 public class SequenceDrawer : PropertyDrawer
@@ -72,6 +73,12 @@ public class SequenceDrawer : PropertyDrawer
                 if(camTask.HasFlag(Sequence.CamTask.BackgroundColor))totalHeight+=_height*3;
                 if(camTask.HasFlag(Sequence.CamTask.OrthographicSize))totalHeight+=_height*3;
             }
+            else if(objectType == Sequence.ObjectType.TextMeshPro)
+            {
+                Sequence.TextMeshProTask textMeshProTask = (Sequence.TextMeshProTask)property.FindPropertyRelative("TargetTextMeshProTask").enumValueFlag;
+                if(textMeshProTask.HasFlag(Sequence.TextMeshProTask.Color))totalHeight+=_height*3;
+                if(textMeshProTask.HasFlag(Sequence.TextMeshProTask.MaxVisibleCharacters))totalHeight+=_height*3;
+            }
 
 
 
@@ -103,7 +110,7 @@ public class SequenceDrawer : PropertyDrawer
         else if(sequenceType == Sequence.Type.LoadScene)
         {
             property.FindPropertyRelative("PropertyRectHeight").floatValue = _height * 3;
-            return _height * 4;
+            return _height * 3;
         }
         else if(sequenceType == Sequence.Type.UnityEvent)
         {
@@ -460,7 +467,55 @@ public class SequenceDrawer : PropertyDrawer
                 Sequence.CamTask camTask = (Sequence.CamTask)property.FindPropertyRelative("TargetCamTask").enumValueFlag;
                 if(camTask.HasFlag(Sequence.CamTask.BackgroundColor))DrawCamTask("BackgroundColor");
                 if(camTask.HasFlag(Sequence.CamTask.OrthographicSize))DrawCamTask("OrthographicSize");
-            }            
+            }    
+            else if(objectType == Sequence.ObjectType.TextMeshPro)
+            {
+                EditorGUI.PropertyField(nextPosition, property.FindPropertyRelative("TargetTextMeshProTask"), new GUIContent("Task"));
+                void DrawTextMeshProTask(string name)
+                {
+                    nextPosition.y += _height;
+                    EditorGUI.LabelField(new Rect(nextPosition.x, nextPosition.y, nextPosition.width, _height),
+                        new GUIContent(name)
+                    );
+                
+                    nextPosition.y += _height;
+                    if(GUI.Button(new Rect(nextPosition.x, nextPosition.y, nextPosition.width/4-5, _height),"Set Start"))
+                    {
+                        if(name == "TextMeshProColor")property.FindPropertyRelative(name+"Start").colorValue = 
+                            property.FindPropertyRelative("TargetComp").GetSerializedValue<Transform>().GetComponent<TMP_Text>().color;
+                        else if(name == "MaxVisibleCharacters")
+                        {
+                            int maxVisibleCharactersStart = property.FindPropertyRelative("TargetComp").GetSerializedValue<Transform>().GetComponent<TMP_Text>().maxVisibleCharacters;
+                            int maxCharacters = property.FindPropertyRelative("TargetComp").GetSerializedValue<Transform>().GetComponent<TMP_Text>().text.Length;
+                            property.FindPropertyRelative(name+"Start").intValue = Mathf.Clamp(maxVisibleCharactersStart, 0, maxCharacters+1);
+                        }
+                    }
+                    EditorGUI.PropertyField(
+                        new Rect(nextPosition.x+nextPosition.width/4, nextPosition.y, nextPosition.width*3/4, _height),
+                        property.FindPropertyRelative(name+"Start"), GUIContent.none
+                    );
+
+                    nextPosition.y += _height;
+                    if(GUI.Button(new Rect(nextPosition.x, nextPosition.y, nextPosition.width/4-5, _height),"Set End"))
+                    {
+                        if(name == "TextMeshProColor")property.FindPropertyRelative(name+"End").colorValue = 
+                            property.FindPropertyRelative("TargetComp").GetSerializedValue<Transform>().GetComponent<TMP_Text>().color;
+                        else if(name == "MaxVisibleCharacters")
+                        {
+                            int maxVisibleCharactersEnd = property.FindPropertyRelative("TargetComp").GetSerializedValue<Transform>().GetComponent<TMP_Text>().maxVisibleCharacters;
+                            int maxCharacters = property.FindPropertyRelative("TargetComp").GetSerializedValue<Transform>().GetComponent<TMP_Text>().text.Length;
+                            property.FindPropertyRelative(name+"End").intValue = Mathf.Clamp(maxVisibleCharactersEnd, 0, maxCharacters+1);
+                        }
+                    }
+                    EditorGUI.PropertyField(
+                        new Rect(nextPosition.x+nextPosition.width/4, nextPosition.y, nextPosition.width*3/4, _height),
+                        property.FindPropertyRelative(name+"End"), GUIContent.none
+                    );
+                }
+                Sequence.TextMeshProTask textMeshProTask = (Sequence.TextMeshProTask)property.FindPropertyRelative("TargetTextMeshProTask").enumValueFlag;
+                if(textMeshProTask.HasFlag(Sequence.TextMeshProTask.Color))DrawTextMeshProTask("TextMeshProColor");
+                if(textMeshProTask.HasFlag(Sequence.TextMeshProTask.MaxVisibleCharacters))DrawTextMeshProTask("MaxVisibleCharacters");
+            }        
 
         }
 #region others
@@ -494,8 +549,6 @@ public class SequenceDrawer : PropertyDrawer
         }
         else if(sequenceType == Sequence.Type.LoadScene)
         {
-            nextPosition.y += _height;
-            EditorGUI.PropertyField(nextPosition, property.FindPropertyRelative("IsLoadWithLoadingScreen"));
             nextPosition.y += _height;
             EditorGUI.PropertyField(nextPosition, property.FindPropertyRelative("SceneToLoad"));
         }

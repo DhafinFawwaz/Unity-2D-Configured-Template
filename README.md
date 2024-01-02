@@ -1,7 +1,7 @@
-<h1 align="center">Unity 2D Configured Template V4.0.0</h1>
+<h1 align="center">Unity 2D Configured Template V5.0.0</h1>
 
-Unity 2D Configured Template V4.0.0 is a unity template with some probably usefull features that can
-always be used for any unity game project. It consist of a template scene that has implemented all the features below. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI. Also note that the API Reference below hasn't covered everything. In this version, there's already boiler plate for state machine and you can easily create a new state by right click Create/C# StateMachine/PlayerGeneralState and you can also choose Core or States. Also, [AnimationUI](https://github.com/DhafinFawwaz/Unity-AnimationUI "AnimationUI") is also integrated. Now the LoadScene sequence have option to loadscene with the loading bar.
+Unity 2D Configured Template V5.0.0 is a unity template with some probably usefull features that can
+always be used for any unity game project. It consist of a template scene that has implemented all the features below. With a few modification within Unity Engine, it can also be used for 3D game. Note that this project uses Microsoft C# naming convention. This is because Unity's own naming convention itself isn't consistent. Therefore, it may be better to stick with one. This is mainly a template for game UI. Also note that the API Reference below hasn't covered everything. In this version, there's already boiler plate for state machine and you can easily create a new state by right click Create/C# StateMachine/PlayerGeneralState and you can also choose Core or States. Also, [AnimationUI](https://github.com/DhafinFawwaz/Unity-AnimationUI "AnimationUI") is also integrated. 
 
 
 ## ✨ Features
@@ -10,8 +10,10 @@ always be used for any unity game project. It consist of a template scene that h
 - Scene load with Loading Screen
 - Save data with encryption
 - Audio settings including with option like fading when Scene Load
-- Custom button
+- Custom Button
 - Custom Slider
+- Both Custom Button and Slider is inherits the Selectable class which makes the Unity UI navigation compatible 
+- Implement everything modular. It mainly uses Observer
 - Boilerplate for StateMachine
 - Others
 
@@ -19,74 +21,87 @@ always be used for any unity game project. It consist of a template scene that h
 
 ## 🔍 API Reference
 
-### 🪟 Transition
+### 🪟 Scene Transition
 
 Get the reference by
 
 ```csharp
-Singleton.Instance.Transition.MyMethodName();
+[SerializeField] SceneTransition _sceneTransition;
+void GoHome()
+{
+    _sceneTransition.MyMethodName();
+}
 ```
 
 #### 🔗 Syntax
 
-| Method                            | Description                        |
-|:--------                          | :------------------------------    |
-|`Out()`                            |Start the transition out animation  |
-|`SetOutDefault()`                  |Set the transition out parameters to the default values|
-|`SetDelayBeforeOut(float t)`       |Set the delay before the transition out animation starts, before the added/set function by t|
-|`SetDelayAfterOut(float t)`        |Set the delay after the transition out animation ends, before the added/set function by t|
-|`SetOutStart(delegate func)`       |Set the method that will get called when transition out started    |
-|`SetOutEnd(delegate func)`         |Set the method that will get called when transition out ended      |
-|`AddOutStart(delegate func)`       |Add another method that will get called when transition out started|
-|`AddOutEnd(delegate func)`         |Add another method that will get called when transition out ended  |
-|`In()`                             |Start the transition in animation   |
-|`SetInDefault()`                   |Set the transition in parameters to the default values|
-|`SetDelayBeforeIn(float t)`        |Set the delay before the transition in animation start, before the added/set function by t|
-|`SetDelayAfterIn(float t)`        |Set the delay after the transition In animation ends, before the added/set function by t|
-|`SetInStart(delegate func)`        |Set the method that will get called when transition in started     |
-|`SetInEnd(delegate func)`          |Set the method that will get called when transition in ended       |
-|`AddInStart(delegate func)`        |Add another method that will get called when transition in started |
-|`AddInEnd(delegate func)`          |Add another method that will get called when transition in ended   |
-|`SetMusicFade(bool b)`             |Set whether the music will fade during the transition out|
+| Method                                  | Description                        |
+|:--------                                | :------------------------------    |
+|`StartSceneTransition(string sceneName)` |Start the transition animation and load the scene |
+|`StartTransitionWithoutLoadingScene()`   |Start the transition animation without loading scene|
+|`SetDelayAfterOut(float delay)`          |Set the delay after the transition out animation finish, before the OnAfterOut|   
+|`SetDelayBeforeIn(float delay)`          |Set the delay before the transition in animation start, before the OnBefore|   
+|`SetOutDuration(float duration)`         |Set duration of the transition out animation |
+|`SetInDuration(float duration)`          |Set duration of the transition in animation |
+|`AddListenerAfterOut(Action action)`     |Add another method that will get called after transition out finish|   
+|`AddListenerBeforeIn(Action action)`     |Add another method that will get called before transition in started |   
+|`RemoveAllListener()`                    |remove both OnAfterOut and OnBefore |
+|`OutAnimation()`                         |override for transition out animation|
+|`InAnimation()`                          |override for transition in animation|
 
-
-In the Unity Hierarchy, navigate to `Singleton/Transition`. Inside `TransitionAnimation.cs`, change the animation the way you want there with `OutAnimation() and by editing its child`.
 
 #### 📖 Examples
 
-Transition out without fading the music, call `ActivateMainMenuCanvas()`, wait 1 seconds then transition in.
+Transition To home menu, fade the music, Enable the music back.
+Make sure to attach the SceneTransition prefab in `Level/Prefab/PresetPrefabs/Transition`
 ```csharp
-Singleton.Instance.Transition.Out()
-    .AddOutEnd(Singleton.Instance.Transition.In)
-    .SetMusicFade(false)
-    .SetDelayAfterOut(1)
-    .AddOutEnd(ActivateMainMenuCanvas);
+[SerializeField] SceneTransition _sceneTransition;
+void GoHome()
+{
+    Audio.MusicFadeOut(0.5f);
+    _sceneTransition.StartSceneTransition("Home");
+        .AddListenerBeforeIn(() => {
+            Audio.SetMusicSourceVolume(1);
+    })
+}
+```
+
+Transition To home menu, wait 0.5 seconds then transition in.
+```csharp
+[SerializeField] SceneTransition _sceneTransition;
+[SerializeField] GameObject _home;
+void GoHome()
+{
+    _sceneTransition.StartTransitionWithoutLoadingScene()
+        .SetDelayAfterOut(0.5f)
+        .AddListenerAfterOut(ActivateHome);
+}
+void ActivateHome()
+{
+    _home.gameObject.SetActive(true);
+}
 ```
 
 ### ⏳ SceneLoader
 Get the reference by
 
 ```csharp
-Singleton.Instance.Scene.MyMethodName();
+SceneLoader.MyMethodName();
 ```
 
 #### 🔗 Syntax
 
-| Method                                    | Description                       |
-|:--------                                  |:------------------------------    |
-|`LoadScene(string sceneName)`              |Load scene by string               |
-|`AddOnLoadingEnd(delegate func)`           |Add a function to call when the loading ended, usefull for transition in|
-|`LoadSceneWithTransition(string sceneName)`|Transition out, loading screen, then transition in|
+| Method                                         | Description                       |
+|:--------                                       |:------------------------------    |
+|`LoadSceneWithProgressBar(string sceneName, int index = 0)`  |Load scene by string and chose the SceneTransition|
 
-In the Unity Hierarchy, navigate to `Singleton/Loading`. You can change the loading animation by editing `Loading.cs` and its child's child.
+In the project view. navigate to `Level/Prefabs/PresetPrefabs/Resources/SINGLETON` and see `SceneHandler.cs` attached to `SceneLoader` gameobject. Assign the SceneTransition prefab there. For example the SceneTransition is in `Level/Prefabs/PresetPrefabs/Transition/ScreenWipeTransition`
 
 #### 📖 Examples
 
-Transition out in 0.7 seconds with fading music, start loading screen, load scene, then transition in.
+Load the Home Scene with transtion in index 0 with the progress bar loading screen.
 ```csharp
-Singleton.Instance.Scene.LoadSceneWithTransition(sceneName);
-Singleton.Instance.Transition.SetMusicFade(true)
-    .SetDuration(0.7f);
+SceneLoader.LoadSceneWithProgressBar("Home", 0);
 ```
 
 ### 💾 SaveData
@@ -103,7 +118,7 @@ Save.MyMethodName();
 |`SaveData()`|Save the data of Save.data       |
 |`LoadData()`|Load the save data into Save.data|
 
-Modify `SaveData.cs` in `Assets\Code\PresetScripts\SaveData.cs` however you like to fit the game. Change the value of `JSONEncryptedKey` into any other random value with the same amount of digit. Note that this save system didn't use BinaryFormatter because of security risk according to Microsoft (Microsoft, 2022). The encryption uses Rijndael algorithm instead, see https://en.wikipedia.org/wiki/Advanced_Encryption_Standard.
+Modify `SaveData.cs` in `Assets\Code\PresetScripts\Save\SaveData.cs` however you like to fit the game. Change the value of `JSONEncryptedKey` in `Assets\Code\PresetScripts\Save\Save.cs` into any other random value with the same amount of digit. Note that this save system didn't use BinaryFormatter because of security risk according to Microsoft (Microsoft, 2022). The encryption uses Rijndael algorithm instead, see https://en.wikipedia.org/wiki/Advanced_Encryption_Standard.
 
 #### 📖 Examples
 
@@ -125,7 +140,7 @@ Save.SaveData();
 Get the reference by
 
 ```csharp
-Singleton.Instance.Audio.MyMethodName();
+Audio.MyMethodName();
 ```
 
 | Method     | Description                                        |
@@ -136,15 +151,21 @@ Singleton.Instance.Audio.MyMethodName();
 |`PlaySound(AudioClip audioClip)`|Play the audioClip sound|
 |`PlaySound(AudioClip audioClip, float volume)`|Play the audioClip sound by volume|
 |`PlaySound(int index)`|Play the audioClip sound by index|
+|`PlaySoundWithTimeLimit(AudioClip clip, float timeLimit)`|Play the clip while also make sure it wont fire until timeLimit has elapsed before the previous call. Useful to optimize audio like when collecting hundreds of coins at the same time.|
+|`MusicFadeOut(float duration)`|Fade out the music|
+|`MusicFadeOutAndChangeTo(AudioClip _musicClip, bool isLooping, float duration, float delayBeforeChangeDuration)`|Fade out the music and change it to another music|
+|`SetMusicSourceVolume(float t)`|Set the music volume normalized from 0 to 1. This is also whats changed by MusicFadeOutAndChangeTo and MusicFadeOut|
+|`ToggleLoop(bool isLooping)`|Toggle whether the music should be looping or not|
 
 
+Assign the list SFX you want in the prefab `Level/Prefabs/PresetPrefabs/Resources/SINGLETON`. Its the `AudioManager.cs` attached to the child of the SINGLETON prefab. You can also set the volume of the SFX.
 Drop the `MusicLoader` prefab in `Assets\Level\Prefabs\PresetPrefabs` to the scene and replace the Music Clip in the inspector to any music you want. This will automatically replace the currently played music when entering this scene. If there's no music asigned to the MusicLoader, it will automatically stop the current playing music.
 
 #### 📖 Examples
 
 Play the epicImpactSFX.
 ```csharp
-Singleton.Instance.Audio.PlaySound(epicImpactSFX);
+Audio.PlaySound(epicImpactSFX);
 ```
 
 ### 💻 Resolution

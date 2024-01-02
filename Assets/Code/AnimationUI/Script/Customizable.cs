@@ -1,23 +1,23 @@
 using UnityEngine;
 // Please modify this class
-public class Customizable
+public static class AnimationUICustomizable
 {
     public static void SetActiveAllInput(bool isActivating)
     {
+        // Debug.Log("Set Active All Input");
         // Please modify this line to use your own Singleton class.
-        Debug.Log("Set Active All Input");
-        Singleton.Instance.Game.SetActiveAllInput(isActivating);
+        // Singleton.Instance.Game.SetActiveAllInput(isActivating);
     }
     public static void PlaySound(AudioClip _SFXFile)
     {
+        // Debug.Log("SFX by file");
         // Please modify this line to use your own Singleton class.
-        Debug.Log("SFX by file");
-        Singleton.Instance.Audio.PlaySound(_SFXFile);
+        // Singleton.Instance.Audio.PlaySound(_SFXFile);
     }
     public static void PlaySound(int _index)
     {
+        // Debug.Log("SFX by index");
         // Please modify this line to use your own Singleton class.
-        Debug.Log("SFX by index");
-        Singleton.Instance.Audio.PlaySound(_index);
+        // Singleton.Instance.Audio.PlaySound(_index);
     }
 }

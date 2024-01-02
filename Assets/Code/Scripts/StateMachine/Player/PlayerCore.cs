@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerCore : Core<PlayerCore, PlayerStates>
 {
-    GameManager _game;
     [ReadOnly] public PlayerLocomotion Locomotion;
     [ReadOnly] public PlayerStats Stats;
 
@@ -12,9 +11,6 @@ public class PlayerCore : Core<PlayerCore, PlayerStates>
         CurrentState = States.Idle();
         CurrentState.StateEnter();
 
-
-        _game = Singleton.Instance.Game;
-        _game.Core = this;
         Locomotion = GetComponent<PlayerLocomotion>();
         Stats = GetComponent<PlayerStats>();
     }
