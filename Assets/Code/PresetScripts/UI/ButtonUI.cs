@@ -31,6 +31,7 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     public static event Action s_onDeselect;
 
     [SerializeField] UnityEvent _onClick;
+    public UnityEvent OnClick { get => _onClick; set => _onClick = value; }
     [SerializeField] UnityEvent _onPointerEnter;
     [SerializeField] UnityEvent _onPointerExit;
     [SerializeField] UnityEvent _onPointerDown;
@@ -45,9 +46,11 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     
     public void OnSubmit(BaseEventData eventData)
     {
+        if(!interactable) return;
+        _key++;
         s_onClick?.Invoke();
         _onClick?.Invoke();
-        _key++;
+        if(!interactable) return;
         if(targetGraphic != null)
         {
             StartCoroutine(TweenLocalScale(targetGraphic.transform, Vector3.one*_scales.pressedScale, Vector3.one*_scales.highlightedScale, _scales.fadeDuration, Ease.InOutQuart));
@@ -57,9 +60,11 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(!interactable) return;
+        _key++;
         s_onClick?.Invoke();
         _onClick?.Invoke();
-        _key++;
+        if(!interactable) return;
         if(targetGraphic != null)
         {
             StartCoroutine(TweenLocalScale(targetGraphic.transform, Vector3.one*_scales.pressedScale, Vector3.one*_scales.highlightedScale, _scales.fadeDuration, Ease.OutBackQuart));
@@ -69,6 +74,7 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     }
     public override void OnPointerDown(PointerEventData eventData)
     {
+        if(!interactable) return;
         s_onPointerDown?.Invoke();
         _onPointerDown?.Invoke();
         _key++;
@@ -81,6 +87,7 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     }
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        if(!interactable) return;
         s_onPointerEnter?.Invoke();
         _onPointerEnter?.Invoke();
         _key++;
@@ -93,6 +100,7 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
+        if(!interactable) return;
         s_onPointerExit?.Invoke();
         _onPointerExit?.Invoke();
         _key++;
@@ -105,6 +113,7 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     }
     public override void OnPointerUp(PointerEventData eventData)
     {
+        if(!interactable) return;
         s_onPointerUp?.Invoke();
         _onPointerUp?.Invoke();
         _key++;
@@ -117,6 +126,7 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     }
     public override void OnSelect(BaseEventData eventData)
     {
+        if(!interactable) return;
         s_onSelect?.Invoke();
         _onSelect?.Invoke();
         _key++;
@@ -129,6 +139,7 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
     }
     public override void OnDeselect(BaseEventData eventData)
     {
+        if(!interactable) return;
         s_onDeselect?.Invoke();
         _onDeselect?.Invoke();
         _key++;
@@ -140,6 +151,29 @@ public class ButtonUI : Selectable, IPointerClickHandler, ISubmitHandler
         if(_text != null) StartCoroutine(TweenTextMeshProColor(_text, _text.color, _textColors.normalColor, _textColors.fadeDuration, Ease.OutQuart));
     }
     public void SetInteractable(bool isInteractable)
+    {
+        interactable = isInteractable;
+        _key++;
+        if(interactable)
+        {
+            if(targetGraphic != null)
+            {
+                StartCoroutine(TweenLocalScale(targetGraphic.transform, targetGraphic.transform.localScale, Vector3.one*_scales.normalScale, _scales.fadeDuration, Ease.OutBackQuart));
+                StartCoroutine(TweenGraphicColor(targetGraphic, targetGraphic.color, colors.normalColor, colors.fadeDuration, Ease.OutQuart));
+            }
+            if(_text != null) StartCoroutine(TweenTextMeshProColor(_text, _text.color, _textColors.normalColor, _textColors.fadeDuration, Ease.OutQuart));
+        }
+        else
+        {
+            if(targetGraphic != null)
+            {
+                StartCoroutine(TweenLocalScale(targetGraphic.transform, targetGraphic.transform.localScale, Vector3.one*_scales.disabledScale, _scales.fadeDuration, Ease.OutBackQuart));
+                StartCoroutine(TweenGraphicColor(targetGraphic, targetGraphic.color, colors.disabledColor, colors.fadeDuration, Ease.OutQuart));
+            }
+            if(_text != null) StartCoroutine(TweenTextMeshProColor(_text, _text.color, _textColors.disabledColor, _textColors.fadeDuration, Ease.OutQuart));
+        }
+    }
+    public void SetInteractableImmediete(bool isInteractable)
     {
         interactable = isInteractable;
         if(interactable)
