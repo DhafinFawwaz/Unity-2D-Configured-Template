@@ -39,5 +39,12 @@ public class SaveHelper : MonoBehaviour
     {
         System.Diagnostics.Process.Start(Application.persistentDataPath);
     }
+
+    public void LoadSaveData()
+    {
+        Save.Initialize();
+        _newSaveDataToSet = Save.Data;
+        Debug.Log("Data value has been loaded from " + Save.Path);
+    }
     
 }

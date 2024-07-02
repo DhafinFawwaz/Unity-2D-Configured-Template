@@ -35,4 +35,9 @@ public class MusicLoader : MonoBehaviour
     {
         Audio.MusicFadeOut(0.5f);
     }
+
+    public void FadeInMusic()
+    {
+        Audio.MusicFadeIn(0.5f);
+    }
 }

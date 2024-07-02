@@ -112,6 +112,22 @@ public class AudioManager : MonoBehaviour
 
     public void MusicFadeOut(float duration)
         => StartCoroutine(MusicFadeOutIEnumerator(duration));
+        
+    public void MusicFadeIn(float duration)
+        => StartCoroutine(MusicFadeInIEnumerator(duration));
+
+    IEnumerator MusicFadeInIEnumerator(float duration)
+    {
+        float t = 0;
+        while(t <= 1)
+        {
+            _musicSource.volume = t;
+            t += Time.unscaledDeltaTime/duration;
+            yield return null;
+        }
+        _musicSource.volume = 0;
+    }
+
     IEnumerator MusicFadeOutIEnumerator(float duration)
     {
         float t = 0;
@@ -183,6 +199,7 @@ public static class Audio
     public static void SetSoundMixerVolume(float newVal) => _audio.SetSoundMixerVolume( newVal);
     public static void ToggleLoop(bool isLooping) => _audio.ToggleLoop(isLooping);
     public static void MusicFadeOut(float duration) => _audio.MusicFadeOut(duration);
+    public static void MusicFadeIn(float duration) => _audio.MusicFadeIn(duration);
     public static void MusicFadeOutAndChangeTo(AudioClip _musicClip, bool isLooping, float duration, float delayBeforeChangeDuration)
         => _audio.MusicFadeOutAndChangeTo(_musicClip, isLooping, duration, delayBeforeChangeDuration);
     public static void PlaySound(int index) => _audio.PlaySound(index);
