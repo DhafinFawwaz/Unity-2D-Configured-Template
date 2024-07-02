@@ -8,35 +8,18 @@ namespace DhafinFawwaz.Spawner
     {
         [SerializeField] float _radius = 5;
 
-        public override List<GameObject> Spawn()
+        public SphereSpawner SetRadius(float radius)
         {
-            List<GameObject> spawnedObjects = new List<GameObject>();
-            for(int i = 0; i < _amount; i++)
-            {
-                Vector3 spawnPosition = GetRandomPosition();
-                GameObject spawnedObject = Instantiate(_prefab, transform.position + spawnPosition, Quaternion.identity);
-                spawnedObjects.Add(spawnedObject);
-            }
-            return spawnedObjects;
+            _radius = radius;
+            return this;
         }
 
-        public override void Reposition()
-        {
-            foreach(Transform child in transform)
-            {
-                Vector3 spawnPosition = GetRandomPosition();
-                child.position = transform.position + spawnPosition;
-            }
-        }
-
-        protected virtual Vector3 GetRandomPosition()
+        public override Vector3 GetRandomPosition()
         {
             return Random.insideUnitSphere * _radius;
         }
 
     #if UNITY_EDITOR
-        List<Vector3> _predictedPositions = new List<Vector3>();
-        [SerializeField] bool _drawGizmos = true;
 
         void OnDrawGizmosSelected()
         {
@@ -51,20 +34,6 @@ namespace DhafinFawwaz.Spawner
             {
                 Gizmos.DrawSphere(transform.position + pos, 0.1f);
             }
-        }
-
-        void RefreshPredictedPositions()
-        {
-            _predictedPositions.Clear();
-            for(int i = 0; i < _amount; i++)
-            {
-                _predictedPositions.Add(GetRandomPosition());
-            }
-        }
-
-        void OnValidate()
-        {
-            RefreshPredictedPositions();
         }
     #endif
     }

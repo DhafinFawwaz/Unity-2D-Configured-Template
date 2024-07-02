@@ -8,28 +8,20 @@ namespace DhafinFawwaz.Spawner
     {
         [SerializeField] Vector3 _spawnArea = new Vector3(5, 5, 5);
         [SerializeField] Vector3 _spawnRotation = new Vector3(0, 0, 0);
-        public override List<GameObject> Spawn()
+
+        public BoxSpawner SetSpawnArea(Vector3 spawnArea)
         {
-            List<GameObject> spawnedObjects = new List<GameObject>();
-            for(int i = 0; i < _amount; i++)
-            {
-                Vector3 spawnPosition = GetRandomPosition();
-                GameObject spawnedObject = Instantiate(_prefab, transform.position + spawnPosition, Quaternion.identity);
-                spawnedObjects.Add(spawnedObject);
-            }
-            return spawnedObjects;
+            _spawnArea = spawnArea;
+            return this;
         }
 
-        public override void Reposition()
+        public BoxSpawner SetSpawnRotation(Vector3 spawnRotation)
         {
-            foreach(Transform child in transform)
-            {
-                Vector3 spawnPosition = GetRandomPosition();
-                child.position = transform.position + spawnPosition;
-            }
+            _spawnRotation = spawnRotation;
+            return this;
         }
 
-        Vector3 GetRandomPosition()
+        public override Vector3 GetRandomPosition()
         {
             Vector3 v = new Vector3(
                 Random.Range(-_spawnArea.x/2, _spawnArea.x/2),
@@ -41,8 +33,6 @@ namespace DhafinFawwaz.Spawner
         }
 
     #if UNITY_EDITOR
-        List<Vector3> _predictedPositions = new List<Vector3>();
-        [SerializeField] bool _drawGizmos = true;
         void OnDrawGizmosSelected()
         {
             if(!_drawGizmos) return;
@@ -83,20 +73,6 @@ namespace DhafinFawwaz.Spawner
             {
                 Gizmos.DrawSphere(transform.position + position, 0.1f);
             }
-        }
-
-        void RefreshPredictedPositions()
-        {
-            _predictedPositions.Clear();
-            for(int i = 0; i < _amount; i++)
-            {
-                _predictedPositions.Add(GetRandomPosition());
-            }
-        }
-
-        void OnValidate()
-        {
-            RefreshPredictedPositions();
         }
     #endif
 
